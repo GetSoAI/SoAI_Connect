@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoAI</string>
+
+    <!-- Connection Screen -->
+    <string name="connection_title">SoAI Connect</string>
+    <string name="server_url_hint">Server URL or IP</string>
+    <string name="server_url_helper">Example: 192.168.1.100 or soai.local</string>
+    <string name="connection_info">A lightweight client for accessing the SoAI web interface on your local network.\n\nJust enter your server address and the port will be discovered automatically.</string>
+    <string name="website_url">https://soai.to</string>
+    <string name="website_label">soai.to</string>
+    <string name="check_button">Check</string>
+    <string name="connect_button">Connect</string>
+    <string name="retry_button">Retry</string>
+    <string name="checking">Checking…</string>
+    <string name="server_identity">SoAI %s</string>
+    <string name="server_identity_named">SoAI %1$s — %2$s</string>
+    <string name="server_found_identity">%1$s found: %2$s</string>
+    <string name="server_found_fallback">%1$s\nConfigured port %2$d is occupied. This instance is running on fallback port %3$d.</string>
+    <string name="error_empty_url">Server URL is required</string>
+    <string name="error_invalid_address">Invalid server address</string>
+    <string name="error_ipv6_zone_unsupported">IPv6 zone identifiers are not supported</string>
+    <string name="error_invalid_port">Invalid port: %s</string>
+    <string name="error_server_not_reachable">Server not reachable at %s</string>
+    <string name="error_server_not_found">Server not found on %s</string>
+    <string name="error_multiple_servers">Multiple SoAI servers were found. Enter an explicit server port.</string>
+    <string name="error_not_soai_server">The server at %s responded but is not a SoAI server</string>
+
+    <!-- Main Screen -->
+    <string name="menu_reload">Reload</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+    <string name="menu_close">Close</string>
+    <string name="default_device_label">Android device</string>
+    <string name="error_loading_page">Error loading page</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_security">Security</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_power">Power</string>
+    <string name="incognito_mode">Incognito Mode</string>
+    <string name="incognito_mode_description">Cookies and site data are cleared when you leave the app</string>
+    <string name="android_notifications">Android Notifications</string>
+    <string name="android_notifications_description">Forward SoAI WebUI notifications to the Android notification shade when the app is in the background</string>
+    <string name="android_notifications_background_title">Keep SoAI running in the background</string>
+    <string name="android_notifications_background_message">SoAI must keep a background connection open to show Android notifications. WebUI notifications will still appear inside SoAI when this switch is off; this switch only controls forwarding them to Android.\n\nTo keep delivery reliable, open Android battery settings and disable battery optimization for SoAI. The exact wording depends on your device, but look for Battery, App battery usage, Unrestricted, or Don\'t optimize.\n\nSoAI uses this direct background connection to avoid depending on Google services.</string>
+    <string name="no_trusted_certificate">No trusted HTTPS certificate</string>
+    <string name="trusted_certificate_installed">Trusted certificate for %1$s:\n%2$s</string>
+    <string name="reset_trusted_certificate">Reset Trusted Certificate</string>
+    <string name="reset_trusted_certificate_confirm">This will remove the trusted certificate for this server. Continue?</string>
+    <string name="trusted_certificate_cleared">Trusted certificate cleared</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="clear_cache_confirm">This will clear all cached data. Continue?</string>
+    <string name="cache_cleared">Cache cleared</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirm">This will sign out this device and return to the SoAI sign-in screen. Continue?</string>
+    <string name="device_name">Device name</string>
+    <string name="save_device_name">Save device name</string>
+    <string name="device_name_required">Enter a device name.</string>
+    <string name="device_name_saved">Device name updated.</string>
+    <string name="device_name_update_failed">Could not update the device name.</string>
+    <string name="device_identity_cookie_failed">Could not prepare secure device identity.</string>
+    <string name="logout_failed_title">Could not revoke session</string>
+    <string name="logout_failed_message">SoAI could not confirm logout with the server. Retry, or clear only this app\'s local credentials.</string>
+    <string name="clear_locally">Clear locally</string>
+    <string name="clear_locally_warning">The server session may remain active. Clear local credentials anyway?</string>
+    <string name="retry">Retry</string>
+    <string name="reset">Reset</string>
+    <string name="clear">Clear</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="open">Open</string>
+    <string name="wake_on_lan_description">Send a Wake-on-LAN magic packet to power on your SoAI machine (if WOL is enabled in BIOS/OS and supported by your network).</string>
+    <string name="wol_mac_label">MAC address</string>
+    <string name="wol_broadcast_label">Broadcast address (optional)</string>
+    <string name="wol_port_label">UDP port (default 9)</string>
+    <string name="wol_wake_now">Wake now</string>
+    <string name="wol_success">Wake-on-LAN packet sent</string>
+    <string name="wol_error_invalid_mac">Invalid MAC address</string>
+    <string name="wol_error_invalid_port">Invalid port</string>
+    <string name="wol_error_invalid_broadcast">Invalid broadcast address</string>
+    <string name="wol_error_failed">Wake-on-LAN failed: %s</string>
+
+    <!-- About Screen -->
+    <string name="about_title">About SoAI</string>
+    <string name="app_title">SoAI Connect</string>
+    <string name="app_tagline">Smart Orchestrator for Artificial Intelligence</string>
+    <string name="app_description">A mobile client for SoAI - a comprehensive orchestration layer for local and remote Large Language Models, providing a unified OpenAI-compatible API, request queuing, and intelligent backend abstraction.</string>
+    <string name="app_version">Client version: %s</string>
+    <string name="app_license">License: MIT License</string>
+    <string name="licenses_label">Licenses</string>
+    <string name="licenses_unavailable">Licenses are unavailable.</string>
+
+    <string name="popup_title">Popup</string>
+    <string name="error_opening_link">Cannot open link</string>
+    <string name="error_opening_file_picker">Cannot open file picker</string>
+    <string name="permission_denied">Permission denied</string>
+
+    <string name="server_found_untrusted_tls_identity">%1$s found: %2$s\nHTTPS certificate requires approval</string>
+    <string name="webview_crashed">Web content crashed. Reload to continue.</string>
+
+    <string name="open_external_app_title">Open external app?</string>
+    <string name="open_external_app_message">Open this link in another app?\n\n%1$s</string>
+
+    <string name="untrusted_certificate_title">Untrusted certificate</string>
+    <string name="certificate_changed_title">Certificate changed</string>
+    <string name="certificate_details">Server: %1$s\n\nSubject: %2$s\nIssuer: %3$s\nSHA-256: %4$s\n\nOnly trust certificates you recognize.</string>
+    <string name="trust_once">Trust once</string>
+    <string name="trust_always">Trust always</string>
+    <string name="ssl_error_wrong_origin">Blocked: certificate error from a different origin</string>
+    <string name="ssl_error_unavailable_certificate">Blocked: certificate details not available</string>
+    <string name="ssl_error_blocked">Blocked: certificate not trusted</string>
+
+    <string name="android_notifications_channel_name">SoAI notifications</string>
+    <string name="android_notifications_channel_description">Alerts from the SoAI frontend and backend</string>
+    <string name="android_notifications_connection_channel_name">SoAI notification connection</string>
+    <string name="android_notifications_connection_channel_description">Keeps SoAI notification delivery connected</string>
+    <string name="android_notifications_foreground_title">SoAI notifications active</string>
+    <string name="android_notifications_foreground_text">Listening for SoAI alerts</string>
+    <string name="notification_generic_title">SoAI</string>
+    <string name="notification_generic_message">New SoAI notification</string>
+    <string name="notification_tool_approval_title">Tool approval required</string>
+    <string name="notification_tool_approval_message">%1$s is waiting for approval</string>
+    <string name="notification_ask_user_title">SoAI needs input</string>
+    <string name="notification_ask_user_message">SoAI is waiting for your response</string>
+    <string name="notification_secret_request_title">Secret required</string>
+    <string name="notification_secret_request_message">A secret is required to continue</string>
+    <string name="notification_automation_completed_title">Automation completed</string>
+    <string name="notification_automation_completed_message">%1$s completed</string>
+    <string name="notification_automation_completed_message_generic">Automation completed</string>
+    <string name="notification_automation_failed_title">Automation failed</string>
+    <string name="notification_automation_failed_message">%1$s failed</string>
+    <string name="notification_automation_failed_message_generic">Automation failed</string>
+    <string name="notification_automation_failed_message_with_status">%1$s failed: %2$s</string>
+    <string name="notification_automation_failed_message_with_status_generic">Automation failed: %1$s</string>
+    <string name="notification_mail_new_title">New mail in %1$s</string>
+    <string name="notification_mail_new_message">%1$s: %2$s</string>
+    <string name="notification_mail_sync_failure_title">Mail sync failed for %1$s</string>
+    <string name="notification_mail_sync_failure_message">%1$s</string>
+    <string name="notification_calendar_invite_update_title">Calendar invite updated in %1$s</string>
+    <string name="notification_calendar_invite_update_message">%1$s: %2$s</string>
+    <string name="notification_calendar_reminder_due_title">Calendar reminder in %1$s</string>
+    <string name="notification_calendar_reminder_due_message">%1$s starts at %2$s</string>
+    <string name="notification_calendar_reminder_missed_title">Missed calendar reminder in %1$s</string>
+    <string name="notification_calendar_reminder_missed_message">%1$s started at %2$s</string>
+    <string name="notification_calendar_sync_failure_title">Calendar sync failed for %1$s</string>
+    <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="change_server">Change server</string>
+    <string name="change_server_confirm">This will clear data for the current server and return to connection setup. Continue?</string>
+    <string name="change">Change</string>
+    <string name="server_found_cleartext_warning">%1$s\nWarning: this connection is not encrypted and the address is not on your local network. Anyone between your device and the server can read your session.</string>
+</resources>

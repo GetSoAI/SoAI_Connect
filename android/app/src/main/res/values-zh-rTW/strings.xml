@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoAI</string>
+
+    <!-- Connection Screen -->
+    <string name="connection_title">SoAI Connect</string>
+    <string name="server_url_hint">伺服器網址或 IP 位址</string>
+    <string name="server_url_helper">例如：192.168.1.100 或 soai.local</string>
+    <string name="connection_info">用來存取區域網路上 SoAI 網頁介面的輕量級用戶端。\n\n只要輸入伺服器位址，系統就會自動探索連接埠。</string>
+    <string name="website_url">https://soai.to</string>
+    <string name="website_label">soai.to</string>
+    <string name="check_button">檢查</string>
+    <string name="connect_button">連線</string>
+    <string name="retry_button">重試</string>
+    <string name="checking">正在檢查…</string>
+    <string name="server_identity">SoAI %s</string>
+    <string name="server_identity_named">SoAI %1$s — %2$s</string>
+    <string name="server_found_identity">找到 %1$s：%2$s</string>
+    <string name="server_found_fallback">%1$s\n設定的連接埠 %2$d 已被占用。此執行個體目前使用備用連接埠 %3$d。</string>
+    <string name="error_empty_url">必須輸入伺服器網址</string>
+    <string name="error_invalid_address">伺服器位址無效</string>
+    <string name="error_ipv6_zone_unsupported">不支援 IPv6 區域識別碼</string>
+    <string name="error_invalid_port">連接埠無效：%s</string>
+    <string name="error_server_not_reachable">無法連上 %s 的伺服器</string>
+    <string name="error_server_not_found">在 %s 找不到伺服器</string>
+    <string name="error_multiple_servers">找到多個 SoAI 伺服器。請明確輸入伺服器連接埠。</string>
+    <string name="error_not_soai_server">%s 的伺服器有回應，但不是 SoAI 伺服器</string>
+
+    <!-- Main Screen -->
+    <string name="menu_reload">重新載入</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_about">關於</string>
+    <string name="menu_close">關閉</string>
+    <string name="default_device_label">Android 裝置</string>
+    <string name="error_loading_page">載入頁面時發生錯誤</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">設定</string>
+    <string name="settings_privacy">隱私權</string>
+    <string name="settings_security">安全性</string>
+    <string name="settings_data">資料</string>
+    <string name="settings_power">電源</string>
+    <string name="incognito_mode">無痕模式</string>
+    <string name="incognito_mode_description">離開應用程式時清除 Cookie 和網站資料</string>
+    <string name="android_notifications">Android 通知</string>
+    <string name="android_notifications_description">應用程式在背景執行時，將 SoAI 網頁介面的通知轉送到 Android 通知欄</string>
+    <string name="android_notifications_background_title">讓 SoAI 在背景持續執行</string>
+    <string name="android_notifications_background_message">SoAI 必須維持背景連線，才能顯示 Android 通知。關閉此開關後，網頁介面的通知仍會顯示在 SoAI 內；此開關只控制是否將通知轉送到 Android。\n\n為了可靠接收通知，請開啟 Android 電池設定，並停用 SoAI 的電池最佳化。各裝置使用的名稱可能不同，請尋找「電池」、「應用程式電池用量」、「不受限制」或「不要最佳化」等選項。\n\nSoAI 使用這個直接背景連線，因此不需要依賴 Google 服務。</string>
+    <string name="no_trusted_certificate">沒有受信任的 HTTPS 憑證</string>
+    <string name="trusted_certificate_installed">%1$s 的受信任憑證：\n%2$s</string>
+    <string name="reset_trusted_certificate">重設受信任的憑證</string>
+    <string name="reset_trusted_certificate_confirm">這會移除此伺服器的受信任憑證。要繼續嗎？</string>
+    <string name="trusted_certificate_cleared">已清除受信任的憑證</string>
+    <string name="clear_cache">清除快取</string>
+    <string name="clear_cache_confirm">這會清除所有快取資料。要繼續嗎？</string>
+    <string name="cache_cleared">已清除快取</string>
+    <string name="logout">登出</string>
+    <string name="logout_confirm">這會將此裝置登出，並返回 SoAI 登入畫面。要繼續嗎？</string>
+    <string name="device_name">裝置名稱</string>
+    <string name="save_device_name">儲存裝置名稱</string>
+    <string name="device_name_required">請輸入裝置名稱。</string>
+    <string name="device_name_saved">裝置名稱已更新。</string>
+    <string name="device_name_update_failed">無法更新裝置名稱。</string>
+    <string name="device_identity_cookie_failed">無法準備安全的裝置身分。</string>
+    <string name="logout_failed_title">無法撤銷工作階段</string>
+    <string name="logout_failed_message">SoAI 無法向伺服器確認登出。請重試，或只清除此應用程式的本機登入憑證。</string>
+    <string name="clear_locally">清除本機資料</string>
+    <string name="clear_locally_warning">伺服器工作階段可能仍然有效。仍要清除本機登入憑證嗎？</string>
+    <string name="retry">重試</string>
+    <string name="reset">重設</string>
+    <string name="clear">清除</string>
+    <string name="cancel">取消</string>
+    <string name="ok">確定</string>
+    <string name="open">開啟</string>
+    <string name="wake_on_lan_description">傳送 Wake-on-LAN 魔術封包以啟動 SoAI 主機（必須在 BIOS 或作業系統中啟用 WOL，且網路支援此功能）。</string>
+    <string name="wol_mac_label">MAC 位址</string>
+    <string name="wol_broadcast_label">廣播位址（選填）</string>
+    <string name="wol_port_label">UDP 連接埠（預設為 9）</string>
+    <string name="wol_wake_now">立即喚醒</string>
+    <string name="wol_success">已傳送 Wake-on-LAN 封包</string>
+    <string name="wol_error_invalid_mac">MAC 位址無效</string>
+    <string name="wol_error_invalid_port">連接埠無效</string>
+    <string name="wol_error_invalid_broadcast">廣播位址無效</string>
+    <string name="wol_error_failed">Wake-on-LAN 失敗：%s</string>
+
+    <!-- About Screen -->
+    <string name="about_title">關於 SoAI</string>
+    <string name="app_title">SoAI Connect</string>
+    <string name="app_tagline">人工智慧的智慧型協調器</string>
+    <string name="app_description">SoAI 的行動用戶端。SoAI 是完整的本機與遠端大型語言模型協調層，提供統一且相容 OpenAI 的 API、請求佇列，以及智慧型後端抽象化。</string>
+    <string name="app_version">用戶端版本：%s</string>
+    <string name="app_license">授權條款：MIT License</string>
+    <string name="licenses_label">授權條款</string>
+    <string name="licenses_unavailable">無法取得授權條款。</string>
+
+    <string name="popup_title">彈出式視窗</string>
+    <string name="error_opening_link">無法開啟連結</string>
+    <string name="error_opening_file_picker">無法開啟檔案選擇器</string>
+    <string name="permission_denied">權限遭拒</string>
+
+    <string name="server_found_untrusted_tls_identity">找到 %1$s：%2$s\nHTTPS 憑證需要核准</string>
+    <string name="webview_crashed">網頁內容已當機。請重新載入後繼續。</string>
+
+    <string name="open_external_app_title">要開啟外部應用程式嗎？</string>
+    <string name="open_external_app_message">要在其他應用程式中開啟此連結嗎？\n\n%1$s</string>
+
+    <string name="untrusted_certificate_title">不受信任的憑證</string>
+    <string name="certificate_changed_title">憑證已變更</string>
+    <string name="certificate_details">伺服器：%1$s\n\n主體：%2$s\n簽發者：%3$s\nSHA-256：%4$s\n\n請只信任您認得的憑證。</string>
+    <string name="trust_once">僅信任一次</string>
+    <string name="trust_always">一律信任</string>
+    <string name="ssl_error_wrong_origin">已封鎖：憑證錯誤來自其他來源</string>
+    <string name="ssl_error_unavailable_certificate">已封鎖：無法取得憑證詳細資料</string>
+    <string name="ssl_error_blocked">已封鎖：憑證不受信任</string>
+
+    <string name="android_notifications_channel_name">SoAI 通知</string>
+    <string name="android_notifications_channel_description">來自 SoAI 前端與後端的提醒</string>
+    <string name="android_notifications_connection_channel_name">SoAI 通知連線</string>
+    <string name="android_notifications_connection_channel_description">讓 SoAI 通知傳送保持連線</string>
+    <string name="android_notifications_foreground_title">SoAI 通知已啟用</string>
+    <string name="android_notifications_foreground_text">正在接收 SoAI 提醒</string>
+    <string name="notification_generic_title">SoAI</string>
+    <string name="notification_generic_message">新的 SoAI 通知</string>
+    <string name="notification_tool_approval_title">需要核准工具</string>
+    <string name="notification_tool_approval_message">%1$s 正在等候核准</string>
+    <string name="notification_ask_user_title">SoAI 需要您的回覆</string>
+    <string name="notification_ask_user_message">SoAI 正在等候您的回覆</string>
+    <string name="notification_secret_request_title">需要機密資訊</string>
+    <string name="notification_secret_request_message">必須提供機密資訊才能繼續</string>
+    <string name="notification_automation_completed_title">自動化已完成</string>
+    <string name="notification_automation_completed_message">%1$s 已完成</string>
+    <string name="notification_automation_completed_message_generic">自動化已完成</string>
+    <string name="notification_automation_failed_title">自動化失敗</string>
+    <string name="notification_automation_failed_message">%1$s 失敗</string>
+    <string name="notification_automation_failed_message_generic">自動化失敗</string>
+    <string name="notification_automation_failed_message_with_status">%1$s 失敗：%2$s</string>
+    <string name="notification_automation_failed_message_with_status_generic">自動化失敗：%1$s</string>
+    <string name="notification_mail_new_title">%1$s 中有新郵件</string>
+    <string name="notification_mail_new_message">%1$s：%2$s</string>
+    <string name="notification_mail_sync_failure_title">%1$s 的郵件同步失敗</string>
+    <string name="notification_mail_sync_failure_message">%1$s</string>
+    <string name="notification_calendar_invite_update_title">%1$s 中的行事曆邀請已更新</string>
+    <string name="notification_calendar_invite_update_message">%1$s：%2$s</string>
+    <string name="notification_calendar_reminder_due_title">%1$s 中的行事曆提醒</string>
+    <string name="notification_calendar_reminder_due_message">%1$s 將於 %2$s 開始</string>
+    <string name="notification_calendar_reminder_missed_title">錯過 %1$s 中的行事曆提醒</string>
+    <string name="notification_calendar_reminder_missed_message">%1$s 已於 %2$s 開始</string>
+    <string name="notification_calendar_sync_failure_title">%1$s 的行事曆同步失敗</string>
+    <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="change_server">變更伺服器</string>
+    <string name="change_server_confirm">這會清除目前伺服器的資料，並返回連線設定。要繼續嗎？</string>
+    <string name="change">變更</string>
+    <string name="server_found_cleartext_warning">%1$s\n警告：此連線未加密，而且該位址不在您的區域網路上。裝置與伺服器之間的任何人都能讀取您的工作階段。</string>
+</resources>

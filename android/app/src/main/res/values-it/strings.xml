@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoAI</string>
+
+    <!-- Connection Screen -->
+    <string name="connection_title">SoAI Connect</string>
+    <string name="server_url_hint">URL o IP del server</string>
+    <string name="server_url_helper">Esempio: 192.168.1.100 o soai.local</string>
+    <string name="connection_info">Un client leggero per accedere all\'interfaccia web di SoAI sulla tua rete locale.\n\nInserisci l\'indirizzo del server e la porta verrà rilevata automaticamente.</string>
+    <string name="website_url">https://soai.to</string>
+    <string name="website_label">soai.to</string>
+    <string name="check_button">Verifica</string>
+    <string name="connect_button">Connetti</string>
+    <string name="retry_button">Riprova</string>
+    <string name="checking">Verifica in corso…</string>
+    <string name="server_identity">SoAI %s</string>
+    <string name="server_identity_named">SoAI %1$s — %2$s</string>
+    <string name="server_found_identity">%1$s trovato: %2$s</string>
+    <string name="server_found_fallback">%1$s\nLa porta configurata %2$d è occupata. Questa istanza è in esecuzione sulla porta di riserva %3$d.</string>
+    <string name="error_empty_url">L\'URL del server è obbligatorio</string>
+    <string name="error_invalid_address">Indirizzo del server non valido</string>
+    <string name="error_ipv6_zone_unsupported">Gli identificatori di zona IPv6 non sono supportati</string>
+    <string name="error_invalid_port">Porta non valida: %s</string>
+    <string name="error_server_not_reachable">Server non raggiungibile su %s</string>
+    <string name="error_server_not_found">Server non trovato su %s</string>
+    <string name="error_multiple_servers">Sono stati trovati più server SoAI. Inserisci una porta del server esplicita.</string>
+    <string name="error_not_soai_server">Il server su %s ha risposto ma non è un server SoAI</string>
+
+    <!-- Main Screen -->
+    <string name="menu_reload">Ricarica</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="menu_about">Informazioni</string>
+    <string name="error_loading_page">Errore durante il caricamento della pagina</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_security">Sicurezza</string>
+    <string name="settings_data">Dati</string>
+    <string name="settings_power">Alimentazione</string>
+    <string name="incognito_mode">Modalità in incognito</string>
+    <string name="incognito_mode_description">Cookie e dati dei siti vengono eliminati quando esci dall\'app</string>
+    <string name="android_notifications">Notifiche Android</string>
+    <string name="android_notifications_description">Inoltra le notifiche della WebUI di SoAI all\'area notifiche di Android quando l\'app è in background</string>
+    <string name="android_notifications_background_title">Mantieni SoAI in esecuzione in background</string>
+    <string name="android_notifications_background_message">SoAI deve mantenere aperta una connessione in background per mostrare le notifiche Android. Le notifiche della WebUI continueranno ad apparire dentro SoAI anche con questo interruttore disattivato; questo interruttore controlla solo l\'inoltro ad Android.\n\nPer una consegna affidabile, apri le impostazioni della batteria di Android e disattiva l\'ottimizzazione della batteria per SoAI. La dicitura esatta dipende dal dispositivo: cerca Batteria, Utilizzo batteria dell\'app, Senza restrizioni o Non ottimizzare.\n\nSoAI usa questa connessione diretta in background per non dipendere dai servizi Google.</string>
+    <string name="no_trusted_certificate">Nessun certificato HTTPS attendibile</string>
+    <string name="trusted_certificate_installed">Certificato attendibile per %1$s:\n%2$s</string>
+    <string name="reset_trusted_certificate">Reimposta certificato attendibile</string>
+    <string name="reset_trusted_certificate_confirm">Questa operazione rimuoverà il certificato attendibile per questo server. Continuare?</string>
+    <string name="trusted_certificate_cleared">Certificato attendibile rimosso</string>
+    <string name="clear_cache">Svuota cache</string>
+    <string name="clear_cache_confirm">Questa operazione eliminerà tutti i dati memorizzati nella cache. Continuare?</string>
+    <string name="cache_cleared">Cache svuotata</string>
+    <string name="logout">Disconnetti</string>
+    <string name="logout_confirm">Questa operazione disconnetterà il dispositivo e tornerà alla schermata di accesso a SoAI. Continuare?</string>
+    <string name="reset">Reimposta</string>
+    <string name="clear">Svuota</string>
+    <string name="cancel">Annulla</string>
+    <string name="ok">OK</string>
+    <string name="open">Apri</string>
+    <string name="wake_on_lan_description">Invia un pacchetto magico Wake-on-LAN per accendere la tua macchina SoAI (se il WOL è abilitato nel BIOS/OS e supportato dalla tua rete).</string>
+    <string name="wol_mac_label">Indirizzo MAC</string>
+    <string name="wol_broadcast_label">Indirizzo di broadcast (opzionale)</string>
+    <string name="wol_port_label">Porta UDP (predefinita 9)</string>
+    <string name="wol_wake_now">Accendi ora</string>
+    <string name="wol_success">Pacchetto Wake-on-LAN inviato</string>
+    <string name="wol_error_invalid_mac">Indirizzo MAC non valido</string>
+    <string name="wol_error_invalid_port">Porta non valida</string>
+    <string name="wol_error_invalid_broadcast">Indirizzo di broadcast non valido</string>
+    <string name="wol_error_failed">Wake-on-LAN non riuscito: %s</string>
+
+    <!-- About Screen -->
+    <string name="about_title">Informazioni su SoAI</string>
+    <string name="app_title">SoAI Connect</string>
+    <string name="app_tagline">Smart Orchestrator for Artificial Intelligence</string>
+    <string name="app_description">Un client mobile per SoAI: un livello di orchestrazione completo per Large Language Model locali e remoti, con un\'API unificata compatibile con OpenAI, accodamento delle richieste e astrazione intelligente dei backend.</string>
+    <string name="app_version">Versione client: %s</string>
+    <string name="app_license">Licenza: MIT License</string>
+    <string name="licenses_label">Licenze</string>
+    <string name="licenses_unavailable">Le licenze non sono disponibili.</string>
+
+    <string name="popup_title">Popup</string>
+    <string name="error_opening_link">Impossibile aprire il collegamento</string>
+    <string name="error_opening_file_picker">Impossibile aprire il selettore di file</string>
+    <string name="permission_denied">Autorizzazione negata</string>
+
+    <string name="server_found_untrusted_tls_identity">%1$s trovato: %2$s\nIl certificato HTTPS richiede approvazione</string>
+    <string name="webview_crashed">Il contenuto web si è arrestato. Ricarica per continuare.</string>
+
+    <string name="open_external_app_title">Aprire un\'app esterna?</string>
+    <string name="open_external_app_message">Aprire questo collegamento in un\'altra app?\n\n%1$s</string>
+
+    <string name="untrusted_certificate_title">Certificato non attendibile</string>
+    <string name="certificate_changed_title">Certificato modificato</string>
+    <string name="certificate_details">Server: %1$s\n\nSoggetto: %2$s\nEmittente: %3$s\nSHA-256: %4$s\n\nConsidera attendibili solo i certificati che riconosci.</string>
+    <string name="trust_once">Fidati una volta</string>
+    <string name="trust_always">Fidati sempre</string>
+    <string name="ssl_error_wrong_origin">Bloccato: errore di certificato da un\'origine diversa</string>
+    <string name="ssl_error_unavailable_certificate">Bloccato: dettagli del certificato non disponibili</string>
+    <string name="ssl_error_blocked">Bloccato: certificato non attendibile</string>
+
+    <string name="android_notifications_channel_name">Notifiche SoAI</string>
+    <string name="android_notifications_channel_description">Avvisi dal frontend e dal backend di SoAI</string>
+    <string name="android_notifications_connection_channel_name">Connessione notifiche SoAI</string>
+    <string name="android_notifications_connection_channel_description">Mantiene attiva la consegna delle notifiche di SoAI</string>
+    <string name="android_notifications_foreground_title">Notifiche SoAI attive</string>
+    <string name="android_notifications_foreground_text">In ascolto degli avvisi di SoAI</string>
+    <string name="notification_generic_title">SoAI</string>
+    <string name="notification_generic_message">Nuova notifica SoAI</string>
+    <string name="notification_tool_approval_title">Approvazione strumento richiesta</string>
+    <string name="notification_tool_approval_message">%1$s è in attesa di approvazione</string>
+    <string name="notification_ask_user_title">SoAI richiede un input</string>
+    <string name="notification_ask_user_message">SoAI è in attesa della tua risposta</string>
+    <string name="notification_secret_request_title">Segreto richiesto</string>
+    <string name="notification_secret_request_message">È richiesto un segreto per continuare</string>
+    <string name="notification_automation_completed_title">Automazione completata</string>
+    <string name="notification_automation_completed_message">%1$s completata</string>
+    <string name="notification_automation_completed_message_generic">Automazione completata</string>
+    <string name="notification_automation_failed_title">Automazione non riuscita</string>
+    <string name="notification_automation_failed_message">%1$s non riuscita</string>
+    <string name="notification_automation_failed_message_generic">Automazione non riuscita</string>
+    <string name="notification_automation_failed_message_with_status">%1$s non riuscita: %2$s</string>
+    <string name="notification_automation_failed_message_with_status_generic">Automazione non riuscita: %1$s</string>
+    <string name="notification_mail_new_title">Nuova mail in %1$s</string>
+    <string name="notification_mail_new_message">%1$s: %2$s</string>
+    <string name="notification_mail_sync_failure_title">Sincronizzazione mail non riuscita per %1$s</string>
+    <string name="notification_mail_sync_failure_message">%1$s</string>
+    <string name="notification_calendar_invite_update_title">Invito del calendario aggiornato in %1$s</string>
+    <string name="notification_calendar_invite_update_message">%1$s: %2$s</string>
+    <string name="notification_calendar_reminder_due_title">Promemoria del calendario in %1$s</string>
+    <string name="notification_calendar_reminder_due_message">%1$s inizia alle %2$s</string>
+    <string name="notification_calendar_reminder_missed_title">Promemoria del calendario mancato in %1$s</string>
+    <string name="notification_calendar_reminder_missed_message">%1$s è iniziato alle %2$s</string>
+    <string name="notification_calendar_sync_failure_title">Sincronizzazione calendario non riuscita per %1$s</string>
+    <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="change_server">Cambia server</string>
+    <string name="change_server_confirm">Questa operazione eliminerà i dati del server corrente e tornerà alla configurazione della connessione. Continuare?</string>
+    <string name="change">Cambia</string>
+    <string name="device_name">Nome dispositivo</string>
+    <string name="save_device_name">Salva nome dispositivo</string>
+    <string name="device_name_required">Inserisci un nome per il dispositivo.</string>
+    <string name="device_name_saved">Nome del dispositivo aggiornato.</string>
+    <string name="device_name_update_failed">Impossibile aggiornare il nome del dispositivo.</string>
+    <string name="device_identity_cookie_failed">Impossibile preparare l’identità sicura del dispositivo.</string>
+    <string name="logout_failed_title">Impossibile revocare la sessione</string>
+    <string name="logout_failed_message">SoAI non ha potuto confermare la disconnessione con il server. Riprova oppure cancella solo le credenziali locali di questa app.</string>
+    <string name="clear_locally">Cancella localmente</string>
+    <string name="clear_locally_warning">La sessione sul server potrebbe rimanere attiva. Cancellare comunque le credenziali locali?</string>
+    <string name="retry">Riprova</string>
+    <string name="menu_close">Chiudi</string>
+    <string name="default_device_label">Dispositivo Android</string>
+    <string name="server_found_cleartext_warning">%1$s\nAttenzione: questa connessione non è cifrata e l\'indirizzo non è nella tua rete locale. Chiunque si trovi tra il tuo dispositivo e il server può leggere la tua sessione.</string>
+</resources>
