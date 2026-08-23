@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoAI</string>
+
+    <!-- Connection Screen -->
+    <string name="connection_title">SoAI Connect</string>
+    <string name="server_url_hint">نشانی یا IP سرور</string>
+    <string name="server_url_helper">مثال: 192.168.1.100 یا soai.local</string>
+    <string name="connection_info">یک برنامهٔ سبک برای دسترسی به رابط وب SoAI در شبکهٔ محلی شما.\n\nفقط نشانی سرور را وارد کنید؛ درگاه به‌طور خودکار پیدا می‌شود.</string>
+    <string name="website_url">https://soai.to</string>
+    <string name="website_label">soai.to</string>
+    <string name="check_button">بررسی</string>
+    <string name="connect_button">اتصال</string>
+    <string name="retry_button">تلاش دوباره</string>
+    <string name="checking">در حال بررسی…</string>
+    <string name="server_identity">SoAI %s</string>
+    <string name="server_identity_named">SoAI %1$s — %2$s</string>
+    <string name="server_found_identity">%1$s پیدا شد: %2$s</string>
+    <string name="server_found_fallback">%1$s\nدرگاه پیکربندی‌شدهٔ %2$d در حال استفاده است. این نمونه روی درگاه جایگزین %3$d اجرا می‌شود.</string>
+    <string name="error_empty_url">نشانی سرور الزامی است</string>
+    <string name="error_invalid_address">نشانی سرور نامعتبر است</string>
+    <string name="error_ipv6_zone_unsupported">شناسه‌های ناحیهٔ IPv6 پشتیبانی نمی‌شوند</string>
+    <string name="error_invalid_port">درگاه نامعتبر: %s</string>
+    <string name="error_server_not_reachable">سرور در %s در دسترس نیست</string>
+    <string name="error_server_not_found">سروری در %s پیدا نشد</string>
+    <string name="error_multiple_servers">چند سرور SoAI پیدا شد. درگاه سرور را به‌طور مشخص وارد کنید.</string>
+    <string name="error_not_soai_server">سرور در %s پاسخ داد، اما سرور SoAI نیست</string>
+
+    <!-- Main Screen -->
+    <string name="menu_reload">بارگذاری دوباره</string>
+    <string name="menu_settings">تنظیمات</string>
+    <string name="menu_about">درباره</string>
+    <string name="menu_close">بستن</string>
+    <string name="default_device_label">دستگاه Android</string>
+    <string name="error_loading_page">خطا در بارگذاری صفحه</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_privacy">حریم خصوصی</string>
+    <string name="settings_security">امنیت</string>
+    <string name="settings_data">داده‌ها</string>
+    <string name="settings_power">برق</string>
+    <string name="incognito_mode">حالت ناشناس</string>
+    <string name="incognito_mode_description">با خروج از برنامه، کوکی‌ها و داده‌های سایت پاک می‌شوند</string>
+    <string name="android_notifications">اعلان‌های Android</string>
+    <string name="android_notifications_description">وقتی برنامه در پس‌زمینه است، اعلان‌های رابط وب SoAI را به بخش اعلان‌های Android بفرست</string>
+    <string name="android_notifications_background_title">SoAI را در پس‌زمینه فعال نگه دارید</string>
+    <string name="android_notifications_background_message">برای نمایش اعلان‌های Android، SoAI باید اتصال پس‌زمینه را باز نگه دارد. وقتی این گزینه خاموش باشد، اعلان‌های رابط وب همچنان درون SoAI نمایش داده می‌شوند؛ این گزینه فقط ارسال آن‌ها به Android را کنترل می‌کند.\n\nبرای دریافت مطمئن اعلان‌ها، تنظیمات باتری Android را باز و بهینه‌سازی باتری را برای SoAI غیرفعال کنید. نام دقیق این گزینه به دستگاه شما بستگی دارد؛ به‌دنبال «باتری»، «مصرف باتری برنامه»، «بدون محدودیت» یا «بهینه‌سازی نشود» بگردید.\n\nSoAI از این اتصال مستقیم پس‌زمینه استفاده می‌کند تا به سرویس‌های Google وابسته نباشد.</string>
+    <string name="no_trusted_certificate">گواهی HTTPS مورد اعتمادی وجود ندارد</string>
+    <string name="trusted_certificate_installed">گواهی مورد اعتماد برای %1$s:\n%2$s</string>
+    <string name="reset_trusted_certificate">بازنشانی گواهی مورد اعتماد</string>
+    <string name="reset_trusted_certificate_confirm">گواهی مورد اعتماد این سرور حذف می‌شود. ادامه می‌دهید؟</string>
+    <string name="trusted_certificate_cleared">گواهی مورد اعتماد پاک شد</string>
+    <string name="clear_cache">پاک کردن حافظهٔ پنهان</string>
+    <string name="clear_cache_confirm">همهٔ داده‌های ذخیره‌شده در حافظهٔ پنهان پاک می‌شوند. ادامه می‌دهید؟</string>
+    <string name="cache_cleared">حافظهٔ پنهان پاک شد</string>
+    <string name="logout">خروج از حساب</string>
+    <string name="logout_confirm">از حساب این دستگاه خارج می‌شوید و به صفحهٔ ورود SoAI بازمی‌گردید. ادامه می‌دهید؟</string>
+    <string name="device_name">نام دستگاه</string>
+    <string name="save_device_name">ذخیرهٔ نام دستگاه</string>
+    <string name="device_name_required">نام دستگاه را وارد کنید.</string>
+    <string name="device_name_saved">نام دستگاه به‌روزرسانی شد.</string>
+    <string name="device_name_update_failed">نام دستگاه به‌روزرسانی نشد.</string>
+    <string name="device_identity_cookie_failed">آماده‌سازی هویت امن دستگاه ممکن نشد.</string>
+    <string name="logout_failed_title">نشست لغو نشد</string>
+    <string name="logout_failed_message">SoAI نتوانست خروج از حساب را با سرور تأیید کند. دوباره تلاش کنید یا فقط اطلاعات ورود محلی این برنامه را پاک کنید.</string>
+    <string name="clear_locally">پاک کردن محلی</string>
+    <string name="clear_locally_warning">ممکن است نشست سرور همچنان فعال بماند. اطلاعات ورود محلی پاک شود؟</string>
+    <string name="retry">تلاش دوباره</string>
+    <string name="reset">بازنشانی</string>
+    <string name="clear">پاک کردن</string>
+    <string name="cancel">لغو</string>
+    <string name="ok">تأیید</string>
+    <string name="open">باز کردن</string>
+    <string name="wake_on_lan_description">برای روشن کردن دستگاه SoAI یک بستهٔ جادویی Wake-on-LAN بفرستید؛ به‌شرط آنکه WOL در BIOS یا سیستم‌عامل فعال باشد و شبکه از آن پشتیبانی کند.</string>
+    <string name="wol_mac_label">نشانی MAC</string>
+    <string name="wol_broadcast_label">نشانی پخش همگانی (اختیاری)</string>
+    <string name="wol_port_label">درگاه UDP (پیش‌فرض ۹)</string>
+    <string name="wol_wake_now">اکنون روشن کن</string>
+    <string name="wol_success">بستهٔ Wake-on-LAN ارسال شد</string>
+    <string name="wol_error_invalid_mac">نشانی MAC نامعتبر است</string>
+    <string name="wol_error_invalid_port">درگاه نامعتبر است</string>
+    <string name="wol_error_invalid_broadcast">نشانی پخش همگانی نامعتبر است</string>
+    <string name="wol_error_failed">Wake-on-LAN ناموفق بود: %s</string>
+
+    <!-- About Screen -->
+    <string name="about_title">دربارهٔ SoAI</string>
+    <string name="app_title">SoAI Connect</string>
+    <string name="app_tagline">هماهنگ‌کنندهٔ هوشمند هوش مصنوعی</string>
+    <string name="app_description">برنامهٔ همراه SoAI؛ یک لایهٔ جامع هماهنگ‌سازی برای مدل‌های زبانی بزرگ محلی و راه‌دور که API یکپارچه و سازگار با OpenAI، صف‌بندی درخواست‌ها و انتزاع هوشمند موتورهای پشتیبان را فراهم می‌کند.</string>
+    <string name="app_version">نسخهٔ برنامه: %s</string>
+    <string name="app_license">مجوز: MIT License</string>
+    <string name="licenses_label">مجوزها</string>
+    <string name="licenses_unavailable">مجوزها در دسترس نیستند.</string>
+
+    <string name="popup_title">پنجرهٔ بازشو</string>
+    <string name="error_opening_link">پیوند باز نشد</string>
+    <string name="error_opening_file_picker">انتخاب‌گر پرونده باز نشد</string>
+    <string name="permission_denied">مجوز داده نشد</string>
+
+    <string name="server_found_untrusted_tls_identity">%1$s پیدا شد: %2$s\nگواهی HTTPS نیاز به تأیید دارد</string>
+    <string name="webview_crashed">محتوای وب از کار افتاد. برای ادامه دوباره بارگذاری کنید.</string>
+
+    <string name="open_external_app_title">در برنامهٔ دیگری باز شود؟</string>
+    <string name="open_external_app_message">این پیوند در برنامهٔ دیگری باز شود؟\n\n%1$s</string>
+
+    <string name="untrusted_certificate_title">گواهی مورد اعتماد نیست</string>
+    <string name="certificate_changed_title">گواهی تغییر کرده است</string>
+    <string name="certificate_details">سرور: %1$s\n\nموضوع: %2$s\nصادرکننده: %3$s\nSHA-256: %4$s\n\nفقط به گواهی‌هایی اعتماد کنید که می‌شناسید.</string>
+    <string name="trust_once">اعتماد برای یک بار</string>
+    <string name="trust_always">همیشه اعتماد کن</string>
+    <string name="ssl_error_wrong_origin">مسدود شد: خطای گواهی از مبدأ دیگری است</string>
+    <string name="ssl_error_unavailable_certificate">مسدود شد: جزئیات گواهی در دسترس نیست</string>
+    <string name="ssl_error_blocked">مسدود شد: گواهی مورد اعتماد نیست</string>
+
+    <string name="android_notifications_channel_name">اعلان‌های SoAI</string>
+    <string name="android_notifications_channel_description">هشدارهای رابط کاربری و بخش پشتیبان SoAI</string>
+    <string name="android_notifications_connection_channel_name">اتصال اعلان‌های SoAI</string>
+    <string name="android_notifications_connection_channel_description">اتصال دریافت اعلان‌های SoAI را فعال نگه می‌دارد</string>
+    <string name="android_notifications_foreground_title">اعلان‌های SoAI فعال‌اند</string>
+    <string name="android_notifications_foreground_text">در حال دریافت هشدارهای SoAI</string>
+    <string name="notification_generic_title">SoAI</string>
+    <string name="notification_generic_message">اعلان جدید SoAI</string>
+    <string name="notification_tool_approval_title">تأیید ابزار لازم است</string>
+    <string name="notification_tool_approval_message">%1$s منتظر تأیید است</string>
+    <string name="notification_ask_user_title">SoAI به پاسخ شما نیاز دارد</string>
+    <string name="notification_ask_user_message">SoAI منتظر پاسخ شماست</string>
+    <string name="notification_secret_request_title">اطلاعات محرمانه لازم است</string>
+    <string name="notification_secret_request_message">برای ادامه، اطلاعات محرمانه لازم است</string>
+    <string name="notification_automation_completed_title">خودکارسازی تکمیل شد</string>
+    <string name="notification_automation_completed_message">%1$s تکمیل شد</string>
+    <string name="notification_automation_completed_message_generic">خودکارسازی تکمیل شد</string>
+    <string name="notification_automation_failed_title">خودکارسازی ناموفق بود</string>
+    <string name="notification_automation_failed_message">%1$s ناموفق بود</string>
+    <string name="notification_automation_failed_message_generic">خودکارسازی ناموفق بود</string>
+    <string name="notification_automation_failed_message_with_status">%1$s ناموفق بود: %2$s</string>
+    <string name="notification_automation_failed_message_with_status_generic">خودکارسازی ناموفق بود: %1$s</string>
+    <string name="notification_mail_new_title">نامهٔ جدید در %1$s</string>
+    <string name="notification_mail_new_message">%1$s: %2$s</string>
+    <string name="notification_mail_sync_failure_title">همگام‌سازی نامه برای %1$s ناموفق بود</string>
+    <string name="notification_mail_sync_failure_message">%1$s</string>
+    <string name="notification_calendar_invite_update_title">دعوت‌نامهٔ تقویم در %1$s به‌روزرسانی شد</string>
+    <string name="notification_calendar_invite_update_message">%1$s: %2$s</string>
+    <string name="notification_calendar_reminder_due_title">یادآور تقویم در %1$s</string>
+    <string name="notification_calendar_reminder_due_message">%1$s در %2$s شروع می‌شود</string>
+    <string name="notification_calendar_reminder_missed_title">یادآور ازدست‌رفتهٔ تقویم در %1$s</string>
+    <string name="notification_calendar_reminder_missed_message">%1$s در %2$s شروع شد</string>
+    <string name="notification_calendar_sync_failure_title">همگام‌سازی تقویم برای %1$s ناموفق بود</string>
+    <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="change_server">تغییر سرور</string>
+    <string name="change_server_confirm">داده‌های سرور فعلی پاک می‌شوند و به راه‌اندازی اتصال بازمی‌گردید. ادامه می‌دهید؟</string>
+    <string name="change">تغییر</string>
+    <string name="server_found_cleartext_warning">%1$s\nهشدار: این اتصال رمزگذاری نشده و نشانی آن در شبکهٔ محلی شما نیست. هر کسی میان دستگاه شما و سرور می‌تواند نشست شما را بخواند.</string>
+</resources>
