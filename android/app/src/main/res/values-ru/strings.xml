@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Неверный порт: %s</string>
     <string name="error_server_not_reachable">Сервер недоступен в %s</string>
     <string name="error_server_not_found">Сервер не найден на %s</string>
-    <string name="error_multiple_servers">Найдено несколько серверов SoAI. Укажите явный порт сервера.</string>
+    <string name="error_multiple_servers">Найдено несколько серверов SoAI: %s. Явно укажите один из них.</string>
     <string name="error_not_soai_server">Сервер %s ответил, но не является сервером SoAI.</string>
     <string name="menu_reload">Перезагрузить</string>
     <string name="menu_settings">Настройки</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Неверный MAC-адрес</string>
     <string name="wol_error_invalid_port">Неверный порт</string>
     <string name="wol_error_invalid_broadcast">Неверный широковещательный адрес</string>
+    <string name="wol_error_unexpected">Не удалось отправить пакет</string>
     <string name="wol_error_failed">Ошибка пробуждения по локальной сети: %s</string>
     <string name="about_title">О СоАИ</string>
     <string name="app_title">SoAI Connect</string>

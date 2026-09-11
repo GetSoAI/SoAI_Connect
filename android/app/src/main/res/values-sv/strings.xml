@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Ogiltig port: %s</string>
     <string name="error_server_not_reachable">Servern kan inte nås på %s</string>
     <string name="error_server_not_found">Servern hittades inte på %s</string>
-    <string name="error_multiple_servers">Flera SoAI-servrar hittades. Ange en explicit serverport.</string>
+    <string name="error_multiple_servers">Flera SoAI-servrar hittades: %s. Ange en av dem uttryckligen.</string>
     <string name="error_not_soai_server">Servern på %s svarade men är inte en SoAI-server</string>
     <string name="menu_reload">Ladda om</string>
     <string name="menu_settings">Inställningar</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Ogiltig MAC-adress</string>
     <string name="wol_error_invalid_port">Ogiltig port</string>
     <string name="wol_error_invalid_broadcast">Ogiltig sändningsadress</string>
+    <string name="wol_error_unexpected">Det gick inte att skicka paketet</string>
     <string name="wol_error_failed">Wake-on-LAN misslyckades: %s</string>
     <string name="about_title">Om SoAI</string>
     <string name="app_title">SoAI Connect</string>

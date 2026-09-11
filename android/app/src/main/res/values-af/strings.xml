@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Ongeldige poort: %s</string>
     <string name="error_server_not_reachable">Bediener nie bereikbaar by %s</string>
     <string name="error_server_not_found">Bediener nie gevind op %s</string>
-    <string name="error_multiple_servers">Veelvuldige SoAI-bedieners is gevind. Voer \'n eksplisiete bedienerpoort in.</string>
+    <string name="error_multiple_servers">Veelvuldige SoAI-bedieners is gevind: %s. Voer een uitdruklik in.</string>
     <string name="error_not_soai_server">Die bediener by %s het geantwoord, maar is nie \'n SoAI-bediener nie</string>
     <string name="menu_reload">Herlaai</string>
     <string name="menu_settings">Instellings</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Ongeldige MAC-adres</string>
     <string name="wol_error_invalid_port">Ongeldige poort</string>
     <string name="wol_error_invalid_broadcast">Ongeldige uitsaaiadres</string>
+    <string name="wol_error_unexpected">Kon nie die pakkie stuur nie</string>
     <string name="wol_error_failed">Wake-on-LAN het misluk: %s</string>
     <string name="about_title">Oor SoAI</string>
     <string name="app_title">SoAI Connect</string>

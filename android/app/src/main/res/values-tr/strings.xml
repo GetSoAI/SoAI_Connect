@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Geçersiz bağlantı noktası: %s</string>
     <string name="error_server_not_reachable">Sunucuya %s adresinden ulaşılamıyor</string>
     <string name="error_server_not_found">Sunucu %s üzerinde bulunamadı</string>
-    <string name="error_multiple_servers">Birden fazla SoAI sunucusu bulundu. Açık bir sunucu bağlantı noktası girin.</string>
+    <string name="error_multiple_servers">Birden fazla SoAI sunucusu bulundu: %s. Bunlardan birini açıkça girin.</string>
     <string name="error_not_soai_server">%s adresindeki sunucu yanıt verdi ancak bir SoAI sunucusu değil</string>
     <string name="menu_reload">Yeniden yükle</string>
     <string name="menu_settings">Ayarlar</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Geçersiz MAC adresi</string>
     <string name="wol_error_invalid_port">Geçersiz bağlantı noktası</string>
     <string name="wol_error_invalid_broadcast">Geçersiz yayın adresi</string>
+    <string name="wol_error_unexpected">Paket gönderilemedi</string>
     <string name="wol_error_failed">Yerel Ağda Uyandırma başarısız oldu: %s</string>
     <string name="about_title">SoAI Hakkında</string>
     <string name="app_title">SoAI Bağlantısı</string>

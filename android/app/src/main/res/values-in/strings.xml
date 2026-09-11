@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Pelabuhan tidak valid: %s</string>
     <string name="error_server_not_reachable">Server tidak dapat dijangkau di %s</string>
     <string name="error_server_not_found">Server tidak ditemukan pada %s</string>
-    <string name="error_multiple_servers">Beberapa server SoAI ditemukan. Masukkan port server secara eksplisit.</string>
+    <string name="error_multiple_servers">Beberapa server SoAI ditemukan: %s. Masukkan salah satunya secara eksplisit.</string>
     <string name="error_not_soai_server">Server di %s merespons tetapi bukan server SoAI</string>
     <string name="menu_reload">Muat ulang</string>
     <string name="menu_settings">Pengaturan</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Alamat MAC tidak valid</string>
     <string name="wol_error_invalid_port">Pelabuhan tidak valid</string>
     <string name="wol_error_invalid_broadcast">Alamat siaran tidak valid</string>
+    <string name="wol_error_unexpected">Paket tidak dapat dikirim</string>
     <string name="wol_error_failed">Pengaktifan di LAN gagal: %s</string>
     <string name="about_title">Tentang SoAI</string>
     <string name="app_title">SoAI Terhubung</string>

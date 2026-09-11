@@ -27,6 +27,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.withTimeoutOrNull
 import java.util.concurrent.atomic.AtomicLong
 import okhttp3.Response
 import okhttp3.WebSocket
@@ -80,12 +81,20 @@ class SoAINotificationListenerService : Service() {
         activeServerUrl = listenerServerUrl
         listenerJob = serviceScope.launch {
             try {
-                runListener(listenerServerUrl)
+                var outcome: ListenerRunOutcome
+                do {
+                    outcome = runListener(listenerServerUrl)
+                } while (
+                    isActive &&
+                    outcome == ListenerRunOutcome.POLICY_DISALLOWED &&
+                    listenerAllowed(listenerServerUrl)
+                )
+                if (isActive) stopSelf()
             } catch (exception: CancellationException) {
                 throw exception
             } catch (exception: Exception) {
                 Log.e(TAG, "Notification listener stopped after an unexpected failure", exception)
-                stopSelf()
+                if (isActive) stopSelf()
             }
         }
         return START_STICKY
@@ -100,8 +109,9 @@ class SoAINotificationListenerService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
-    private suspend fun runListener(serverUrl: String) {
+    private suspend fun runListener(serverUrl: String): ListenerRunOutcome {
         var backoffMillis = ReconnectBackoff.INITIAL_MILLIS
+        var listenerOutcome = ListenerRunOutcome.POLICY_DISALLOWED
         val webSocketClient = HttpClientFactory.createPinnedWebSocket(prefs)
         val restClient = HttpClientFactory.createPinnedRest(prefs)
         val apiClient = SoAINotificationApiClient(restClient, CookieManager.getInstance())
@@ -120,10 +130,15 @@ class SoAINotificationListenerService : Service() {
                     }
                 )
                 try {
-                    val outcome = finished.await()
+                    var outcome: SessionConnectionOutcome? = null
+                    while (outcome == null && listenerAllowed(serverUrl)) {
+                        outcome = withTimeoutOrNull(LISTENER_POLICY_CHECK_INTERVAL_MILLIS) {
+                            finished.await()
+                        }
+                    }
                     if (outcome == SessionConnectionOutcome.AUTHENTICATION_REVOKED) {
-                        stopSelf()
-                        return
+                        listenerOutcome = ListenerRunOutcome.AUTHENTICATION_REVOKED
+                        break
                     }
                 } finally {
                     if (activeCoordinator === coordinator) {
@@ -133,12 +148,12 @@ class SoAINotificationListenerService : Service() {
                     connectionJob.cancelAndJoin()
                 }
                 if (!serviceScope.isActive || !listenerAllowed(serverUrl)) {
-                    return
+                    break
                 }
                 val openedAt = openedAtMillis.get()
                 val connectionLifetime = if (openedAt == 0L) 0L else SystemClock.elapsedRealtime() - openedAt
                 backoffMillis = ReconnectBackoff.next(backoffMillis, connectionLifetime)
-                delay(backoffMillis)
+                delay(ReconnectBackoff.jittered(backoffMillis))
             }
         } finally {
             restClient.dispatcher.cancelAll()
@@ -148,6 +163,7 @@ class SoAINotificationListenerService : Service() {
             restClient.dispatcher.executorService.shutdown()
             webSocketClient.dispatcher.executorService.shutdown()
         }
+        return listenerOutcome
     }
 
     private fun createWebSocketListener(
@@ -291,5 +307,11 @@ class SoAINotificationListenerService : Service() {
     companion object {
         private const val TAG = "SoAINotificationSvc"
         private const val FOREGROUND_NOTIFICATION_ID = 4601
+        private const val LISTENER_POLICY_CHECK_INTERVAL_MILLIS = 30_000L
     }
+}
+
+private enum class ListenerRunOutcome {
+    AUTHENTICATION_REVOKED,
+    POLICY_DISALLOWED
 }

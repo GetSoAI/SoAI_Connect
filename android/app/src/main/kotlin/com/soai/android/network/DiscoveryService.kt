@@ -63,12 +63,7 @@ class DiscoveryService(
         }
 
         if (explicitPort != null) {
-            return@withContext withTimeoutOrNull(DISCOVERY_TIMEOUT) {
-                probeBackendWithSchemes(parsed.hostname, explicitPort, parsed.preferredScheme)
-            } ?: throw DiscoveryException(
-                DiscoveryFailureReason.NOT_REACHABLE,
-                "${parsed.hostname}:$explicitPort"
-            )
+            return@withContext probeBackendWithSchemes(parsed.hostname, explicitPort, parsed.preferredScheme)
         }
 
         return@withContext discoverFromPorts(
@@ -86,9 +81,7 @@ class DiscoveryService(
         val deferreds = DISCOVERY_PORTS.map { port ->
             async {
                 try {
-                    withTimeoutOrNull(DISCOVERY_TIMEOUT) {
-                        probeDiscoveryPort(hostname, port, preferredScheme)
-                    }
+                    probeDiscoveryPort(hostname, port, preferredScheme)
                 } catch (e: CancellationException) {
                     throw e
                 } catch (exception: Exception) {
@@ -102,7 +95,7 @@ class DiscoveryService(
             is DiscoverySelection.Selected -> selection.endpoint
             is DiscoverySelection.Ambiguous -> throw DiscoveryException(
                 DiscoveryFailureReason.AMBIGUOUS,
-                hostname
+                selection.endpoints.joinToString(", ") { it.serverUrl }
             )
             DiscoverySelection.NotFound -> throw DiscoveryException(
                 DiscoveryFailureReason.NOT_FOUND,
@@ -113,18 +106,19 @@ class DiscoveryService(
 
     private suspend fun probeDiscoveryPort(hostname: String, port: Int, preferredScheme: String?): DiscoveryResult? {
         for (scheme in buildPreferredSchemeList(preferredScheme)) {
-            val payload = fetchDiscoveryPayload(hostname, port, scheme) ?: continue
-            val probe = probeBackend(hostname, payload.port, payload.scheme)
-            if (
-                probe.result != null &&
-                probe.result.instanceId == payload.instanceId &&
-                probe.result.scheme == payload.scheme &&
-                probe.result.port == payload.port &&
-                probe.result.preferredPort == payload.preferredPort &&
-                probe.result.fallbackActive == payload.fallbackActive
-            ) {
-                return probe.result
+            val result = withTimeoutOrNull(SCHEME_PROBE_TIMEOUT) {
+                val payload = fetchDiscoveryPayload(hostname, port, scheme)
+                    ?: return@withTimeoutOrNull null
+                val probe = probeBackend(hostname, payload.port, payload.scheme)
+                probe.result?.takeIf { candidate ->
+                    candidate.instanceId == payload.instanceId &&
+                        candidate.scheme == payload.scheme &&
+                        candidate.port == payload.port &&
+                        candidate.preferredPort == payload.preferredPort &&
+                        candidate.fallbackActive == payload.fallbackActive
+                }
             }
+            if (result != null) return result
         }
         return null
     }
@@ -169,11 +163,11 @@ class DiscoveryService(
     }
 
     private suspend fun probeBackendWithSchemes(hostname: String, port: Int, preferredScheme: String?): DiscoveryResult {
-        val schemes = buildPreferredSchemeList(preferredScheme)
-
         var rejectedNonSoAI = false
-        for (scheme in schemes) {
-            val probe = probeBackend(hostname, port, scheme)
+        for (scheme in buildPreferredSchemeList(preferredScheme)) {
+            val probe = withTimeoutOrNull(SCHEME_PROBE_TIMEOUT) {
+                probeBackend(hostname, port, scheme)
+            } ?: continue
             if (probe.result != null) {
                 return probe.result
             }
@@ -235,7 +229,7 @@ class DiscoveryService(
     companion object {
         private const val TAG = "DiscoveryService"
         private val DISCOVERY_PORTS = listOf(7950, 7951, 7952, 7953, 7954, 7955, 7956, 7957, 7958, 7959, 7960)
-        private const val DISCOVERY_TIMEOUT = 3000L
+        private const val SCHEME_PROBE_TIMEOUT = 3_000L
         private const val MAX_DISCOVERY_BODY_BYTES = 64L * 1024L
     }
 }

@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Cổng không hợp lệ: %s</string>
     <string name="error_server_not_reachable">Máy chủ không thể truy cập được tại %s</string>
     <string name="error_server_not_found">Không tìm thấy máy chủ trên %s</string>
-    <string name="error_multiple_servers">Đã tìm thấy nhiều máy chủ SoAI. Hãy nhập cổng máy chủ cụ thể.</string>
+    <string name="error_multiple_servers">Đã tìm thấy nhiều máy chủ SoAI: %s. Hãy nhập rõ một trong số đó.</string>
     <string name="error_not_soai_server">Máy chủ tại %s đã phản hồi nhưng không phải là máy chủ SoAI</string>
     <string name="menu_reload">Tải lại</string>
     <string name="menu_settings">Cài đặt</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Địa chỉ MAC không hợp lệ</string>
     <string name="wol_error_invalid_port">Cổng không hợp lệ</string>
     <string name="wol_error_invalid_broadcast">Địa chỉ quảng bá không hợp lệ</string>
+    <string name="wol_error_unexpected">Không thể gửi gói tin</string>
     <string name="wol_error_failed">Wake-on-LAN không thành công: %s</string>
     <string name="about_title">Giới thiệu về SoAI</string>
     <string name="app_title">Kết nối SoAI</string>

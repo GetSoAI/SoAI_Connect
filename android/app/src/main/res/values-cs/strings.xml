@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Neplatný port: %s</string>
     <string name="error_server_not_reachable">Server není dostupný na %s</string>
     <string name="error_server_not_found">Server nebyl nalezen na %s</string>
-    <string name="error_multiple_servers">Bylo nalezeno více serverů SoAI. Zadejte konkrétní port serveru.</string>
+    <string name="error_multiple_servers">Bylo nalezeno více serverů SoAI: %s. Zadejte jeden z nich.</string>
     <string name="error_not_soai_server">Server na %s odpověděl, ale není serverem SoAI</string>
     <string name="menu_reload">Znovu načíst</string>
     <string name="menu_settings">Nastavení</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Neplatná adresa MAC</string>
     <string name="wol_error_invalid_port">Neplatný port</string>
     <string name="wol_error_invalid_broadcast">Neplatná adresa vysílání</string>
+    <string name="wol_error_unexpected">Paket se nepodařilo odeslat</string>
     <string name="wol_error_failed">Wake-on-LAN se nezdařilo: %s</string>
     <string name="about_title">O SoAI</string>
     <string name="app_title">SoAI Connect</string>

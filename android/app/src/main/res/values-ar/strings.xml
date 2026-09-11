@@ -21,7 +21,7 @@
     <string name="error_invalid_port">منفذ غير صالح: %s</string>
     <string name="error_server_not_reachable">الخادم غير قابل للوصول على %s</string>
     <string name="error_server_not_found">لم يتم العثور على الخادم على %s</string>
-    <string name="error_multiple_servers">تم العثور على عدة خوادم SoAI. أدخل منفذ خادم صريحًا.</string>
+    <string name="error_multiple_servers">تم العثور على عدة خوادم SoAI: %s. أدخل أحدها صراحةً.</string>
     <string name="error_not_soai_server">استجاب الخادم الموجود في %s ولكنه ليس خادم SoAI</string>
     <string name="menu_reload">إعادة تحميل</string>
     <string name="menu_settings">إعدادات</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">عنوان MAC غير صالح</string>
     <string name="wol_error_invalid_port">منفذ غير صالح</string>
     <string name="wol_error_invalid_broadcast">عنوان البث غير صالح</string>
+    <string name="wol_error_unexpected">تعذر إرسال الحزمة</string>
     <string name="wol_error_failed">فشل التنبيه على الشبكة المحلية: %s</string>
     <string name="about_title">حول سواي</string>
     <string name="app_title">اتصال SoAI</string>

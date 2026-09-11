@@ -23,7 +23,7 @@
     <string name="error_invalid_port">連接埠無效：%s</string>
     <string name="error_server_not_reachable">無法連上 %s 的伺服器</string>
     <string name="error_server_not_found">在 %s 找不到伺服器</string>
-    <string name="error_multiple_servers">找到多個 SoAI 伺服器。請明確輸入伺服器連接埠。</string>
+    <string name="error_multiple_servers">找到多個 SoAI 伺服器：%s。請明確輸入其中一個。</string>
     <string name="error_not_soai_server">%s 的伺服器有回應，但不是 SoAI 伺服器</string>
 
     <!-- Main Screen -->
@@ -81,6 +81,7 @@
     <string name="wol_error_invalid_mac">MAC 位址無效</string>
     <string name="wol_error_invalid_port">連接埠無效</string>
     <string name="wol_error_invalid_broadcast">廣播位址無效</string>
+    <string name="wol_error_unexpected">無法傳送封包</string>
     <string name="wol_error_failed">Wake-on-LAN 失敗：%s</string>
 
     <!-- About Screen -->

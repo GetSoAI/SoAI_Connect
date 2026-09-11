@@ -27,11 +27,11 @@ Smaller things: camera, microphone, and file uploads go through the normal Andro
 
 SoAI Connect is distributed by sideloading from the [Releases page](https://github.com/GetSoAI/SoAI_Connect/releases) of this repository. There is no app-store listing.
 
-Each published APK ships with a `.sha256` sidecar. Verify the checksum and the signing certificate before you install:
+Each published APK ships with a `.sha256` sidecar and uses the canonical version-bearing name `SoAI-Connect-<version>-android.apk`. Verify the checksum and the signing certificate before you install:
 
 ```sh
-sha256sum -c SoAI-Connect-<version>-<timestamp>.apk.sha256
-apksigner verify --print-certs SoAI-Connect-<version>-<timestamp>.apk
+sha256sum -c SoAI-Connect-<version>-android.apk.sha256
+apksigner verify --print-certs SoAI-Connect-<version>-android.apk
 ```
 
 A genuine package is signed with APK Signature Scheme v2 and v3, carries no v1 JAR signature, and reports this certificate:
@@ -84,7 +84,7 @@ That file holds signing secrets and is never tracked in git. Keep the keystore o
 
 `VERSION` holds the client version and is the only place it is written. SoAI Connect versions independently of the SoAI server. It is a companion artifact, never an input to SoAI's automatic updates, and a client fix does not require a server release.
 
-`versionCode` is derived from that version as `major * 10000 + minor * 100 + patch`, so `1.0.0` is `10000` and `1.2.3` is `10203`. Bumping `VERSION` is the whole release-version change. Minor and patch components must stay below 100.
+`versionCode` is derived from that version as `major * 10000 + minor * 100 + patch`, so `1.2.3` is `10203`. Bumping `VERSION` is the whole release-version change. Minor and patch components must stay below 100.
 
 ## Layout
 

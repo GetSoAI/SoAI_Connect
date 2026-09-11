@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Ongeldige poort: %s</string>
     <string name="error_server_not_reachable">Server niet bereikbaar op %s</string>
     <string name="error_server_not_found">Server niet gevonden op %s</string>
-    <string name="error_multiple_servers">Er zijn meerdere SoAI-servers gevonden. Voer een expliciete serverpoort in.</string>
+    <string name="error_multiple_servers">Er zijn meerdere SoAI-servers gevonden: %s. Voer er één expliciet in.</string>
     <string name="error_not_soai_server">De server op %s heeft gereageerd, maar is geen SoAI-server</string>
     <string name="menu_reload">Herladen</string>
     <string name="menu_settings">Instellingen</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Ongeldig MAC-adres</string>
     <string name="wol_error_invalid_port">Ongeldige poort</string>
     <string name="wol_error_invalid_broadcast">Ongeldig uitzendadres</string>
+    <string name="wol_error_unexpected">Kan het pakket niet verzenden</string>
     <string name="wol_error_failed">Wake-on-LAN mislukt: %s</string>
     <string name="about_title">Over SoAI</string>
     <string name="app_title">SoAI Connect</string>

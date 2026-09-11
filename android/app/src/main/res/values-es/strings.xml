@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Puerto no válido: %s</string>
     <string name="error_server_not_reachable">Servidor no accesible en %s</string>
     <string name="error_server_not_found">Servidor no encontrado en %s</string>
-    <string name="error_multiple_servers">Se encontraron varios servidores SoAI. Ingrese un puerto de servidor explícito.</string>
+    <string name="error_multiple_servers">Se encontraron varios servidores SoAI: %s. Ingrese uno de ellos explícitamente.</string>
     <string name="error_not_soai_server">El servidor en %s respondió pero no es un servidor SoAI</string>
     <string name="menu_reload">Recargar</string>
     <string name="menu_settings">Ajustes</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Dirección MAC no válida</string>
     <string name="wol_error_invalid_port">Puerto no válido</string>
     <string name="wol_error_invalid_broadcast">Dirección de transmisión no válida</string>
+    <string name="wol_error_unexpected">No se pudo enviar el paquete</string>
     <string name="wol_error_failed">Error de activación en LAN: %s</string>
     <string name="about_title">Acerca de SOAI</string>
     <string name="app_title">Conexión SoAI</string>

@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Porta inválida: %s</string>
     <string name="error_server_not_reachable">Servidor não acessível em %s</string>
     <string name="error_server_not_found">Servidor não encontrado em %s</string>
-    <string name="error_multiple_servers">Vários servidores SoAI foram encontrados. Insira uma porta de servidor explícita.</string>
+    <string name="error_multiple_servers">Vários servidores SoAI foram encontrados: %s. Insira um deles explicitamente.</string>
     <string name="error_not_soai_server">O servidor em %s respondeu, mas não é um servidor SoAI</string>
     <string name="menu_reload">Recarregar</string>
     <string name="menu_settings">Configurações</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Endereço MAC inválido</string>
     <string name="wol_error_invalid_port">Porta inválida</string>
     <string name="wol_error_invalid_broadcast">Endereço de transmissão inválido</string>
+    <string name="wol_error_unexpected">Não foi possível enviar o pacote</string>
     <string name="wol_error_failed">Falha no Wake-on-LAN: %s</string>
     <string name="about_title">Sobre SoAI</string>
     <string name="app_title">Conexão SoAI</string>

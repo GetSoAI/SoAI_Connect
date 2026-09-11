@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Nieprawidłowy port: %s</string>
     <string name="error_server_not_reachable">Serwer nieosiągalny pod adresem %s</string>
     <string name="error_server_not_found">Nie znaleziono serwera w %s</string>
-    <string name="error_multiple_servers">Znaleziono wiele serwerów SoAI. Wprowadź jawny port serwera.</string>
+    <string name="error_multiple_servers">Znaleziono wiele serwerów SoAI: %s. Wprowadź jawnie jeden z nich.</string>
     <string name="error_not_soai_server">Serwer w %s odpowiedział, ale nie jest serwerem SoAI</string>
     <string name="menu_reload">Przeładować</string>
     <string name="menu_settings">Ustawienia</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Nieprawidłowy adres MAC</string>
     <string name="wol_error_invalid_port">Nieprawidłowy port</string>
     <string name="wol_error_invalid_broadcast">Nieprawidłowy adres rozgłoszeniowy</string>
+    <string name="wol_error_unexpected">Nie można wysłać pakietu</string>
     <string name="wol_error_failed">Wake-on-LAN nie powiodło się: %s</string>
     <string name="about_title">O SoAI</string>
     <string name="app_title">Połączenie SoAI</string>

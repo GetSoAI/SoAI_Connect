@@ -159,7 +159,7 @@ class ConnectionActivity : AppCompatActivity() {
             DiscoveryFailureReason.NOT_REACHABLE ->
                 getString(R.string.error_server_not_reachable, detail)
             DiscoveryFailureReason.NOT_FOUND -> getString(R.string.error_server_not_found, detail)
-            DiscoveryFailureReason.AMBIGUOUS -> getString(R.string.error_multiple_servers)
+            DiscoveryFailureReason.AMBIGUOUS -> getString(R.string.error_multiple_servers, detail)
             DiscoveryFailureReason.NOT_SOAI_SERVER ->
                 getString(R.string.error_not_soai_server, detail)
         }
