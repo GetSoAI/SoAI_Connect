@@ -21,7 +21,7 @@
     <string name="error_invalid_port">अमान्य पोर्ट: %s</string>
     <string name="error_server_not_reachable">%s पर सर्वर पहुंच योग्य नहीं है</string>
     <string name="error_server_not_found">%s पर सर्वर नहीं मिला</string>
-    <string name="error_multiple_servers">कई SoAI सर्वर मिले। एक स्पष्ट सर्वर पोर्ट दर्ज करें।</string>
+    <string name="error_multiple_servers">कई SoAI सर्वर मिले: %s। इनमें से एक को स्पष्ट रूप से दर्ज करें।</string>
     <string name="error_not_soai_server">%s पर सर्वर ने प्रतिक्रिया दी लेकिन वह SoAI सर्वर नहीं है</string>
     <string name="menu_reload">पुनः लोड करें</string>
     <string name="menu_settings">सेटिंग्स</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">अमान्य मैक पता</string>
     <string name="wol_error_invalid_port">अमान्य पोर्ट</string>
     <string name="wol_error_invalid_broadcast">अमान्य प्रसारण पता</string>
+    <string name="wol_error_unexpected">पैकेट भेजा नहीं जा सका</string>
     <string name="wol_error_failed">वेक-ऑन-लैन विफल: %s</string>
     <string name="about_title">एसओएआई के बारे में</string>
     <string name="app_title">एसओएआई कनेक्ट</string>

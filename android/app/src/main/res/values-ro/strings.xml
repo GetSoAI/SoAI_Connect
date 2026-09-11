@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Port nevalid: %s</string>
     <string name="error_server_not_reachable">Serverul nu este accesibil la %s</string>
     <string name="error_server_not_found">Serverul nu a fost găsit pe %s</string>
-    <string name="error_multiple_servers">Au fost găsite mai multe servere SoAI. Introduceți un port de server explicit.</string>
+    <string name="error_multiple_servers">Au fost găsite mai multe servere SoAI: %s. Introduceți explicit unul dintre ele.</string>
     <string name="error_not_soai_server">Serverul de la %s a răspuns, dar nu este un server SoAI</string>
     <string name="menu_reload">Reîncărcați</string>
     <string name="menu_settings">Setări</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Adresă MAC nevalidă</string>
     <string name="wol_error_invalid_port">Port nevalid</string>
     <string name="wol_error_invalid_broadcast">Adresă de difuzare nevalidă</string>
+    <string name="wol_error_unexpected">Pachetul nu a putut fi trimis</string>
     <string name="wol_error_failed">Wake-on-LAN a eșuat: %s</string>
     <string name="about_title">Despre SoAI</string>
     <string name="app_title">SoAI Connect</string>

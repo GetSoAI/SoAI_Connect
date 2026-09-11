@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.soai.android.R
 import com.soai.android.data.AppPreferences
 import com.soai.android.databinding.ActivitySettingsBinding
+import com.soai.android.network.WakeOnLanDeliveryException
 import com.soai.android.network.WakeOnLanException
 import com.soai.android.network.WakeOnLanField
 import com.soai.android.network.WakeOnLanSender
@@ -25,7 +26,7 @@ internal class WakeOnLanSettings(
     fun initialize() {
         binding.wolMacInput.setText(prefs.wolMac.orEmpty())
         binding.wolBroadcastInput.setText(prefs.wolBroadcastAddress.orEmpty())
-        binding.wolPortInput.setText(String.format(Locale.getDefault(), "%d", prefs.wolPort))
+        binding.wolPortInput.setText(String.format(Locale.ROOT, "%d", prefs.wolPort))
         binding.wolWakeButton.setOnClickListener { send() }
     }
 
@@ -59,16 +60,14 @@ internal class WakeOnLanSettings(
                 showMessage(activity.getString(R.string.wol_success))
             } catch (exception: WakeOnLanException) {
                 showFieldError(exception.field)
+            } catch (exception: WakeOnLanDeliveryException) {
+                Log.w(TAG, "Wake-on-LAN delivery failed", exception)
+                showWakeFailure(R.string.wol_error_unexpected)
             } catch (exception: CancellationException) {
                 throw exception
             } catch (exception: Exception) {
                 Log.e(TAG, "Unexpected Wake-on-LAN failure", exception)
-                showMessage(
-                    activity.getString(
-                        R.string.wol_error_failed,
-                        activity.getString(R.string.wol_error_invalid_broadcast)
-                    )
-                )
+                showWakeFailure(R.string.wol_error_unexpected)
             } finally {
                 binding.wolWakeButton.isEnabled = true
             }
@@ -81,13 +80,12 @@ internal class WakeOnLanSettings(
                 activity.getString(R.string.wol_error_invalid_mac)
             WakeOnLanField.PORT -> binding.wolPortLayout.error =
                 activity.getString(R.string.wol_error_invalid_port)
-            WakeOnLanField.BROADCAST -> showMessage(
-                activity.getString(
-                    R.string.wol_error_failed,
-                    activity.getString(R.string.wol_error_invalid_broadcast)
-                )
-            )
+            WakeOnLanField.BROADCAST -> showWakeFailure(R.string.wol_error_invalid_broadcast)
         }
+    }
+
+    private fun showWakeFailure(causeRes: Int) {
+        showMessage(activity.getString(R.string.wol_error_failed, activity.getString(causeRes)))
     }
 
     private fun parsePort(text: String?): Int? {

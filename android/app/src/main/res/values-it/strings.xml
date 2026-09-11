@@ -23,7 +23,7 @@
     <string name="error_invalid_port">Porta non valida: %s</string>
     <string name="error_server_not_reachable">Server non raggiungibile su %s</string>
     <string name="error_server_not_found">Server non trovato su %s</string>
-    <string name="error_multiple_servers">Sono stati trovati più server SoAI. Inserisci una porta del server esplicita.</string>
+    <string name="error_multiple_servers">Sono stati trovati più server SoAI: %s. Inseriscine uno esplicitamente.</string>
     <string name="error_not_soai_server">Il server su %s ha risposto ma non è un server SoAI</string>
 
     <!-- Main Screen -->
@@ -68,6 +68,7 @@
     <string name="wol_error_invalid_mac">Indirizzo MAC non valido</string>
     <string name="wol_error_invalid_port">Porta non valida</string>
     <string name="wol_error_invalid_broadcast">Indirizzo di broadcast non valido</string>
+    <string name="wol_error_unexpected">Impossibile inviare il pacchetto</string>
     <string name="wol_error_failed">Wake-on-LAN non riuscito: %s</string>
 
     <!-- About Screen -->

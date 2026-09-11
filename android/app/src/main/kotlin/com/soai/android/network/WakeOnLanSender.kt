@@ -17,6 +17,8 @@ enum class WakeOnLanField {
 
 class WakeOnLanException(val field: WakeOnLanField) : Exception("Invalid ${field.name}")
 
+class WakeOnLanDeliveryException(cause: Throwable) : Exception("Wake-on-LAN delivery failed", cause)
+
 object WakeOnLanSender {
 
     private const val MAGIC_PREFIX_LENGTH = 6
@@ -135,15 +137,11 @@ object WakeOnLanSender {
                     socket.send(DatagramPacket(packetBytes, packetBytes.size, address, port))
                     delivered = true
                 } catch (exception: Exception) {
-                    Log.w(TAG, "Wake-on-LAN send failed for ${address.hostAddress}", exception)
                     lastFailure = exception
                 }
             }
             if (!delivered) {
-                if (lastFailure != null) {
-                    Log.w(TAG, "Wake-on-LAN was not delivered", lastFailure)
-                }
-                throw WakeOnLanException(WakeOnLanField.BROADCAST)
+                throw WakeOnLanDeliveryException(checkNotNull(lastFailure))
             }
         }
     }

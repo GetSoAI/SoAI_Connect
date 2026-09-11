@@ -23,7 +23,7 @@
     <string name="error_invalid_port">درگاه نامعتبر: %s</string>
     <string name="error_server_not_reachable">سرور در %s در دسترس نیست</string>
     <string name="error_server_not_found">سروری در %s پیدا نشد</string>
-    <string name="error_multiple_servers">چند سرور SoAI پیدا شد. درگاه سرور را به‌طور مشخص وارد کنید.</string>
+    <string name="error_multiple_servers">چند سرور SoAI پیدا شد: %s. یکی را به‌طور مشخص وارد کنید.</string>
     <string name="error_not_soai_server">سرور در %s پاسخ داد، اما سرور SoAI نیست</string>
 
     <!-- Main Screen -->
@@ -81,6 +81,7 @@
     <string name="wol_error_invalid_mac">نشانی MAC نامعتبر است</string>
     <string name="wol_error_invalid_port">درگاه نامعتبر است</string>
     <string name="wol_error_invalid_broadcast">نشانی پخش همگانی نامعتبر است</string>
+    <string name="wol_error_unexpected">ارسال بسته امکان‌پذیر نبود</string>
     <string name="wol_error_failed">Wake-on-LAN ناموفق بود: %s</string>
 
     <!-- About Screen -->

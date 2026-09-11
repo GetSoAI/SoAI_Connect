@@ -21,7 +21,7 @@
     <string name="error_invalid_port">無効なポート: %s</string>
     <string name="error_server_not_reachable">%s でサーバーに到達できません</string>
     <string name="error_server_not_found">%s でサーバーが見つかりません</string>
-    <string name="error_multiple_servers">複数の SoAI サーバーが見つかりました。サーバーのポートを明示的に入力してください。</string>
+    <string name="error_multiple_servers">複数の SoAI サーバーが見つかりました: %s。いずれか 1 つを明示的に入力してください。</string>
     <string name="error_not_soai_server">%s のサーバーが応答しましたが、SoAI サーバーではありません</string>
     <string name="menu_reload">リロード</string>
     <string name="menu_settings">設定</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">無効なMACアドレス</string>
     <string name="wol_error_invalid_port">無効なポート</string>
     <string name="wol_error_invalid_broadcast">無効なブロードキャスト アドレス</string>
+    <string name="wol_error_unexpected">パケットを送信できませんでした</string>
     <string name="wol_error_failed">Wake-on-LAN が失敗しました: %s</string>
     <string name="about_title">SoAIについて</string>
     <string name="app_title">SoAI コネクト</string>

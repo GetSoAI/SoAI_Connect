@@ -23,7 +23,7 @@
     <string name="error_invalid_port">Invalid port: %s</string>
     <string name="error_server_not_reachable">Server not reachable at %s</string>
     <string name="error_server_not_found">Server not found on %s</string>
-    <string name="error_multiple_servers">Multiple SoAI servers were found. Enter an explicit server port.</string>
+    <string name="error_multiple_servers">Multiple SoAI servers were found: %s. Enter one explicitly.</string>
     <string name="error_not_soai_server">The server at %s responded but is not a SoAI server</string>
 
     <!-- Main Screen -->
@@ -81,13 +81,14 @@
     <string name="wol_error_invalid_mac">Invalid MAC address</string>
     <string name="wol_error_invalid_port">Invalid port</string>
     <string name="wol_error_invalid_broadcast">Invalid broadcast address</string>
+    <string name="wol_error_unexpected">Unable to send the packet</string>
     <string name="wol_error_failed">Wake-on-LAN failed: %s</string>
 
     <!-- About Screen -->
     <string name="about_title">About SoAI</string>
     <string name="app_title">SoAI Connect</string>
     <string name="app_tagline">Smart Orchestrator for Artificial Intelligence</string>
-    <string name="app_description">A mobile client for SoAI - a comprehensive orchestration layer for local and remote Large Language Models, providing a unified OpenAI-compatible API, request queuing, and intelligent backend abstraction.</string>
+    <string name="app_description">A mobile client for SoAI - a comprehensive orchestration layer for local and remote Large Language Models, providing OpenAI-compatible and Anthropic-compatible APIs, request queuing, and intelligent backend abstraction.</string>
     <string name="app_version">Client version: %s</string>
     <string name="app_license">License: MIT License</string>
     <string name="licenses_label">Licenses</string>

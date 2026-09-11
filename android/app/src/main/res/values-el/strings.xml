@@ -21,7 +21,7 @@
     <string name="error_invalid_port">Μη έγκυρη θύρα: %s</string>
     <string name="error_server_not_reachable">Ο διακομιστής δεν είναι προσβάσιμος στο %s</string>
     <string name="error_server_not_found">Ο διακομιστής δεν βρέθηκε στο %s</string>
-    <string name="error_multiple_servers">Βρέθηκαν πολλοί διακομιστές SoAI. Εισαγάγετε ρητή θύρα διακομιστή.</string>
+    <string name="error_multiple_servers">Βρέθηκαν πολλοί διακομιστές SoAI: %s. Εισαγάγετε έναν από αυτούς ρητά.</string>
     <string name="error_not_soai_server">Ο διακομιστής στο %s απάντησε αλλά δεν είναι διακομιστής SoAI</string>
     <string name="menu_reload">Γεμίζω πάλι</string>
     <string name="menu_settings">Ρυθμίσεις</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">Μη έγκυρη διεύθυνση MAC</string>
     <string name="wol_error_invalid_port">Μη έγκυρη θύρα</string>
     <string name="wol_error_invalid_broadcast">Μη έγκυρη διεύθυνση εκπομπής</string>
+    <string name="wol_error_unexpected">Δεν ήταν δυνατή η αποστολή του πακέτου</string>
     <string name="wol_error_failed">Το Wake-on-LAN απέτυχε: %s</string>
     <string name="about_title">Σχετικά με το SoAI</string>
     <string name="app_title">SoAI Connect</string>

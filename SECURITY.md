@@ -22,7 +22,7 @@ Because the client is a shell around the server's own web interface, findings th
 
 Reports are validated and prioritized by exploitability and impact. Remediation and disclosure timing is coordinated with the reporter, and reporters are credited in the advisory on request. There is no bug bounty.
 
-The full policy — acknowledgement and assessment targets, the coordinated-disclosure timeline, the declared security support period for the SoAI 1.0 line, and the software bill of materials — is published in `SECURITY.md` in the SoAI repository at <https://github.com/GetSoAI/SoAI> and at <https://soai.to/legal-notices/>. It governs this client too, and is kept in one place so the two cannot drift apart.
+The full policy — acknowledgement and assessment targets, the coordinated-disclosure timeline, the declared security support period for SoAI, and the software bill of materials — is published in `SECURITY.md` in the SoAI repository at <https://github.com/GetSoAI/SoAI> and at <https://soai.to/legal-notices/>. It governs this client too, and is kept in one place so the two cannot drift apart.
 
 The supported baseline is the latest published SoAI Connect release. Older packages may be asked to reproduce against it before investigation continues.
 

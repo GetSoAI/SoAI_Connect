@@ -81,7 +81,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/appTagline"
-                tools:text="Version 1.0.0" />
+                tools:text="Version 1.0.1" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"

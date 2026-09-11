@@ -21,7 +21,7 @@
     <string name="error_invalid_port">端口无效：%s</string>
     <string name="error_server_not_reachable">无法访问位于 %s 的服务器</string>
     <string name="error_server_not_found">在 %s 上找不到服务器</string>
-    <string name="error_multiple_servers">发现多个 SoAI 服务器。请输入明确的服务器端口。</string>
+    <string name="error_multiple_servers">发现多个 SoAI 服务器：%s。请明确输入其中一个。</string>
     <string name="error_not_soai_server">%s 处的服务器已响应，但不是 SoAI 服务器</string>
     <string name="menu_reload">重新加载</string>
     <string name="menu_settings">设置</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">MAC 地址无效</string>
     <string name="wol_error_invalid_port">端口无效</string>
     <string name="wol_error_invalid_broadcast">无效的广播地址</string>
+    <string name="wol_error_unexpected">无法发送数据包</string>
     <string name="wol_error_failed">局域网唤醒失败：%s</string>
     <string name="about_title">关于SoAI</string>
     <string name="app_title">SoAI连接</string>

@@ -21,7 +21,7 @@
     <string name="error_invalid_port">พอร์ตไม่ถูกต้อง: %s</string>
     <string name="error_server_not_reachable">ไม่สามารถเข้าถึงเซิร์ฟเวอร์ได้ที่ %s</string>
     <string name="error_server_not_found">ไม่พบเซิร์ฟเวอร์บน %s</string>
-    <string name="error_multiple_servers">พบเซิร์ฟเวอร์ SoAI หลายเครื่อง โปรดป้อนพอร์ตเซิร์ฟเวอร์ให้ชัดเจน</string>
+    <string name="error_multiple_servers">พบเซิร์ฟเวอร์ SoAI หลายเครื่อง: %s โปรดป้อนหนึ่งในรายการเหล่านี้ให้ชัดเจน</string>
     <string name="error_not_soai_server">เซิร์ฟเวอร์ที่ %s ตอบกลับ แต่ไม่ใช่เซิร์ฟเวอร์ SoAI</string>
     <string name="menu_reload">โหลดซ้ำ</string>
     <string name="menu_settings">การตั้งค่า</string>
@@ -62,6 +62,7 @@
     <string name="wol_error_invalid_mac">ที่อยู่ MAC ไม่ถูกต้อง</string>
     <string name="wol_error_invalid_port">พอร์ตไม่ถูกต้อง</string>
     <string name="wol_error_invalid_broadcast">ที่อยู่ออกอากาศไม่ถูกต้อง</string>
+    <string name="wol_error_unexpected">ไม่สามารถส่งแพ็กเก็ตได้</string>
     <string name="wol_error_failed">Wake-on-LAN ล้มเหลว: %s</string>
     <string name="about_title">เกี่ยวกับ SOAI</string>
     <string name="app_title">โซเอไอ คอนเน็ค</string>
