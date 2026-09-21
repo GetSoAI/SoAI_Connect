@@ -159,13 +159,14 @@ class WebFileChooser(
     }
 
     private fun tryCreateCameraCaptureIntent(): Intent? {
-        val captureDirectory = File(activity.cacheDir, CAPTURE_DIRECTORY)
+        val captureDirectory = File(activity.cacheDir, CameraCaptureFiles.DIRECTORY)
         if (!captureDirectory.exists() && !captureDirectory.mkdirs()) {
             Log.w(TAG, "Unable to create capture cache directory")
             return null
         }
+        CameraCaptureFiles.pruneStale(captureDirectory, System.currentTimeMillis())
         val photoFile = try {
-            File.createTempFile("soai_capture_", ".jpg", captureDirectory)
+            CameraCaptureFiles.create(captureDirectory)
         } catch (exception: IOException) {
             Log.w(TAG, "Unable to create capture file", exception)
             return null
@@ -226,7 +227,6 @@ class WebFileChooser(
     }
 
     private companion object {
-        const val CAPTURE_DIRECTORY = "captures"
         const val TAG = "WebFileChooser"
     }
 }

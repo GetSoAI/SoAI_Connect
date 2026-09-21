@@ -6,13 +6,15 @@ import kotlinx.coroutines.CancellationException
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import org.json.JSONObject
 
 internal const val SOAI_PRODUCT_MARKER = "soai"
 
 internal data class HealthCheck(
     val endpoint: RuntimeEndpointPayload?,
     val tlsStatus: TlsStatus,
-    val rejectedNonSoAI: Boolean
+    val rejectedNonSoAI: Boolean,
+    val transientSoAIFailure: Boolean
 )
 
 internal class BackendHealthVerifier(
@@ -36,7 +38,7 @@ internal class BackendHealthVerifier(
             if (scheme == "https" && isTlsVerificationFailure(e)) {
                 return verifyHealthIgnoringCertificate(request)
             }
-            HealthCheck(endpoint = null, tlsStatus = TlsStatus.NONE, rejectedNonSoAI = false)
+            unresolvedHealthCheck()
         }
     }
 
@@ -46,27 +48,61 @@ internal class BackendHealthVerifier(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            HealthCheck(endpoint = null, tlsStatus = TlsStatus.NONE, rejectedNonSoAI = false)
+            unresolvedHealthCheck()
         }
     }
 
     private fun buildHealthCheck(response: Response, tlsStatus: TlsStatus): HealthCheck {
         response.use { resp ->
             if (!resp.isSuccessful) {
-                return HealthCheck(endpoint = null, tlsStatus = TlsStatus.NONE, rejectedNonSoAI = false)
+                val transientSoAIFailure = resp.code == 503 && isTypedTransientSoAIResponse(
+                    readBoundedBody(resp, MAX_HEALTH_BODY_BYTES)
+                )
+                return HealthCheck(
+                    endpoint = null,
+                    tlsStatus = TlsStatus.NONE,
+                    rejectedNonSoAI = !transientSoAIFailure,
+                    transientSoAIFailure = transientSoAIFailure
+                )
             }
             val endpoint = DiscoveryPayloadParser.parse(
                 readBoundedBody(resp, MAX_HEALTH_BODY_BYTES)
             ) ?: return HealthCheck(
                 endpoint = null,
                 tlsStatus = TlsStatus.NONE,
-                rejectedNonSoAI = true
+                rejectedNonSoAI = true,
+                transientSoAIFailure = false
             )
-            return HealthCheck(endpoint = endpoint, tlsStatus = tlsStatus, rejectedNonSoAI = false)
+            return HealthCheck(
+                endpoint = endpoint,
+                tlsStatus = tlsStatus,
+                rejectedNonSoAI = false,
+                transientSoAIFailure = false
+            )
         }
+    }
+
+    private fun unresolvedHealthCheck(): HealthCheck {
+        return HealthCheck(
+            endpoint = null,
+            tlsStatus = TlsStatus.NONE,
+            rejectedNonSoAI = false,
+            transientSoAIFailure = false
+        )
+    }
+
+    private fun isTypedTransientSoAIResponse(body: String?): Boolean {
+        if (body.isNullOrBlank()) return false
+        val errorCode = try {
+            JSONObject(body).optJSONObject("error")?.opt("code") as? String
+        } catch (_: Exception) {
+            null
+        }
+        return errorCode in TRANSIENT_SOAI_ERROR_CODES
     }
 
     companion object {
         private const val MAX_HEALTH_BODY_BYTES = 64L * 1024L
+        private val TRANSIENT_SOAI_ERROR_CODES = setOf("server_not_ready", "server_shutting_down")
     }
 }

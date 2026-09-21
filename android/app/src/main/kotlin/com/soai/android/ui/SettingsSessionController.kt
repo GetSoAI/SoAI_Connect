@@ -12,6 +12,7 @@ import com.soai.android.R
 import com.soai.android.data.AppPreferences
 import com.soai.android.databinding.ActivitySettingsBinding
 import com.soai.android.network.HttpClientFactory
+import com.soai.android.network.HttpClientRelease
 import com.soai.android.network.SoAISessionApi
 import com.soai.android.notifications.SoAINotificationPresenter
 import com.soai.android.notifications.SoAINotificationServiceController
@@ -170,9 +171,7 @@ internal class SettingsSessionController(
     }
 
     private fun closeHttpClient() {
-        httpClient.dispatcher.cancelAll()
-        httpClient.connectionPool.evictAll()
-        httpClient.dispatcher.executorService.shutdown()
+        HttpClientRelease.release(httpClient)
     }
 
     companion object {

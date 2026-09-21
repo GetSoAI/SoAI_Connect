@@ -158,6 +158,8 @@ class ConnectionActivity : AppCompatActivity() {
             DiscoveryFailureReason.INVALID_PORT -> getString(R.string.error_invalid_port, detail)
             DiscoveryFailureReason.NOT_REACHABLE ->
                 getString(R.string.error_server_not_reachable, detail)
+            DiscoveryFailureReason.TEMPORARILY_UNAVAILABLE ->
+                getString(R.string.error_server_temporarily_unavailable, detail)
             DiscoveryFailureReason.NOT_FOUND -> getString(R.string.error_server_not_found, detail)
             DiscoveryFailureReason.AMBIGUOUS -> getString(R.string.error_multiple_servers, detail)
             DiscoveryFailureReason.NOT_SOAI_SERVER ->

@@ -49,6 +49,8 @@ class SoAINotificationListenerService : Service() {
     @Volatile
     private var activeServerUrl: String? = null
 
+    private var foregroundStarted = false
+
     override fun onCreate() {
         super.onCreate()
         prefs = AppPreferences.getInstance(this)
@@ -59,15 +61,25 @@ class SoAINotificationListenerService : Service() {
         } else {
             0
         }
-        ServiceCompat.startForeground(
-            this,
-            FOREGROUND_NOTIFICATION_ID,
-            SoAINotificationPresenter.buildForegroundNotification(this),
-            foregroundServiceType
-        )
+        foregroundStarted = try {
+            ServiceCompat.startForeground(
+                this,
+                FOREGROUND_NOTIFICATION_ID,
+                SoAINotificationPresenter.buildForegroundNotification(this),
+                foregroundServiceType
+            )
+            true
+        } catch (exception: RuntimeException) {
+            Log.e(TAG, "Android rejected the notification listener foreground start", exception)
+            false
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (!foregroundStarted) {
+            stopSelf()
+            return START_NOT_STICKY
+        }
         val serverUrl = prefs.serverUrl
         if (!listenerAllowed(serverUrl)) {
             stopSelf()
@@ -204,35 +216,34 @@ class SoAINotificationListenerService : Service() {
             }
 
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-                val outcome = if (SessionClosePolicy.isTerminalAuthenticationClose(code)) {
-                    SessionConnectionOutcome.AUTHENTICATION_REVOKED
+                if (SessionClosePolicy.indicatesAuthenticationLoss(code)) {
+                    confirmSessionOutcome(serverUrl, apiClient, finished, connectionScope)
                 } else {
-                    SessionConnectionOutcome.RECONNECT
+                    finished.complete(SessionConnectionOutcome.RECONNECT)
                 }
-                finished.complete(outcome)
             }
 
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
-                Log.w(TAG, "Notification WebSocket failed", t)
-                if (response?.code == 401 || response?.code == 403) {
-                    finished.complete(SessionConnectionOutcome.AUTHENTICATION_REVOKED)
-                    return
-                }
-                connectionScope.launch {
-                    val authenticated = try {
-                        apiClient.probeAuthentication(serverUrl)
-                    } catch (exception: Exception) {
-                        Log.w(TAG, "Session probe after WebSocket failure failed", exception)
-                        null
-                    }
-                    val outcome = if (authenticated == false) {
-                        SessionConnectionOutcome.AUTHENTICATION_REVOKED
-                    } else {
-                        SessionConnectionOutcome.RECONNECT
-                    }
-                    finished.complete(outcome)
-                }
+                SoAINotificationFailureLog.webSocketFailure(TAG, t)
+                confirmSessionOutcome(serverUrl, apiClient, finished, connectionScope)
             }
+        }
+    }
+
+    private fun confirmSessionOutcome(
+        serverUrl: String,
+        apiClient: SoAINotificationApiClient,
+        finished: CompletableDeferred<SessionConnectionOutcome>,
+        connectionScope: CoroutineScope
+    ) {
+        connectionScope.launch {
+            val authenticated = try {
+                apiClient.probeAuthentication(serverUrl)
+            } catch (exception: Exception) {
+                SoAINotificationFailureLog.sessionProbeFailure(TAG, exception)
+                null
+            }
+            finished.complete(SessionClosePolicy.outcomeAfterAuthenticationProbe(authenticated))
         }
     }
 

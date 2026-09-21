@@ -25,6 +25,7 @@
     <string name="error_server_not_found">سروری در %s پیدا نشد</string>
     <string name="error_multiple_servers">چند سرور SoAI پیدا شد: %s. یکی را به‌طور مشخص وارد کنید.</string>
     <string name="error_not_soai_server">سرور در %s پاسخ داد، اما سرور SoAI نیست</string>
+    <string name="error_server_temporarily_unavailable">سرور SoAI در %s در حال راه‌اندازی یا خاموش شدن است. کمی بعد دوباره تلاش کنید.</string>
 
     <!-- Main Screen -->
     <string name="menu_reload">بارگذاری دوباره</string>
@@ -148,6 +149,22 @@
     <string name="notification_calendar_reminder_missed_message">%1$s در %2$s شروع شد</string>
     <string name="notification_calendar_sync_failure_title">همگام‌سازی تقویم برای %1$s ناموفق بود</string>
     <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="notification_openai_quota_exhausted_title">سهمیه %1$s تمام شد</string>
+    <string name="notification_openai_quota_exhausted_message">%1$s پنجره سهمیه %2$s را تمام کرد</string>
+    <string name="notification_api_rate_limit_applied_title">محدودیت نرخ برای %1$s اعمال شد</string>
+    <string name="notification_api_rate_limit_applied_message">درخواست‌های محدودشده برای %1$s: %2$s</string>
+    <string name="notification_backup_operation_failed_title">%1$s ناموفق بود</string>
+    <string name="notification_backup_operation_failed_message">خطاهای ثبت‌شده برای %1$s: %2$s</string>
+    <string name="notification_low_disk_space_title">فضای دیسک برای %1$s کم است</string>
+    <string name="notification_low_disk_space_message">%1$s نتوانست ادامه دهد: دیسک مقصد %2$s کم دارد</string>
+    <string name="notification_messaging_account_degraded_title">حساب پیام‌رسانی نیاز به بررسی دارد</string>
+    <string name="notification_messaging_account_degraded_message">حساب %1$s با نام %2$s را در تنظیمات پیام‌رسانی بررسی کنید</string>
+    <string name="notification_messaging_account_recovered_title">حساب پیام‌رسانی بازیابی شد</string>
+    <string name="notification_messaging_account_recovered_message">حساب %1$s با نام %2$s دوباره آنلاین است</string>
+    <string name="notification_plugin_circuit_breaker_tripped_title">قطع‌کننده مدار افزونه فعال شد</string>
+    <string name="notification_plugin_circuit_breaker_tripped_message">قطع‌کننده مدار برای %1$s باز شد</string>
+    <string name="notification_security_login_throttle_title">محافظت از ورود فعال شد</string>
+    <string name="notification_security_login_throttle_message">درخواست‌های ورود محدودشده در %2$s دقیقه اخیر: %1$s</string>
     <string name="change_server">تغییر سرور</string>
     <string name="change_server_confirm">داده‌های سرور فعلی پاک می‌شوند و به راه‌اندازی اتصال بازمی‌گردید. ادامه می‌دهید؟</string>
     <string name="change">تغییر</string>

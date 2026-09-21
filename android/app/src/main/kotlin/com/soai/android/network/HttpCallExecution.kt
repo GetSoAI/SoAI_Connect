@@ -7,7 +7,9 @@ import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLPeerUnverifiedException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -29,6 +31,12 @@ internal suspend fun executeHttpCall(client: OkHttpClient, request: Request): Re
                 cont.resume(response) { _, responseToClose, _ -> responseToClose.close() }
             }
         })
+    }
+}
+
+internal suspend fun executeHttpCallForSuccess(client: OkHttpClient, request: Request): Boolean {
+    return withContext(Dispatchers.IO) {
+        executeHttpCall(client, request).use { response -> response.isSuccessful }
     }
 }
 

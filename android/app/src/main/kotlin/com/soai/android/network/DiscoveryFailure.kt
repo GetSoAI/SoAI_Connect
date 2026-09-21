@@ -7,6 +7,7 @@ enum class DiscoveryFailureReason {
     IPV6_ZONE_UNSUPPORTED,
     INVALID_PORT,
     NOT_REACHABLE,
+    TEMPORARILY_UNAVAILABLE,
     NOT_FOUND,
     AMBIGUOUS,
     NOT_SOAI_SERVER

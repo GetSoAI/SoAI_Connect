@@ -81,16 +81,22 @@ class SettingsActivity : AppCompatActivity() {
         binding.incognitoSwitch.isChecked = prefs.incognitoMode
         binding.incognitoSwitch.setOnCheckedChangeListener { _, isChecked ->
             prefs.incognitoMode = isChecked
-            binding.androidNotificationsSwitch.isEnabled = !isChecked
+            syncAndroidNotificationsSwitch()
             if (isChecked) {
-                binding.androidNotificationsSwitch.isChecked = false
                 WebViewDataCleaner.clearSessionData()
+                SoAINotificationServiceController.stop(this)
+            } else {
+                SoAINotificationServiceController.sync(this)
             }
         }
 
+        syncAndroidNotificationsSwitch()
+    }
+
+    private fun syncAndroidNotificationsSwitch() {
+        binding.androidNotificationsSwitch.setOnCheckedChangeListener(null)
         binding.androidNotificationsSwitch.isEnabled = !prefs.incognitoMode
-        binding.androidNotificationsSwitch.isChecked =
-            prefs.androidNotificationsEnabled && !prefs.incognitoMode
+        binding.androidNotificationsSwitch.isChecked = prefs.androidNotificationsEnabled && !prefs.incognitoMode
         binding.androidNotificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 requestNotificationPermissionOrEnable()

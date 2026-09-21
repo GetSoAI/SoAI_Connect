@@ -25,6 +25,7 @@
     <string name="error_server_not_found">Server not found on %s</string>
     <string name="error_multiple_servers">Multiple SoAI servers were found: %s. Enter one explicitly.</string>
     <string name="error_not_soai_server">The server at %s responded but is not a SoAI server</string>
+    <string name="error_server_temporarily_unavailable">The SoAI server at %s is starting or shutting down. Try again shortly.</string>
 
     <!-- Main Screen -->
     <string name="menu_reload">Reload</string>
@@ -148,6 +149,22 @@
     <string name="notification_calendar_reminder_missed_message">%1$s started at %2$s</string>
     <string name="notification_calendar_sync_failure_title">Calendar sync failed for %1$s</string>
     <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="notification_openai_quota_exhausted_title">%1$s quota exhausted</string>
+    <string name="notification_openai_quota_exhausted_message">%1$s exhausted the %2$s quota window</string>
+    <string name="notification_api_rate_limit_applied_title">Rate limit applied to %1$s</string>
+    <string name="notification_api_rate_limit_applied_message">Requests limited for %1$s: %2$s</string>
+    <string name="notification_backup_operation_failed_title">%1$s failed</string>
+    <string name="notification_backup_operation_failed_message">Failures recorded for %1$s: %2$s</string>
+    <string name="notification_low_disk_space_title">Low disk space for %1$s</string>
+    <string name="notification_low_disk_space_message">%1$s could not continue: the target disk is short by %2$s</string>
+    <string name="notification_messaging_account_degraded_title">Messaging account needs attention</string>
+    <string name="notification_messaging_account_degraded_message">Check %1$s account %2$s in Messaging settings</string>
+    <string name="notification_messaging_account_recovered_title">Messaging account recovered</string>
+    <string name="notification_messaging_account_recovered_message">%1$s account %2$s is online again</string>
+    <string name="notification_plugin_circuit_breaker_tripped_title">Plugin circuit breaker tripped</string>
+    <string name="notification_plugin_circuit_breaker_tripped_message">Circuit breaker opened for %1$s</string>
+    <string name="notification_security_login_throttle_title">Login protection triggered</string>
+    <string name="notification_security_login_throttle_message">Throttled login requests in the last %2$s minutes: %1$s</string>
     <string name="change_server">Change server</string>
     <string name="change_server_confirm">This will clear data for the current server and return to connection setup. Continue?</string>
     <string name="change">Change</string>
