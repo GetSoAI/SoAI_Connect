@@ -11,7 +11,6 @@ import com.soai.android.network.ServerOrigin
 class WebPermissionMediator(
     private val launchRuntimePermissions: (Array<String>) -> Unit,
     private val serverUri: () -> Uri?,
-    private val onDenied: () -> Unit,
     private val runtimePermissionGranted: (String) -> Boolean,
     private val isTrustedOrigin: (PermissionRequest) -> Boolean = { request ->
         val server = serverUri()
@@ -53,7 +52,6 @@ class WebPermissionMediator(
         if (pendingRequest != null) {
             writeWarning("Rejected overlapping WebView permission request")
             request.deny()
-            onDenied()
             return
         }
 
@@ -94,7 +92,6 @@ class WebPermissionMediator(
         if (!allGranted) {
             writeDebug("Android runtime permission denied for WebView capture request")
             request.deny()
-            onDenied()
             return
         }
 

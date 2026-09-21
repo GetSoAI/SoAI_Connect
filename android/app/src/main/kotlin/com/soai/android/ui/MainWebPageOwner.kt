@@ -8,7 +8,6 @@ import android.webkit.SslErrorHandler
 import android.webkit.WebView
 import com.soai.android.R
 import com.soai.android.data.AppPreferences
-import com.soai.android.notifications.SoAINotificationBridgeController
 import com.soai.android.notifications.SoAINotificationServiceController
 import com.soai.android.web.ExternalNavigation
 import com.soai.android.web.PopupWebViewController
@@ -21,7 +20,6 @@ internal class MainWebPageOwner(
     private val dialogs: LifecycleDialogRegistry,
     private val popupController: PopupWebViewController,
     private val trustController: ServerTrustController,
-    private val notificationBridgeController: SoAINotificationBridgeController,
     private val mainHost: () -> WebViewHost,
     private val recreateMainWebView: (Boolean) -> Unit,
     private val showMessage: (String) -> Unit
@@ -39,7 +37,6 @@ internal class MainWebPageOwner(
         val host = mainHost()
         if (webView != host.webView) return
         rendererRecoveryAttempted = false
-        notificationBridgeController.injectToken(webView)
         SoAINotificationServiceController.sync(activity)
     }
 

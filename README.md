@@ -1,17 +1,31 @@
-# SoAI Connect for Android
+<p align="center">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="media/readme/soai-wordmark-dark.webp">
+<source media="(prefers-color-scheme: light)" srcset="media/readme/soai-wordmark-light.webp">
+<img src="media/readme/soai-wordmark-dark.webp" width="420" alt="SoAI">
+</picture>
+</p>
+
+<h1 align="center">SoAI Connect for Android</h1>
 
 SoAI Connect is the official Android app for [SoAI](https://soai.to), the Smart Orchestrator for Artificial Intelligence.
+
+<p align="center">
+<a href="https://github.com/GetSoAI/SoAI_Connect"><img src="https://img.shields.io/github/v/release/GetSoAI/SoAI_Connect?label=release&amp;color=153e75&amp;labelColor=153e75&amp;style=for-the-badge" alt="Latest published SoAI Connect release" height="28"></a>
+<img src="media/readme/supported-platforms.svg" alt="Android 8.0 or newer" height="28">
+<img src="media/readme/supported-languages.svg" alt="25 UI languages" height="28">
+<a href="LICENSE.md"><img src="media/readme/mit-license.svg" alt="MIT License" height="28"></a>
+</p>
+
+<p align="center">
+<img src="media/readme/connect-setup.webp" width="260" alt="SoAI Connect setup screen with documentation-only server addresses">
+</p>
 
 SoAI runs on your own machine. This app puts it on your phone: the same chat, models, files, and automations you already use in the browser, served by your own server, reached directly over your network.
 
 It also does two things a browser tab cannot. SoAI alerts reach your Android notification shade while the app sits in the background, so you know when an agent is waiting on you. And you can switch the machine on from your phone before you start.
 
 You need a running SoAI server to use the app. Your data stays on it. SoAI Connect keeps your server address, your sign-in, and whatever the page view caches while you use it, which Incognito Mode wipes when you leave.
-
-## Requirements
-
-- Android 8.0 (API 26) or newer.
-- A SoAI server reachable from the device over HTTP or HTTPS.
 
 ## What it does
 
@@ -23,9 +37,14 @@ Notifications come from your own server. No push provider sits in the path and n
 
 Smaller things: camera, microphone, and file uploads go through the normal Android permission prompts. Incognito Mode clears cookies and site data when you leave. Logout ends the session on the server rather than only on the phone, and tells you when it could not reach it. Wake-on-LAN can target a custom broadcast address and port. The interface ships in 25 languages and follows your system's dark theme.
 
+## Requirements
+
+- Android 8.0 (API 26) or newer.
+- A SoAI server reachable from the device over HTTP or HTTPS.
+
 ## Installing
 
-SoAI Connect is distributed by sideloading from the [Releases page](https://github.com/GetSoAI/SoAI_Connect/releases) of this repository. There is no app-store listing.
+SoAI Connect is distributed by sideloading from the Releases section of the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). There is no app-store listing.
 
 Each published APK ships with a `.sha256` sidecar and uses the canonical version-bearing name `SoAI-Connect-<version>-android.apk`. Verify the checksum and the signing certificate before you install:
 
@@ -103,13 +122,13 @@ That file holds signing secrets and is never tracked in git. Keep the keystore o
 
 SoAI Connect is licensed under the MIT License; see `LICENSE.md`. You may inspect, copy, modify, and redistribute it, including as the basis for your own client.
 
-That grant covers this client only. It conveys no right in the SoAI name, logos, or product identity, and no right to run, copy, or distribute SoAI itself. Connecting a client to a SoAI deployment still requires rights applicable to that deployment. SoAI is distributed under the SoAI Source-Available License 1.0, published at <https://soai.to/downloads/>.
+That grant covers this client only. It conveys no right in the SoAI name, logos, or product identity, and no right to run, copy, or distribute SoAI itself. Connecting a client to a SoAI deployment still requires rights applicable to that deployment. SoAI is distributed under the SoAI Source-Available License 1.0; see the downloads section of [soai.to](https://soai.to).
 
 Third-party Android libraries remain governed by their own licenses and notices.
 
 ## Issues, security, and contributions
 
-Bug reports and feature requests are welcome at <https://github.com/GetSoAI/SoAI_Connect/issues>. Include the client version, the Android version, and what you did, what happened, and what you expected.
+Bug reports and feature requests are welcome through the Issues section of the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). Include the client version, the Android version, and what you did, what happened, and what you expected.
 
 Never report a security vulnerability in a public issue. `SECURITY.md` sets out the single point of contact and the disclosure process.
 

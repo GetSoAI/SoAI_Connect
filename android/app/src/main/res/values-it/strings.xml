@@ -25,6 +25,7 @@
     <string name="error_server_not_found">Server non trovato su %s</string>
     <string name="error_multiple_servers">Sono stati trovati più server SoAI: %s. Inseriscine uno esplicitamente.</string>
     <string name="error_not_soai_server">Il server su %s ha risposto ma non è un server SoAI</string>
+    <string name="error_server_temporarily_unavailable">Il server SoAI su %s si sta avviando o arrestando. Riprova tra poco.</string>
 
     <!-- Main Screen -->
     <string name="menu_reload">Ricarica</string>
@@ -135,6 +136,22 @@
     <string name="notification_calendar_reminder_missed_message">%1$s è iniziato alle %2$s</string>
     <string name="notification_calendar_sync_failure_title">Sincronizzazione calendario non riuscita per %1$s</string>
     <string name="notification_calendar_sync_failure_message">%1$s</string>
+    <string name="notification_openai_quota_exhausted_title">Quota di %1$s esaurita</string>
+    <string name="notification_openai_quota_exhausted_message">%1$s ha esaurito la finestra di quota %2$s</string>
+    <string name="notification_api_rate_limit_applied_title">Limite di frequenza applicato a %1$s</string>
+    <string name="notification_api_rate_limit_applied_message">Richieste limitate per %1$s: %2$s</string>
+    <string name="notification_backup_operation_failed_title">%1$s non riuscito</string>
+    <string name="notification_backup_operation_failed_message">Errori registrati per %1$s: %2$s</string>
+    <string name="notification_low_disk_space_title">Spazio su disco insufficiente per %1$s</string>
+    <string name="notification_low_disk_space_message">%1$s non è potuto proseguire: al disco di destinazione mancano %2$s</string>
+    <string name="notification_messaging_account_degraded_title">L\'account di messaggistica richiede attenzione</string>
+    <string name="notification_messaging_account_degraded_message">Verifica l\'account %1$s %2$s nelle impostazioni di messaggistica</string>
+    <string name="notification_messaging_account_recovered_title">Account di messaggistica ripristinato</string>
+    <string name="notification_messaging_account_recovered_message">L\'account %1$s %2$s è di nuovo online</string>
+    <string name="notification_plugin_circuit_breaker_tripped_title">Interruttore di sicurezza del plugin attivato</string>
+    <string name="notification_plugin_circuit_breaker_tripped_message">Interruttore di sicurezza aperto per %1$s</string>
+    <string name="notification_security_login_throttle_title">Protezione dell\'accesso attivata</string>
+    <string name="notification_security_login_throttle_message">Richieste di accesso limitate negli ultimi %2$s minuti: %1$s</string>
     <string name="change_server">Cambia server</string>
     <string name="change_server_confirm">Questa operazione eliminerà i dati del server corrente e tornerà alla configurazione della connessione. Continuare?</string>
     <string name="change">Cambia</string>

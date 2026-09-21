@@ -21,7 +21,6 @@ import com.soai.android.R
 import com.soai.android.SoAIApplication
 import com.soai.android.data.AppPreferences
 import com.soai.android.databinding.ActivityMainBinding
-import com.soai.android.notifications.SoAINotificationBridgeController
 import com.soai.android.notifications.SoAINotificationLaunchRouter
 import com.soai.android.web.AndroidDeviceIdentityCookie
 import com.soai.android.web.PopupWebViewController
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: AppPreferences
     private lateinit var mainHost: WebViewHost
     private lateinit var trustController: ServerTrustController
-    private lateinit var notificationBridgeController: SoAINotificationBridgeController
     private lateinit var pageOwner: MainWebPageOwner
     private var configuredIncognitoMode = false
     private var pageLoadGeneration = 0L
@@ -76,7 +74,6 @@ class MainActivity : AppCompatActivity() {
     private val permissionMediator = WebPermissionMediator(
         launchRuntimePermissions = { permissions -> runtimePermissionLauncher.launch(permissions) },
         serverUri = { serverUri },
-        onDenied = { showSnackbar(getString(R.string.permission_denied)) },
         runtimePermissionGranted = { permission ->
             ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
         }
@@ -115,14 +112,12 @@ class MainActivity : AppCompatActivity() {
         ContentWindowInsets.applyBottom(binding.contentContainer)
 
         trustController = ServerTrustController(this, prefs)
-        notificationBridgeController = SoAINotificationBridgeController(this, prefs)
         pageOwner = MainWebPageOwner(
             activity = this,
             prefs = prefs,
             dialogs = dialogs,
             popupController = popupController,
             trustController = trustController,
-            notificationBridgeController = notificationBridgeController,
             mainHost = { mainHost },
             recreateMainWebView = { loadImmediately -> recreateMainWebView(loadImmediately) },
             showMessage = ::showSnackbar
@@ -209,7 +204,6 @@ class MainActivity : AppCompatActivity() {
         pageLoadGeneration += 1L
         fileChooser.cancelAll()
         permissionMediator.cancelPending()
-        if (::notificationBridgeController.isInitialized) notificationBridgeController.detach()
         popupController.dismissAll()
         if (::trustController.isInitialized) {
             trustController.destroy()
@@ -278,9 +272,6 @@ class MainActivity : AppCompatActivity() {
             permissionMediator,
             onTitleChanged
         )
-        if (isMain) {
-            notificationBridgeController.attach(host.webView)
-        }
     }
 
     private fun loadWebUI() {
@@ -307,7 +298,6 @@ class MainActivity : AppCompatActivity() {
         pageLoadGeneration += 1L
         fileChooser.cancelAll()
         permissionMediator.cancelPending()
-        notificationBridgeController.detach()
         trustController.cancelFor(mainHost.webView)
         mainHost.destroy()
         createMainWebView()
