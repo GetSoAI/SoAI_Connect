@@ -156,4 +156,12 @@
     <string name="menu_close">Fechar</string>
     <string name="default_device_label">Dispositivo Android</string>
     <string name="server_found_cleartext_warning">%1$s\nAviso: esta ligação não está encriptada e o endereço não está na sua rede local. Qualquer pessoa entre o seu dispositivo e o servidor pode ler a sua sessão.</string>
+    <string name="qr_scan_title">Escanear código QR</string>
+    <string name="qr_scan_hint">Aponte a câmera para o código QR no SoAI, em Configurações &gt; Conectar</string>
+    <string name="qr_scan_not_soai">Este não é um código QR do SoAI Connect</string>
+    <string name="qr_scan_close">Fechar leitor</string>
+    <string name="qr_scan_camera_permission_denied">O acesso à câmera é necessário para escanear um código QR. Você ainda pode digitar o endereço do servidor.</string>
+    <string name="qr_scan_camera_unavailable">Não foi possível iniciar a câmera</string>
+    <string name="qr_scan_unsupported">Este código QR requer uma versão mais recente do SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Este código QR pertence a outro servidor SoAI</string>
 </resources>

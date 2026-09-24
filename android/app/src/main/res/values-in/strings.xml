@@ -156,4 +156,12 @@
     <string name="menu_close">Tutup</string>
     <string name="default_device_label">Perangkat Android</string>
     <string name="server_found_cleartext_warning">%1$s\nPeringatan: koneksi ini tidak terenkripsi dan alamatnya tidak berada di jaringan lokal Anda. Siapa pun di antara perangkat Anda dan server dapat membaca sesi Anda.</string>
+    <string name="qr_scan_title">Pindai kode QR</string>
+    <string name="qr_scan_hint">Arahkan kamera ke kode QR di SoAI pada Pengaturan &gt; Hubungkan</string>
+    <string name="qr_scan_not_soai">Ini bukan kode QR SoAI Connect</string>
+    <string name="qr_scan_close">Tutup pemindai</string>
+    <string name="qr_scan_camera_permission_denied">Akses kamera diperlukan untuk memindai kode QR. Anda tetap dapat mengetik alamat server.</string>
+    <string name="qr_scan_camera_unavailable">Kamera tidak dapat dimulai</string>
+    <string name="qr_scan_unsupported">Kode QR ini memerlukan versi SoAI Connect yang lebih baru</string>
+    <string name="qr_error_instance_mismatch">Kode QR ini milik server SoAI lain</string>
 </resources>

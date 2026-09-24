@@ -13,22 +13,24 @@ import android.view.inputmethod.EditorInfo
 import android.transition.TransitionManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withStarted
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.google.android.material.color.MaterialColors
 import com.soai.android.R
 import com.soai.android.data.AppPreferences
 import com.soai.android.databinding.ActivityConnectionBinding
+import com.soai.android.network.ConnectPairingPayload
+import com.soai.android.network.ConnectPairingPayloadParser
 import com.soai.android.network.DiscoveryException
-import com.soai.android.network.DiscoveryFailureReason
 import com.soai.android.network.DiscoveryResult
 import com.soai.android.network.DiscoveryService
 import com.soai.android.network.HttpClientFactory
+import com.soai.android.network.PairingScan
+import com.soai.android.network.QrAutoConnectPolicy
+import com.soai.android.network.QrConnectDecision
 import com.soai.android.network.ServerCertificatePin
 import com.soai.android.network.ServerOrigin
-import com.soai.android.network.TlsStatus
 import com.soai.android.web.ExternalNavigation
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.CancellationException
@@ -37,6 +39,7 @@ class ConnectionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityConnectionBinding
     private lateinit var prefs: AppPreferences
+    private val connectionScreenRenderer by lazy { ConnectionScreenRenderer(this, binding) }
     private val discoveryServiceDelegate = lazy {
         DiscoveryService(
             HttpClientFactory.create(),
@@ -46,8 +49,9 @@ class ConnectionActivity : AppCompatActivity() {
     private val discoveryService by discoveryServiceDelegate
 
     private var connectionState = ConnectionState.IDLE
-    private var renderedState: ConnectionState? = null
     private var discoveryResult: DiscoveryResult? = null
+    private var pendingQrPairing: ConnectPairingPayload? = null
+    private val qrScanLauncher = ConnectionQrScanLauncher(this, ::applyScannedPairing, ::showScanError)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +72,7 @@ class ConnectionActivity : AppCompatActivity() {
 
         setupTextWatcher()
         setupActionButton()
+        qrScanLauncher.bind(binding.serverUrlLayout)
         binding.serverUrlInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId != EditorInfo.IME_ACTION_DONE) return@setOnEditorActionListener false
             if (connectionState == ConnectionState.READY || connectionState == ConnectionState.ERROR) {
@@ -76,7 +81,7 @@ class ConnectionActivity : AppCompatActivity() {
             true
         }
         setupWebsiteLink()
-        updateUI()
+        connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
     }
 
     private fun setupWebsiteLink() {
@@ -86,6 +91,36 @@ class ConnectionActivity : AppCompatActivity() {
                 showError(getString(R.string.error_opening_link))
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        pendingQrPairing?.let { pairing -> outState.putString(STATE_PENDING_QR_PAIRING, pairing.pairingUri) }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val pairingUri = savedInstanceState.getString(STATE_PENDING_QR_PAIRING)
+        if (pairingUri != null) {
+            when (val scan = ConnectPairingPayloadParser.parse(pairingUri)) {
+                is PairingScan.Valid -> pendingQrPairing = scan.payload
+                else -> {
+                    binding.serverUrlInput.text = null
+                    discoveryResult = null
+                    connectionState = ConnectionState.IDLE
+                    connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
+                    showError(getString(R.string.error_empty_url))
+                    return
+                }
+            }
+        }
+        discoveryResult = null
+        connectionState = if (binding.serverUrlInput.text.isNullOrBlank()) {
+            ConnectionState.IDLE
+        } else {
+            ConnectionState.READY
+        }
+        connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
     }
 
     override fun onDestroy() {
@@ -103,7 +138,8 @@ class ConnectionActivity : AppCompatActivity() {
                 val text = s?.toString()?.trim() ?: ""
                 connectionState = if (text.isEmpty()) ConnectionState.IDLE else ConnectionState.READY
                 discoveryResult = null
-                updateUI()
+                pendingQrPairing = null
+                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
             }
         })
     }
@@ -118,6 +154,18 @@ class ConnectionActivity : AppCompatActivity() {
         }
     }
 
+    private fun applyScannedPairing(pairing: ConnectPairingPayload) {
+        if (!::binding.isInitialized || connectionState == ConnectionState.CHECKING) return
+        binding.serverUrlInput.setText(pairing.discoveryInput)
+        binding.serverUrlInput.setSelection(binding.serverUrlInput.length())
+        pendingQrPairing = pairing
+        startDiscovery()
+    }
+
+    private fun showScanError(message: String) {
+        if (::binding.isInitialized) showError(message)
+    }
+
     private fun startDiscovery() {
         val input = binding.serverUrlInput.text?.toString()?.trim()
         if (input.isNullOrEmpty()) {
@@ -127,48 +175,44 @@ class ConnectionActivity : AppCompatActivity() {
 
         binding.serverUrlLayout.error = null
         connectionState = ConnectionState.CHECKING
-        updateUI()
+        connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
 
         lifecycleScope.launch {
             try {
-                discoveryResult = discoveryService.discover(input)
+                val result = discoveryService.discover(input)
+                val pairing = pendingQrPairing
+                val decision = pairing?.let { QrAutoConnectPolicy.decide(it, result) }
+                if (decision == QrConnectDecision.INSTANCE_MISMATCH) {
+                    connectionState = ConnectionState.ERROR
+                    showError(getString(R.string.qr_error_instance_mismatch))
+                    connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
+                    return@launch
+                }
+                if (decision == QrConnectDecision.REVIEW) pendingQrPairing = null
+                discoveryResult = result
                 connectionState = ConnectionState.VERIFIED
-                updateUI()
+                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
+                if (decision == QrConnectDecision.AUTO_CONNECT) {
+                    lifecycle.withStarted { connect() }
+                }
             } catch (exception: CancellationException) {
                 throw exception
             } catch (e: DiscoveryException) {
                 connectionState = ConnectionState.ERROR
-                showError(describeDiscoveryFailure(e))
-                updateUI()
+                showError(DiscoveryResultPresentation.describeFailure(this@ConnectionActivity, e))
+                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
             } catch (e: Exception) {
                 connectionState = ConnectionState.ERROR
                 Log.w(TAG, "Unexpected discovery failure", e)
                 showError(getString(R.string.error_server_not_reachable, input))
-                updateUI()
+                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
             }
-        }
-    }
-
-    private fun describeDiscoveryFailure(exception: DiscoveryException): String {
-        val detail = exception.detail.orEmpty()
-        return when (exception.reason) {
-            DiscoveryFailureReason.INVALID_ADDRESS -> getString(R.string.error_invalid_address)
-            DiscoveryFailureReason.IPV6_ZONE_UNSUPPORTED ->
-                getString(R.string.error_ipv6_zone_unsupported)
-            DiscoveryFailureReason.INVALID_PORT -> getString(R.string.error_invalid_port, detail)
-            DiscoveryFailureReason.NOT_REACHABLE ->
-                getString(R.string.error_server_not_reachable, detail)
-            DiscoveryFailureReason.TEMPORARILY_UNAVAILABLE ->
-                getString(R.string.error_server_temporarily_unavailable, detail)
-            DiscoveryFailureReason.NOT_FOUND -> getString(R.string.error_server_not_found, detail)
-            DiscoveryFailureReason.AMBIGUOUS -> getString(R.string.error_multiple_servers, detail)
-            DiscoveryFailureReason.NOT_SOAI_SERVER ->
-                getString(R.string.error_not_soai_server, detail)
         }
     }
 
     private fun connect() {
         val result = discoveryResult ?: return
+        pendingQrPairing = null
         if (!ServerCertificatePin.isApplicable(
                 ServerOrigin.normalize(result.serverUrl),
                 result.instanceId,
@@ -182,107 +226,12 @@ class ConnectionActivity : AppCompatActivity() {
         navigateToMain()
     }
 
-    private fun updateUI() {
-        if (renderedState != connectionState) {
-            TransitionManager.beginDelayedTransition(binding.root, MaterialFadeThrough())
-            renderedState = connectionState
-        }
-        val hasText = !binding.serverUrlInput.text.isNullOrBlank()
-        if (connectionState != ConnectionState.CHECKING) {
-            binding.actionButton.contentDescription = null
-        }
-        binding.infoContainer.visibility = if (hasText) View.GONE else View.VISIBLE
-
-        when (connectionState) {
-            ConnectionState.IDLE -> {
-                binding.actionButton.visibility = View.GONE
-                binding.progressBar.visibility = View.GONE
-                binding.statusText.visibility = View.GONE
-                binding.serverUrlInput.isEnabled = true
-            }
-            ConnectionState.READY -> {
-                binding.actionButton.visibility = View.VISIBLE
-                binding.actionButton.isEnabled = true
-                binding.actionButton.text = getString(R.string.check_button)
-                binding.actionButton.backgroundTintList =
-                    ContextCompat.getColorStateList(this, R.color.blue_500)
-                binding.progressBar.visibility = View.GONE
-                binding.statusText.visibility = View.GONE
-                binding.serverUrlInput.isEnabled = true
-            }
-            ConnectionState.CHECKING -> {
-                binding.actionButton.visibility = View.VISIBLE
-                binding.actionButton.isEnabled = false
-                binding.actionButton.text = null
-                binding.actionButton.contentDescription = getString(R.string.checking)
-                binding.progressBar.visibility = View.VISIBLE
-                binding.statusText.visibility = View.GONE
-                binding.serverUrlInput.isEnabled = false
-            }
-            ConnectionState.VERIFIED -> {
-                binding.actionButton.visibility = View.VISIBLE
-                binding.actionButton.isEnabled = true
-                binding.actionButton.contentDescription = null
-                binding.actionButton.text = getString(R.string.connect_button)
-                binding.actionButton.backgroundTintList =
-                    ContextCompat.getColorStateList(this, R.color.green_500)
-                binding.progressBar.visibility = View.GONE
-                binding.serverUrlInput.isEnabled = true
-
-                discoveryResult?.let { result ->
-                    binding.statusText.visibility = View.VISIBLE
-                    val identityLabel = result.instanceName?.let { name ->
-                        getString(R.string.server_identity_named, result.version, name)
-                    } ?: getString(R.string.server_identity, result.version)
-                    val statusText = if (result.tlsStatus == TlsStatus.UNTRUSTED) {
-                        getString(
-                            R.string.server_found_untrusted_tls_identity,
-                            identityLabel,
-                            result.serverUrl
-                        )
-                    } else {
-                        getString(R.string.server_found_identity, identityLabel, result.serverUrl)
-                    }
-                    val fallbackText = if (result.fallbackActive) {
-                        getString(
-                            R.string.server_found_fallback,
-                            statusText,
-                            result.preferredPort,
-                            result.port
-                        )
-                    } else {
-                        statusText
-                    }
-                    binding.statusText.text = if (result.cleartextToPublicHost) {
-                        getString(R.string.server_found_cleartext_warning, fallbackText)
-                    } else {
-                        fallbackText
-                    }
-                    val statusColor = if (result.fallbackActive || result.cleartextToPublicHost) {
-                        R.color.amber_500
-                    } else {
-                        R.color.green_500
-                    }
-                    binding.statusText.setTextColor(ContextCompat.getColor(this, statusColor))
-                }
-            }
-            ConnectionState.ERROR -> {
-                binding.actionButton.visibility = View.VISIBLE
-                binding.actionButton.isEnabled = true
-                binding.actionButton.text = getString(R.string.retry_button)
-                binding.actionButton.backgroundTintList =
-                    ContextCompat.getColorStateList(this, R.color.blue_500)
-                binding.progressBar.visibility = View.GONE
-                binding.serverUrlInput.isEnabled = true
-            }
-        }
-    }
-
     private fun navigateToMain() {
         AppNavigation.openMainAndFinish(this)
     }
 
     private fun showError(message: String) {
+        TransitionManager.endTransitions(binding.root)
         binding.statusText.visibility = View.VISIBLE
         binding.statusText.text = message
         binding.statusText.setTextColor(MaterialColors.getColor(binding.statusText, android.R.attr.colorError))
@@ -309,14 +258,7 @@ class ConnectionActivity : AppCompatActivity() {
     }
 
     private companion object {
+        const val STATE_PENDING_QR_PAIRING = "pending_qr_pairing"
         const val TAG = "ConnectionActivity"
     }
-}
-
-private enum class ConnectionState {
-    IDLE,
-    READY,
-    CHECKING,
-    VERIFIED,
-    ERROR
 }

@@ -169,4 +169,12 @@
     <string name="change_server_confirm">داده‌های سرور فعلی پاک می‌شوند و به راه‌اندازی اتصال بازمی‌گردید. ادامه می‌دهید؟</string>
     <string name="change">تغییر</string>
     <string name="server_found_cleartext_warning">%1$s\nهشدار: این اتصال رمزگذاری نشده و نشانی آن در شبکهٔ محلی شما نیست. هر کسی میان دستگاه شما و سرور می‌تواند نشست شما را بخواند.</string>
+    <string name="qr_scan_title">اسکن کد QR</string>
+    <string name="qr_scan_hint">دوربین را به سمت کد QR در SoAI، در بخش تنظیمات &gt; اتصال بگیرید</string>
+    <string name="qr_scan_not_soai">این کد QR متعلق به SoAI Connect نیست</string>
+    <string name="qr_scan_close">بستن اسکنر</string>
+    <string name="qr_scan_camera_permission_denied">برای اسکن کد QR به دسترسی دوربین نیاز است. همچنان می‌توانید نشانی سرور را تایپ کنید.</string>
+    <string name="qr_scan_camera_unavailable">دوربین راه‌اندازی نشد</string>
+    <string name="qr_scan_unsupported">این کد QR به نسخهٔ جدیدتری از SoAI Connect نیاز دارد</string>
+    <string name="qr_error_instance_mismatch">این کد QR متعلق به سرور SoAI دیگری است</string>
 </resources>

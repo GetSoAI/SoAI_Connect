@@ -156,4 +156,12 @@
     <string name="menu_close">Sluit</string>
     <string name="default_device_label">Android-toestel</string>
     <string name="server_found_cleartext_warning">%1$s\nWaarskuwing: hierdie verbinding is nie geënkripteer nie en die adres is nie op jou plaaslike netwerk nie. Enigiemand tussen jou toestel en die bediener kan jou sessie lees.</string>
+    <string name="qr_scan_title">Skandeer QR-kode</string>
+    <string name="qr_scan_hint">Rig die kamera op die QR-kode in SoAI onder Instellings &gt; Koppel</string>
+    <string name="qr_scan_not_soai">Dit is nie \'n SoAI Connect-QR-kode nie</string>
+    <string name="qr_scan_close">Sluit skandeerder</string>
+    <string name="qr_scan_camera_permission_denied">Kameratoegang is nodig om \'n QR-kode te skandeer. Jy kan steeds die bedieneradres intik.</string>
+    <string name="qr_scan_camera_unavailable">Die kamera kon nie begin word nie</string>
+    <string name="qr_scan_unsupported">Hierdie QR-kode benodig \'n nuwer weergawe van SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Hierdie QR-kode behoort aan \'n ander SoAI-bediener</string>
 </resources>

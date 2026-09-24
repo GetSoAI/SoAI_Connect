@@ -55,4 +55,8 @@
     <color name="green_500">#4CAF50</color>
     <color name="amber_500">#FF9800</color>
     <color name="blue_500">#2196F3</color>
+
+    <!-- QR Scanner Colors -->
+    <color name="qr_scan_scrim">#80000000</color>
+    <color name="qr_scan_hint_background">#99000000</color>
 </resources>

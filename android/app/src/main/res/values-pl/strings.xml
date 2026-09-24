@@ -156,4 +156,12 @@
     <string name="menu_close">Zamknij</string>
     <string name="default_device_label">Urządzenie z Androidem</string>
     <string name="server_found_cleartext_warning">%1$s\nOstrzeżenie: to połączenie nie jest szyfrowane, a adres nie znajduje się w Twojej sieci lokalnej. Każdy między Twoim urządzeniem a serwerem może odczytać Twoją sesję.</string>
+    <string name="qr_scan_title">Skanuj kod QR</string>
+    <string name="qr_scan_hint">Skieruj aparat na kod QR w SoAI w sekcji Ustawienia &gt; Połącz</string>
+    <string name="qr_scan_not_soai">To nie jest kod QR SoAI Connect</string>
+    <string name="qr_scan_close">Zamknij skaner</string>
+    <string name="qr_scan_camera_permission_denied">Do zeskanowania kodu QR potrzebny jest dostęp do aparatu. Nadal możesz wpisać adres serwera.</string>
+    <string name="qr_scan_camera_unavailable">Nie udało się uruchomić aparatu</string>
+    <string name="qr_scan_unsupported">Ten kod QR wymaga nowszej wersji SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Ten kod QR należy do innego serwera SoAI</string>
 </resources>

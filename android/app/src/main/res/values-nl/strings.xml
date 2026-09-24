@@ -156,4 +156,12 @@
     <string name="menu_close">Sluiten</string>
     <string name="default_device_label">Android-apparaat</string>
     <string name="server_found_cleartext_warning">%1$s\nWaarschuwing: deze verbinding is niet versleuteld en het adres bevindt zich niet in je lokale netwerk. Iedereen tussen je apparaat en de server kan je sessie lezen.</string>
+    <string name="qr_scan_title">QR-code scannen</string>
+    <string name="qr_scan_hint">Richt de camera op de QR-code in SoAI onder Instellingen &gt; Verbinden</string>
+    <string name="qr_scan_not_soai">Dit is geen QR-code van SoAI Connect</string>
+    <string name="qr_scan_close">Scanner sluiten</string>
+    <string name="qr_scan_camera_permission_denied">Voor het scannen van een QR-code is cameratoegang nodig. U kunt het serveradres nog steeds typen.</string>
+    <string name="qr_scan_camera_unavailable">De camera kon niet worden gestart</string>
+    <string name="qr_scan_unsupported">Voor deze QR-code is een nieuwere versie van SoAI Connect nodig</string>
+    <string name="qr_error_instance_mismatch">Deze QR-code hoort bij een andere SoAI-server</string>
 </resources>

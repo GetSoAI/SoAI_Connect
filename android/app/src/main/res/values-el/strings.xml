@@ -156,4 +156,12 @@
     <string name="menu_close">Κλείσιμο</string>
     <string name="default_device_label">Συσκευή Android</string>
     <string name="server_found_cleartext_warning">%1$s\nΠροειδοποίηση: αυτή η σύνδεση δεν είναι κρυπτογραφημένη και η διεύθυνση δεν βρίσκεται στο τοπικό σας δίκτυο. Οποιοσδήποτε ανάμεσα στη συσκευή σας και τον διακομιστή μπορεί να διαβάσει τη συνεδρία σας.</string>
+    <string name="qr_scan_title">Σάρωση κωδικού QR</string>
+    <string name="qr_scan_hint">Στρέψτε την κάμερα στον κωδικό QR στο SoAI, στην ενότητα Settings &gt; Connect</string>
+    <string name="qr_scan_not_soai">Αυτός δεν είναι κωδικός QR του SoAI Connect</string>
+    <string name="qr_scan_close">Κλείσιμο σαρωτή</string>
+    <string name="qr_scan_camera_permission_denied">Απαιτείται πρόσβαση στην κάμερα για τη σάρωση κωδικού QR. Μπορείτε ακόμη να πληκτρολογήσετε τη διεύθυνση του διακομιστή.</string>
+    <string name="qr_scan_camera_unavailable">Δεν ήταν δυνατή η εκκίνηση της κάμερας</string>
+    <string name="qr_scan_unsupported">Αυτός ο κωδικός QR απαιτεί νεότερη έκδοση του SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Αυτός ο κωδικός QR ανήκει σε διαφορετικό διακομιστή SoAI</string>
 </resources>

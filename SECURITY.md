@@ -2,7 +2,7 @@
 
 ## Single point of contact
 
-`security@soai.to` is the single point of contact for reporting vulnerabilities in SoAI Connect and in SoAI itself. The same contact is published at <https://soai.to/legal-notices/>. Roberto Martini is the manufacturer of SoAI for the purposes of Regulation (EU) 2024/2847.
+`security@soai.to` is the single point of contact for reporting vulnerabilities in SoAI Connect and in SoAI itself. The same contact is published under Legal Notices on [SoAI's website](https://soai.to). Roberto Martini is the manufacturer of SoAI for the purposes of Regulation (EU) 2024/2847.
 
 ## Reporting a vulnerability
 
@@ -22,7 +22,7 @@ Because the client is a shell around the server's own web interface, findings th
 
 Reports are validated and prioritized by exploitability and impact. Remediation and disclosure timing is coordinated with the reporter, and reporters are credited in the advisory on request. There is no bug bounty.
 
-The full policy — acknowledgement and assessment targets, the coordinated-disclosure timeline, the declared security support period for SoAI, and the software bill of materials — is published in `SECURITY.md` in the SoAI repository at <https://github.com/GetSoAI/SoAI> and at <https://soai.to/legal-notices/>. It governs this client too, and is kept in one place so the two cannot drift apart.
+The full policy — acknowledgement and assessment targets, the coordinated-disclosure timeline, the declared security support period for SoAI, and the software bill of materials — is published in `SECURITY.md` in the [SoAI repository](https://github.com/GetSoAI/SoAI) and under Legal Notices on [SoAI's website](https://soai.to). It governs this client too, and is kept in one place so the two cannot drift apart.
 
 The supported baseline is the latest published SoAI Connect release. Older packages may be asked to reproduce against it before investigation continues.
 

@@ -156,4 +156,12 @@
     <string name="menu_close">Đóng</string>
     <string name="default_device_label">Thiết bị Android</string>
     <string name="server_found_cleartext_warning">%1$s\nCảnh báo: kết nối này không được mã hóa và địa chỉ không nằm trong mạng cục bộ của bạn. Bất kỳ ai ở giữa thiết bị của bạn và máy chủ đều có thể đọc phiên của bạn.</string>
+    <string name="qr_scan_title">Quét mã QR</string>
+    <string name="qr_scan_hint">Hướng camera vào mã QR trong SoAI tại Cài đặt &gt; Kết nối</string>
+    <string name="qr_scan_not_soai">Đây không phải là mã QR của SoAI Connect</string>
+    <string name="qr_scan_close">Đóng trình quét</string>
+    <string name="qr_scan_camera_permission_denied">Cần quyền truy cập camera để quét mã QR. Bạn vẫn có thể nhập địa chỉ máy chủ.</string>
+    <string name="qr_scan_camera_unavailable">Không thể khởi động camera</string>
+    <string name="qr_scan_unsupported">Mã QR này cần phiên bản SoAI Connect mới hơn</string>
+    <string name="qr_error_instance_mismatch">Mã QR này thuộc về một máy chủ SoAI khác</string>
 </resources>

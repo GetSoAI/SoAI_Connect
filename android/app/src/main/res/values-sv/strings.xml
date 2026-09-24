@@ -156,4 +156,12 @@
     <string name="menu_close">Stäng</string>
     <string name="default_device_label">Android-enhet</string>
     <string name="server_found_cleartext_warning">%1$s\nVarning: den här anslutningen är inte krypterad och adressen finns inte i ditt lokala nätverk. Vem som helst mellan din enhet och servern kan läsa din session.</string>
+    <string name="qr_scan_title">Skanna QR-kod</string>
+    <string name="qr_scan_hint">Rikta kameran mot QR-koden i SoAI under Settings &gt; Connect</string>
+    <string name="qr_scan_not_soai">Det här är ingen QR-kod för SoAI Connect</string>
+    <string name="qr_scan_close">Stäng skannern</string>
+    <string name="qr_scan_camera_permission_denied">Kameraåtkomst behövs för att skanna en QR-kod. Du kan fortfarande skriva in serveradressen.</string>
+    <string name="qr_scan_camera_unavailable">Kameran kunde inte startas</string>
+    <string name="qr_scan_unsupported">Den här QR-koden kräver en nyare version av SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Den här QR-koden tillhör en annan SoAI-server</string>
 </resources>

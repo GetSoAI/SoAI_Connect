@@ -156,4 +156,12 @@
     <string name="menu_close">닫기</string>
     <string name="default_device_label">Android 기기</string>
     <string name="server_found_cleartext_warning">%1$s\n경고: 이 연결은 암호화되지 않았으며 주소가 로컬 네트워크에 있지 않습니다. 기기와 서버 사이의 누구나 세션을 읽을 수 있습니다.</string>
+    <string name="qr_scan_title">QR 코드 스캔</string>
+    <string name="qr_scan_hint">SoAI의 설정 &gt; 연결에 있는 QR 코드에 카메라를 맞추세요</string>
+    <string name="qr_scan_not_soai">SoAI Connect QR 코드가 아닙니다</string>
+    <string name="qr_scan_close">스캐너 닫기</string>
+    <string name="qr_scan_camera_permission_denied">QR 코드를 스캔하려면 카메라 접근 권한이 필요합니다. 서버 주소는 계속 직접 입력할 수 있습니다.</string>
+    <string name="qr_scan_camera_unavailable">카메라를 시작할 수 없습니다</string>
+    <string name="qr_scan_unsupported">이 QR 코드를 사용하려면 최신 버전의 SoAI Connect가 필요합니다</string>
+    <string name="qr_error_instance_mismatch">이 QR 코드는 다른 SoAI 서버의 코드입니다</string>
 </resources>

@@ -169,4 +169,12 @@
     <string name="change_server_confirm">This will clear data for the current server and return to connection setup. Continue?</string>
     <string name="change">Change</string>
     <string name="server_found_cleartext_warning">%1$s\nWarning: this connection is not encrypted and the address is not on your local network. Anyone between your device and the server can read your session.</string>
+    <string name="qr_scan_title">Scan QR code</string>
+    <string name="qr_scan_hint">Point the camera at the QR code in SoAI under Settings &gt; Connect</string>
+    <string name="qr_scan_not_soai">This isn\'t a SoAI Connect QR code</string>
+    <string name="qr_scan_close">Close scanner</string>
+    <string name="qr_scan_camera_permission_denied">Camera access is needed to scan a QR code. You can still type the server address.</string>
+    <string name="qr_scan_camera_unavailable">The camera could not be started</string>
+    <string name="qr_scan_unsupported">This QR code needs a newer version of SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">This QR code belongs to a different SoAI server</string>
 </resources>

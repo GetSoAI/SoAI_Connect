@@ -156,4 +156,12 @@
     <string name="menu_close">Închide</string>
     <string name="default_device_label">Dispozitiv Android</string>
     <string name="server_found_cleartext_warning">%1$s\nAvertisment: această conexiune nu este criptată, iar adresa nu se află în rețeaua ta locală. Oricine se află între dispozitivul tău și server îți poate citi sesiunea.</string>
+    <string name="qr_scan_title">Scanează codul QR</string>
+    <string name="qr_scan_hint">Îndreaptă camera spre codul QR din SoAI, din Settings &gt; Connect</string>
+    <string name="qr_scan_not_soai">Acesta nu este un cod QR SoAI Connect</string>
+    <string name="qr_scan_close">Închide scanerul</string>
+    <string name="qr_scan_camera_permission_denied">Accesul la cameră este necesar pentru scanarea unui cod QR. Poți introduce în continuare adresa serverului.</string>
+    <string name="qr_scan_camera_unavailable">Camera nu a putut fi pornită</string>
+    <string name="qr_scan_unsupported">Acest cod QR necesită o versiune mai nouă de SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Acest cod QR aparține altui server SoAI</string>
 </resources>

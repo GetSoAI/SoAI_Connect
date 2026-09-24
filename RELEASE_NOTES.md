@@ -1,5 +1,17 @@
 # SoAI Connect Release Notes
 
+## 1.0.3
+
+SoAI Connect 1.0.3 adds QR setup for SoAI servers.
+
+### Highlights
+
+- Scan a QR code in the SoAI WebUI to set up a server connection without typing its address.
+
+### Fixes
+
+- Setup checks retain their results, and QR pairing verifies the intended server.
+
 ## 1.0.2
 
 SoAI Connect 1.0.2 makes Android notifications and connection checks more dependable, preserves the WebUI while a window changes size, and cleans up temporary camera photos.

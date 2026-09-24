@@ -169,4 +169,12 @@
     <string name="change_server_confirm">這會清除目前伺服器的資料，並返回連線設定。要繼續嗎？</string>
     <string name="change">變更</string>
     <string name="server_found_cleartext_warning">%1$s\n警告：此連線未加密，而且該位址不在您的區域網路上。裝置與伺服器之間的任何人都能讀取您的工作階段。</string>
+    <string name="qr_scan_title">掃描 QR 碼</string>
+    <string name="qr_scan_hint">將相機對準 SoAI「設定 &gt; 連線」頁面上的 QR 碼</string>
+    <string name="qr_scan_not_soai">這不是 SoAI Connect 的 QR 碼</string>
+    <string name="qr_scan_close">關閉掃描器</string>
+    <string name="qr_scan_camera_permission_denied">掃描 QR 碼需要相機存取權。您仍可手動輸入伺服器位址。</string>
+    <string name="qr_scan_camera_unavailable">無法啟動相機</string>
+    <string name="qr_scan_unsupported">此 QR 碼需要較新版本的 SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">此 QR 碼屬於另一部 SoAI 伺服器</string>
 </resources>
