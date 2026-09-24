@@ -14,7 +14,7 @@ SoAI Connect is the official Android app for [SoAI](https://soai.to), the Smart 
 <a href="https://github.com/GetSoAI/SoAI_Connect"><img src="https://img.shields.io/github/v/release/GetSoAI/SoAI_Connect?label=release&amp;color=153e75&amp;labelColor=153e75&amp;style=for-the-badge" alt="Latest published SoAI Connect release" height="28"></a>
 <img src="media/readme/supported-platforms.svg" alt="Android 8.0 or newer" height="28">
 <img src="media/readme/supported-languages.svg" alt="25 UI languages" height="28">
-<a href="LICENSE.md"><img src="media/readme/mit-license.svg" alt="MIT License" height="28"></a>
+<a href="https://github.com/GetSoAI/SoAI_Connect"><img src="media/readme/mit-license.svg" alt="MIT License in LICENSE.md" height="28"></a>
 </p>
 
 <p align="center">
@@ -116,7 +116,7 @@ That file holds signing secrets and is never tracked in git. Keep the keystore o
 
 ## Third-party components
 
-`licenses/ANDROID-THIRD-PARTY-LICENSES.txt` records every component embedded in the package, with its license text. The same notice is reproduced inside the app under **About → Licenses**. It is regenerated from the resolved release dependency graph whenever a release is built.
+`licenses/ANDROID-THIRD-PARTY-LICENSES.txt` records every component embedded in the package, with its license text. The same notice is reproduced inside the app under **About → Licenses**. It is regenerated from the resolved release dependency graph whenever a release is built. Components whose notices or license terms name their own copyright holders keep a reviewed copy under `licenses/attributions/`, and the release build stops if one is missing, stale, or no longer matches the NOTICE shipped inside the component.
 
 ## License
 

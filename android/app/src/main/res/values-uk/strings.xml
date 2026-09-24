@@ -156,4 +156,12 @@
     <string name="menu_close">Закрити</string>
     <string name="default_device_label">Пристрій Android</string>
     <string name="server_found_cleartext_warning">%1$s\nПопередження: це з\'єднання не зашифроване, а адреса не належить до вашої локальної мережі. Будь-хто між вашим пристроєм і сервером може прочитати вашу сесію.</string>
+    <string name="qr_scan_title">Сканувати QR-код</string>
+    <string name="qr_scan_hint">Наведіть камеру на QR-код у SoAI в розділі Налаштування &gt; Підключення</string>
+    <string name="qr_scan_not_soai">Це не QR-код SoAI Connect</string>
+    <string name="qr_scan_close">Закрити сканер</string>
+    <string name="qr_scan_camera_permission_denied">Для сканування QR-коду потрібен доступ до камери. Адресу сервера все ще можна ввести вручну.</string>
+    <string name="qr_scan_camera_unavailable">Не вдалося запустити камеру</string>
+    <string name="qr_scan_unsupported">Для цього QR-коду потрібна новіша версія SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Цей QR-код належить іншому серверу SoAI</string>
 </resources>

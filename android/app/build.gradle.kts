@@ -125,6 +125,11 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.11.0")
 
+    implementation("androidx.camera:camera-camera2:1.6.2")
+    implementation("androidx.camera:camera-lifecycle:1.6.2")
+    implementation("androidx.camera:camera-view:1.6.2")
+    implementation("com.google.zxing:core:3.5.4")
+
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.json:json:20260814")
 }
@@ -177,6 +182,7 @@ tasks.register("exportReleaseRuntimeDependencies") {
             .sorted()
     }
     val report = layout.buildDirectory.file("reports/soai/release-runtime-dependencies.txt")
+    inputs.files(configurations.named("releaseRuntimeClasspath").map { configuration -> configuration.incoming.artifacts.artifactFiles })
     outputs.file(report)
     doLast {
         val file = report.get().asFile

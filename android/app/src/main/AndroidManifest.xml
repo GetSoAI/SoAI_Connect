@@ -62,6 +62,11 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.QrScanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SoAI.Scanner" />
+
+        <activity
             android:name=".ui.SettingsActivity"
             android:exported="false" />
 

@@ -156,4 +156,12 @@
     <string name="menu_close">关闭</string>
     <string name="default_device_label">Android 设备</string>
     <string name="server_found_cleartext_warning">%1$s\n警告：此连接未加密，且该地址不在您的本地网络中。您的设备与服务器之间的任何人都可以读取您的会话。</string>
+    <string name="qr_scan_title">扫描二维码</string>
+    <string name="qr_scan_hint">将相机对准 SoAI 中“设置 &gt; 连接”页面上的二维码</string>
+    <string name="qr_scan_not_soai">这不是 SoAI Connect 二维码</string>
+    <string name="qr_scan_close">关闭扫描器</string>
+    <string name="qr_scan_camera_permission_denied">扫描二维码需要相机权限。你仍然可以手动输入服务器地址。</string>
+    <string name="qr_scan_camera_unavailable">无法启动相机</string>
+    <string name="qr_scan_unsupported">此二维码需要更新版本的 SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">此二维码属于另一台 SoAI 服务器</string>
 </resources>

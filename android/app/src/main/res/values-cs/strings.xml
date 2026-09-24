@@ -156,4 +156,12 @@
     <string name="menu_close">Zavřít</string>
     <string name="default_device_label">Zařízení Android</string>
     <string name="server_found_cleartext_warning">%1$s\nVarování: toto připojení není šifrované a adresa není ve vaší místní síti. Kdokoli mezi vaším zařízením a serverem si může přečíst vaši relaci.</string>
+    <string name="qr_scan_title">Naskenovat QR kód</string>
+    <string name="qr_scan_hint">Namiřte fotoaparát na QR kód v SoAI v části Settings &gt; Connect</string>
+    <string name="qr_scan_not_soai">Toto není QR kód SoAI Connect</string>
+    <string name="qr_scan_close">Zavřít skener</string>
+    <string name="qr_scan_camera_permission_denied">Ke skenování QR kódu je potřeba přístup k fotoaparátu. Adresu serveru můžete stále zadat ručně.</string>
+    <string name="qr_scan_camera_unavailable">Fotoaparát se nepodařilo spustit</string>
+    <string name="qr_scan_unsupported">Tento QR kód vyžaduje novější verzi SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">Tento QR kód patří k jinému serveru SoAI</string>
 </resources>

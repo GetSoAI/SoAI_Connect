@@ -156,4 +156,12 @@
     <string name="menu_close">Kapat</string>
     <string name="default_device_label">Android cihazı</string>
     <string name="server_found_cleartext_warning">%1$s\nUyarı: bu bağlantı şifrelenmemiş ve adres yerel ağınızda değil. Cihazınızla sunucu arasındaki herkes oturumunuzu okuyabilir.</string>
+    <string name="qr_scan_title">QR kodunu tara</string>
+    <string name="qr_scan_hint">Kamerayı SoAI\'de Ayarlar &gt; Bağlan altındaki QR koduna doğrultun</string>
+    <string name="qr_scan_not_soai">Bu bir SoAI Connect QR kodu değil</string>
+    <string name="qr_scan_close">Tarayıcıyı kapat</string>
+    <string name="qr_scan_camera_permission_denied">QR kodu taramak için kamera erişimi gerekir. Sunucu adresini yine de yazabilirsiniz.</string>
+    <string name="qr_scan_camera_unavailable">Kamera başlatılamadı</string>
+    <string name="qr_scan_unsupported">Bu QR kodu için SoAI Connect\'in daha yeni bir sürümü gerekir</string>
+    <string name="qr_error_instance_mismatch">Bu QR kodu farklı bir SoAI sunucusuna ait</string>
 </resources>

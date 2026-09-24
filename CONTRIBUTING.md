@@ -16,7 +16,7 @@ Two limits, both from the license rather than from preference: the MIT grant con
 
 ## What is genuinely welcome
 
-**Bug reports.** The most useful thing you can send, at <https://github.com/GetSoAI/SoAI_Connect/issues>. Include the client version, the Android version and device, the SoAI server version, what you did, what happened, and what you expected. A reliable reproduction is worth far more than a proposed fix.
+**Bug reports.** The most useful thing you can send is in the Issues section of the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). Include the client version, the Android version and device, the SoAI server version, what you did, what happened, and what you expected. A reliable reproduction is worth far more than a proposed fix.
 
 **Feature requests and design feedback.** Describe the problem you are trying to solve and the outcome you want, rather than the implementation.
 

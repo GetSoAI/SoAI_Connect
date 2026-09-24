@@ -156,4 +156,12 @@
     <string name="menu_close">إغلاق</string>
     <string name="default_device_label">جهاز Android</string>
     <string name="server_found_cleartext_warning">%1$s\nتحذير: هذا الاتصال غير مشفَّر والعنوان ليس على شبكتك المحلية. يمكن لأي شخص بين جهازك والخادم قراءة جلستك.</string>
+    <string name="qr_scan_title">مسح رمز QR</string>
+    <string name="qr_scan_hint">وجّه الكاميرا نحو رمز QR في SoAI ضمن الإعدادات &gt; الاتصال</string>
+    <string name="qr_scan_not_soai">هذا ليس رمز QR خاصًا بـ SoAI Connect</string>
+    <string name="qr_scan_close">إغلاق الماسح</string>
+    <string name="qr_scan_camera_permission_denied">يلزم الوصول إلى الكاميرا لمسح رمز QR. لا يزال بإمكانك كتابة عنوان الخادم.</string>
+    <string name="qr_scan_camera_unavailable">تعذّر تشغيل الكاميرا</string>
+    <string name="qr_scan_unsupported">يتطلب رمز QR هذا إصدارًا أحدث من SoAI Connect</string>
+    <string name="qr_error_instance_mismatch">ينتمي رمز QR هذا إلى خادم SoAI مختلف</string>
 </resources>

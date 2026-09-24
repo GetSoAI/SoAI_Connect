@@ -156,4 +156,12 @@
     <string name="menu_close">बंद करें</string>
     <string name="default_device_label">Android डिवाइस</string>
     <string name="server_found_cleartext_warning">%1$s\nचेतावनी: यह कनेक्शन एन्क्रिप्टेड नहीं है और यह पता आपके स्थानीय नेटवर्क पर नहीं है। आपके डिवाइस और सर्वर के बीच कोई भी आपका सत्र पढ़ सकता है।</string>
+    <string name="qr_scan_title">QR कोड स्कैन करें</string>
+    <string name="qr_scan_hint">कैमरे को SoAI में सेटिंग्स &gt; कनेक्ट के अंतर्गत दिए QR कोड की ओर करें</string>
+    <string name="qr_scan_not_soai">यह SoAI Connect का QR कोड नहीं है</string>
+    <string name="qr_scan_close">स्कैनर बंद करें</string>
+    <string name="qr_scan_camera_permission_denied">QR कोड स्कैन करने के लिए कैमरे की अनुमति चाहिए। आप अब भी सर्वर का पता टाइप कर सकते हैं।</string>
+    <string name="qr_scan_camera_unavailable">कैमरा शुरू नहीं हो सका</string>
+    <string name="qr_scan_unsupported">इस QR कोड के लिए SoAI Connect का नया संस्करण चाहिए</string>
+    <string name="qr_error_instance_mismatch">यह QR कोड किसी दूसरे SoAI सर्वर का है</string>
 </resources>

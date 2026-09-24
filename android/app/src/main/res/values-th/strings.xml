@@ -156,4 +156,12 @@
     <string name="menu_close">ปิด</string>
     <string name="default_device_label">อุปกรณ์ Android</string>
     <string name="server_found_cleartext_warning">%1$s\nคำเตือน: การเชื่อมต่อนี้ไม่ได้เข้ารหัส และที่อยู่ไม่ได้อยู่ในเครือข่ายท้องถิ่นของคุณ ใครก็ตามที่อยู่ระหว่างอุปกรณ์ของคุณกับเซิร์ฟเวอร์สามารถอ่านเซสชันของคุณได้</string>
+    <string name="qr_scan_title">สแกนคิวอาร์โค้ด</string>
+    <string name="qr_scan_hint">เล็งกล้องไปที่คิวอาร์โค้ดใน SoAI ที่ การตั้งค่า &gt; เชื่อมต่อ</string>
+    <string name="qr_scan_not_soai">นี่ไม่ใช่คิวอาร์โค้ดของ SoAI Connect</string>
+    <string name="qr_scan_close">ปิดตัวสแกน</string>
+    <string name="qr_scan_camera_permission_denied">ต้องมีสิทธิ์เข้าถึงกล้องเพื่อสแกนคิวอาร์โค้ด คุณยังคงพิมพ์ที่อยู่เซิร์ฟเวอร์ได้</string>
+    <string name="qr_scan_camera_unavailable">ไม่สามารถเริ่มกล้องได้</string>
+    <string name="qr_scan_unsupported">คิวอาร์โค้ดนี้ต้องใช้ SoAI Connect เวอร์ชันที่ใหม่กว่า</string>
+    <string name="qr_error_instance_mismatch">คิวอาร์โค้ดนี้เป็นของเซิร์ฟเวอร์ SoAI อื่น</string>
 </resources>
