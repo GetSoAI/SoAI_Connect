@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Não foi possível iniciar a câmera</string>
     <string name="qr_scan_unsupported">Este código QR requer uma versão mais recente do SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Este código QR pertence a outro servidor SoAI</string>
+    <string name="page_error_address">Endereço do servidor não encontrado. Verifique o endereço e a rede e recarregue.</string>
+    <string name="page_error_connection">Servidor inacessível. Verifique a rede e se o SoAI está em execução e recarregue.</string>
+    <string name="page_error_timeout">O servidor demorou demasiado a responder. Recarregue para tentar novamente.</string>
+    <string name="page_error_certificate">A ligação segura falhou. Verifique o certificado do servidor e recarregue.</string>
+    <string name="page_error_authentication">É necessário iniciar sessão. Recarregue para entrar.</string>
+    <string name="page_error_access">Acesso negado. Verifique as permissões da sua conta.</string>
+    <string name="page_error_missing">Página não encontrada. Verifique o endereço do servidor.</string>
+    <string name="page_error_busy">O servidor está ocupado. Aguarde um momento e recarregue.</string>
+    <string name="page_error_server">O servidor não conseguiu carregar esta página. Tente novamente em breve.</string>
+    <string name="notifications_connecting">A ligar ao SoAI</string>
+    <string name="notifications_reconnecting">Ligação perdida. A restabelecer a ligação ao SoAI.</string>
+    <string name="notifications_catching_up">Ligado. A recuperar alertas perdidos.</string>
+    <string name="notifications_catch_up_failed">Alertas em direto ligados; não foi possível verificar alertas perdidos. Reabra o SoAI.</string>
+    <string name="notifications_certificate_required">É necessário aprovar o certificado. Abra o SoAI para o verificar.</string>
+    <string name="notifications_sign_in_required">É necessário iniciar sessão. Abra o SoAI.</string>
+    <string name="notifications_access_denied">Acesso às notificações negado. Verifique as permissões da sua conta.</string>
 </resources>

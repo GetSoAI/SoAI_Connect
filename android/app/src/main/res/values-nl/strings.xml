@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">De camera kon niet worden gestart</string>
     <string name="qr_scan_unsupported">Voor deze QR-code is een nieuwere versie van SoAI Connect nodig</string>
     <string name="qr_error_instance_mismatch">Deze QR-code hoort bij een andere SoAI-server</string>
+    <string name="page_error_address">Serveradres niet gevonden. Controleer het adres en uw netwerk en laad opnieuw.</string>
+    <string name="page_error_connection">Server onbereikbaar. Controleer uw netwerk en of SoAI actief is en laad opnieuw.</string>
+    <string name="page_error_timeout">De server reageerde niet op tijd. Laad opnieuw om het nogmaals te proberen.</string>
+    <string name="page_error_certificate">Beveiligde verbinding mislukt. Controleer het servercertificaat en laad opnieuw.</string>
+    <string name="page_error_authentication">Aanmelden vereist. Laad opnieuw om aan te melden.</string>
+    <string name="page_error_access">Toegang geweigerd. Controleer uw accountrechten.</string>
+    <string name="page_error_missing">Pagina niet gevonden. Controleer het serveradres.</string>
+    <string name="page_error_busy">De server is bezet. Wacht even en laad opnieuw.</string>
+    <string name="page_error_server">De server kon deze pagina niet laden. Probeer het zo nogmaals.</string>
+    <string name="notifications_connecting">Verbinden met SoAI</string>
+    <string name="notifications_reconnecting">Verbinding verbroken. Opnieuw verbinden met SoAI.</string>
+    <string name="notifications_catching_up">Verbonden. Gemiste meldingen worden opgehaald.</string>
+    <string name="notifications_catch_up_failed">Live-meldingen verbonden; gemiste meldingen konden niet worden gecontroleerd. Open SoAI opnieuw.</string>
+    <string name="notifications_certificate_required">Certificaatgoedkeuring vereist. Open SoAI om het te controleren.</string>
+    <string name="notifications_sign_in_required">Aanmelden vereist. Open SoAI.</string>
+    <string name="notifications_access_denied">Toegang tot meldingen geweigerd. Controleer uw accountrechten.</string>
 </resources>

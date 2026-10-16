@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Impossible de démarrer l\'appareil photo</string>
     <string name="qr_scan_unsupported">Ce code QR nécessite une version plus récente de SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Ce code QR appartient à un autre serveur SoAI</string>
+    <string name="page_error_address">Adresse du serveur introuvable. Vérifiez l’adresse et le réseau, puis rechargez.</string>
+    <string name="page_error_connection">Serveur inaccessible. Vérifiez le réseau et que SoAI fonctionne, puis rechargez.</string>
+    <string name="page_error_timeout">Le serveur a mis trop de temps à répondre. Rechargez pour réessayer.</string>
+    <string name="page_error_certificate">La connexion sécurisée a échoué. Vérifiez le certificat du serveur, puis rechargez.</string>
+    <string name="page_error_authentication">Connexion au compte requise. Rechargez pour vous connecter.</string>
+    <string name="page_error_access">Accès refusé. Vérifiez les autorisations de votre compte.</string>
+    <string name="page_error_missing">Page introuvable. Vérifiez l’adresse du serveur.</string>
+    <string name="page_error_busy">Le serveur est occupé. Patientez un instant, puis rechargez.</string>
+    <string name="page_error_server">Le serveur n’a pas pu charger cette page. Réessayez dans un instant.</string>
+    <string name="notifications_connecting">Connexion à SoAI</string>
+    <string name="notifications_reconnecting">Connexion perdue. Reconnexion à SoAI.</string>
+    <string name="notifications_catching_up">Connecté. Récupération des alertes manquées.</string>
+    <string name="notifications_catch_up_failed">Alertes en direct connectées ; impossible de vérifier les alertes manquées. Rouvrez SoAI.</string>
+    <string name="notifications_certificate_required">Approbation du certificat requise. Ouvrez SoAI pour le vérifier.</string>
+    <string name="notifications_sign_in_required">Connexion au compte requise. Ouvrez SoAI.</string>
+    <string name="notifications_access_denied">Accès aux notifications refusé. Vérifiez les autorisations de votre compte.</string>
 </resources>

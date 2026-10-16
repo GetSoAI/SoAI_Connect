@@ -1,3 +1,4 @@
+// WebUI host lifecycle and Android integration for ui/MainActivity.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.ui
@@ -22,7 +23,6 @@ import com.soai.android.SoAIApplication
 import com.soai.android.data.AppPreferences
 import com.soai.android.databinding.ActivityMainBinding
 import com.soai.android.notifications.SoAINotificationLaunchRouter
-import com.soai.android.web.AndroidDeviceIdentityCookie
 import com.soai.android.web.PopupWebViewController
 import com.soai.android.web.SoAIWebChromeClientFactory
 import com.soai.android.web.SoAIWebViewClientFactory
@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var trustController: ServerTrustController
     private lateinit var pageOwner: MainWebPageOwner
     private var configuredIncognitoMode = false
-    private var pageLoadGeneration = 0L
     private val dialogs = LifecycleDialogRegistry(this)
 
     private val fileChooserLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -136,8 +135,9 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         if (!::mainHost.isInitialized) return
-        val serverUrl = prefs.serverUrl ?: return
-        launchRouter.dispatch(mainHost.webView, intent, serverUrl)
+        pageOwner.prepareLoad { serverUrl ->
+            launchRouter.dispatch(mainHost.webView, intent, serverUrl)
+        }
     }
 
     override fun onStart() {
@@ -145,20 +145,17 @@ class MainActivity : AppCompatActivity() {
         if (!::mainHost.isInitialized) return
         if (configuredIncognitoMode != prefs.incognitoMode) {
             configuredIncognitoMode = prefs.incognitoMode
-            popupController.dismissAll()
-            trustController.resetSessionTrust()
             WebViewDataCleaner.clearSessionData {
-                if (!isDestroyed) recreateMainWebView()
+                if (!isFinishing && !isDestroyed) recreateMainWebView()
             }
             return
         }
         if (!prefs.incognitoMode) return
         if (!SoAIApplication.instance.consumeIncognitoInvalidation()) return
 
-        popupController.dismissAll()
-        trustController.resetSessionTrust()
-        WebViewDataCleaner.clearSessionData()
-        loadWebUI()
+        WebViewDataCleaner.clearSessionData {
+            if (!isFinishing && !isDestroyed) recreateMainWebView()
+        }
     }
 
     override fun onPause() {
@@ -201,7 +198,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        pageLoadGeneration += 1L
+        if (::pageOwner.isInitialized) pageOwner.destroy()
         fileChooser.cancelAll()
         permissionMediator.cancelPending()
         popupController.dismissAll()
@@ -222,7 +219,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_reload -> {
-                mainHost.hardReload()
+                pageOwner.prepareLoad { serverUrl ->
+                    if (mainHost.webView.url.isNullOrBlank()) mainHost.webView.loadUrl(serverUrl)
+                    else mainHost.hardReload()
+                }
                 true
             }
             R.id.menu_settings -> {
@@ -275,27 +275,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadWebUI() {
-        val loadGeneration = ++pageLoadGeneration
-        WebViewDataCleaner.runWhenSessionDataReady {
-            if (loadGeneration != pageLoadGeneration || isFinishing || isDestroyed || !::mainHost.isInitialized) return@runWhenSessionDataReady
-            val serverUrl = prefs.serverUrl ?: return@runWhenSessionDataReady
-            AndroidDeviceIdentityCookie.install(
-                CookieManager.getInstance(),
-                serverUrl,
-                prefs.deviceIdentity()
-            ) { installed ->
-                if (loadGeneration != pageLoadGeneration || isFinishing || isDestroyed || !::mainHost.isInitialized) return@install
-                if (!installed) {
-                    mainHost.showError(getString(R.string.device_identity_cookie_failed))
-                    return@install
-                }
-                mainHost.webView.loadUrl(launchRouter.consume(intent, serverUrl))
-            }
+        pageOwner.prepareLoad { serverUrl ->
+            mainHost.webView.loadUrl(launchRouter.consume(intent, serverUrl))
         }
     }
 
     private fun recreateMainWebView(loadImmediately: Boolean = true) {
-        pageLoadGeneration += 1L
+        pageOwner.cancelPageLoad()
         fileChooser.cancelAll()
         permissionMediator.cancelPending()
         trustController.cancelFor(mainHost.webView)

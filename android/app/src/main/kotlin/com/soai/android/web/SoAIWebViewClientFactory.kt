@@ -1,3 +1,4 @@
+// WebView navigation, page failures and certificate callbacks for web/SoAIWebViewClientFactory.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.web
@@ -11,6 +12,7 @@ import android.webkit.RenderProcessGoneDetail
 import android.webkit.SslErrorHandler
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.soai.android.R
@@ -31,12 +33,11 @@ object SoAIWebViewClientFactory {
 
     fun create(context: Context, host: WebViewHost, owner: SoAIWebPageOwner): WebViewClient {
         return object : WebViewClient() {
-            private var mainFrameLoadFailed = false
+            private val pageLoad = WebPageLoadState()
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                mainFrameLoadFailed = false
-                host.showLoadStarted()
+                if (pageLoad.onStarted()) host.showLoadStarted()
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
@@ -45,7 +46,9 @@ object SoAIWebViewClientFactory {
                 if (!owner.incognitoMode) {
                     CookieManager.getInstance().flush()
                 }
-                if (!mainFrameLoadFailed) owner.onPageFinished(host.webView)
+                val failureResource = pageLoad.onFinished()
+                if (failureResource == null) owner.onPageFinished(host.webView)
+                else host.showError(context.getString(failureResource))
             }
 
             override fun onReceivedError(
@@ -55,8 +58,23 @@ object SoAIWebViewClientFactory {
             ) {
                 super.onReceivedError(view, request, error)
                 if (request?.isForMainFrame != true) return
-                mainFrameLoadFailed = true
-                host.showError(context.getString(R.string.error_loading_page))
+                val failureResource = WebPageFailure.messageResource(error?.errorCode)
+                pageLoad.onFailure(failureResource)
+                host.hideLoadProgress()
+                host.showError(context.getString(failureResource))
+            }
+
+            override fun onReceivedHttpError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                errorResponse: WebResourceResponse?
+            ) {
+                super.onReceivedHttpError(view, request, errorResponse)
+                if (request?.isForMainFrame != true || errorResponse == null) return
+                val failureResource = WebPageFailure.httpMessageResource(errorResponse.statusCode)
+                pageLoad.onFailure(failureResource)
+                host.hideLoadProgress()
+                host.showError(context.getString(failureResource))
             }
 
             override fun onRenderProcessGone(

@@ -1,3 +1,4 @@
+// HTTP clients for discovery and approved server connections for network/HttpClientFactory.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
@@ -7,7 +8,6 @@ import com.soai.android.data.AppPreferences
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLPeerUnverifiedException
 import javax.net.ssl.TrustManager
@@ -25,8 +25,8 @@ object HttpClientFactory {
             .build()
     }
 
-    fun createDiscoveryTlsReader(): OkHttpClient {
-        val trustManager = DiscoveryReaderTrustManager()
+    fun createDiscoveryTlsReader(onCertificate: (X509Certificate) -> Unit = {}): OkHttpClient {
+        val trustManager = DiscoveryReaderTrustManager(onCertificate)
         val sslContext = SSLContext.getInstance("TLS")
         sslContext.init(null, arrayOf<TrustManager>(trustManager), SecureRandom())
         return OkHttpClient.Builder()
@@ -60,45 +60,28 @@ object HttpClientFactory {
             .followRedirects(false)
             .followSslRedirects(false)
 
-        val pinnedFingerprint = resolvePinnedFingerprint(prefs)
+        val pinnedFingerprint = SessionCertificateTrust.effectiveFingerprint(
+            prefs.serverUrl?.let(ServerOrigin::normalize),
+            prefs.serverInstanceId,
+            prefs.trustedServerOrigin,
+            prefs.trustedServerInstanceId,
+            prefs.trustedServerCertSha256
+        )
         if (pinnedFingerprint != null) {
             val trustManager = PinnedFingerprintTrustManager(pinnedFingerprint)
             val sslContext = SSLContext.getInstance("TLS")
             sslContext.init(null, arrayOf<TrustManager>(trustManager), SecureRandom())
             builder.sslSocketFactory(sslContext.socketFactory, trustManager)
-            builder.hostnameVerifier { hostname, session ->
+            builder.hostnameVerifier { _, session ->
                 val certificate = try {
                     session.peerCertificates.firstOrNull() as? X509Certificate
                 } catch (_: SSLPeerUnverifiedException) {
                     null
                 }
-                when {
-                    certificate == null -> false
-                    trustManager.matchesFingerprint(certificate) -> true
-                    else -> HttpsURLConnection.getDefaultHostnameVerifier().verify(hostname, session)
-                }
+                certificate != null && trustManager.matchesFingerprint(certificate)
             }
         }
         return builder
-    }
-
-    private fun resolvePinnedFingerprint(prefs: AppPreferences): String? {
-        val serverInstanceId = prefs.serverInstanceId
-        val serverOrigin = prefs.serverUrl?.let { ServerOrigin.normalize(it) }
-        val storedFingerprint = prefs.trustedServerCertSha256
-            ?.takeIf { fingerprint -> ServerCertificatePin.isValidFingerprint(fingerprint) }
-        if (
-            storedFingerprint != null &&
-            ServerCertificatePin.isApplicable(
-                serverOrigin,
-                serverInstanceId,
-                prefs.trustedServerOrigin,
-                prefs.trustedServerInstanceId
-            )
-        ) {
-            return storedFingerprint
-        }
-        return SessionCertificateTrust.fingerprintFor(serverOrigin, serverInstanceId)
     }
 
     private const val CONNECT_TIMEOUT_SECONDS = 10L
@@ -110,13 +93,14 @@ object HttpClientFactory {
 }
 
 @SuppressLint("CustomX509TrustManager", "TrustAllX509TrustManager")
-private class DiscoveryReaderTrustManager : X509TrustManager {
+private class DiscoveryReaderTrustManager(private val onCertificate: (X509Certificate) -> Unit) : X509TrustManager {
 
     override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
         throw SSLPeerUnverifiedException("Client certificates are not supported")
     }
 
     override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+        chain.firstOrNull()?.let(onCertificate)
     }
 
     override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()

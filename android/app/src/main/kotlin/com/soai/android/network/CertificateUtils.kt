@@ -1,3 +1,4 @@
+// Certificate identity and fingerprint presentation for network/CertificateUtils.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
@@ -9,8 +10,8 @@ import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 
 internal data class CertificateSummary(
-    val subjectCn: String,
-    val issuerCn: String,
+    val subjectName: String,
+    val issuerName: String,
     val sha256Hex: String
 )
 
@@ -20,17 +21,19 @@ internal object CertificateUtils {
         val source = sslCertificate ?: return null
         val cert = extractX509Certificate(source) ?: return null
         return try {
-            CertificateSummary(
-                subjectCn = source.issuedTo?.cName?.takeIf { it.isNotBlank() }
-                    ?: cert.subjectX500Principal.name,
-                issuerCn = source.issuedBy?.cName?.takeIf { it.isNotBlank() }
-                    ?: cert.issuerX500Principal.name,
-                sha256Hex = ServerCertificatePin.sha256Hex(cert)
-            )
+            summarize(cert)
         } catch (exception: Exception) {
             Log.w(TAG, "Unable to summarize server certificate", exception)
             null
         }
+    }
+
+    fun summarize(certificate: X509Certificate): CertificateSummary {
+        return CertificateSummary(
+            subjectName = certificate.subjectX500Principal.name,
+            issuerName = certificate.issuerX500Principal.name,
+            sha256Hex = ServerCertificatePin.sha256Hex(certificate)
+        )
     }
 
     fun formatHexFingerprint(hex: String): String {

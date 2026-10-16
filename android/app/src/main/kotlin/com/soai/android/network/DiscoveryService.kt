@@ -169,8 +169,8 @@ class DiscoveryService(
 
     private suspend fun readDiscoveryBody(request: Request, scheme: String): String? {
         try {
-            return executeHttpCall(httpClient, request).use { resp ->
-                if (!resp.isSuccessful) null else readBoundedBody(resp, MAX_DISCOVERY_BODY_BYTES)
+            return executeHttpCall(httpClient, request) { response ->
+                if (!response.isSuccessful) null else readBoundedBody(response, MAX_DISCOVERY_BODY_BYTES)
             }
         } catch (e: CancellationException) {
             throw e
@@ -184,8 +184,8 @@ class DiscoveryService(
 
     private suspend fun readDiscoveryBodyIgnoringCertificate(request: Request): String? {
         return try {
-            executeHttpCall(discoveryTlsReaderClient, request).use { resp ->
-                if (!resp.isSuccessful) null else readBoundedBody(resp, MAX_DISCOVERY_BODY_BYTES)
+            executeHttpCall(discoveryTlsReaderClient, request) { response ->
+                if (!response.isSuccessful) null else readBoundedBody(response, MAX_DISCOVERY_BODY_BYTES)
             }
         } catch (e: CancellationException) {
             throw e

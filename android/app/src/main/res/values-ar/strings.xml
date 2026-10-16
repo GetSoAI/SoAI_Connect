@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">تعذّر تشغيل الكاميرا</string>
     <string name="qr_scan_unsupported">يتطلب رمز QR هذا إصدارًا أحدث من SoAI Connect</string>
     <string name="qr_error_instance_mismatch">ينتمي رمز QR هذا إلى خادم SoAI مختلف</string>
+    <string name="page_error_address">لم يتم العثور على عنوان الخادم. تحقق من العنوان والشبكة ثم أعد التحميل.</string>
+    <string name="page_error_connection">يتعذر الوصول إلى الخادم. تحقق من الشبكة ومن تشغيل SoAI ثم أعد التحميل.</string>
+    <string name="page_error_timeout">استغرق الخادم وقتًا طويلًا للرد. أعد التحميل للمحاولة مجددًا.</string>
+    <string name="page_error_certificate">فشل الاتصال الآمن. تحقق من شهادة الخادم ثم أعد التحميل.</string>
+    <string name="page_error_authentication">يلزم تسجيل الدخول. أعد التحميل لتسجيل الدخول.</string>
+    <string name="page_error_access">رُفض الوصول. تحقق من صلاحيات حسابك.</string>
+    <string name="page_error_missing">لم يتم العثور على الصفحة. تحقق من عنوان الخادم.</string>
+    <string name="page_error_busy">الخادم مشغول. انتظر قليلًا ثم أعد التحميل.</string>
+    <string name="page_error_server">تعذر على الخادم تحميل هذه الصفحة. حاول مجددًا بعد قليل.</string>
+    <string name="notifications_connecting">جارٍ الاتصال بـ SoAI</string>
+    <string name="notifications_reconnecting">انقطع الاتصال. جارٍ إعادة الاتصال بـ SoAI.</string>
+    <string name="notifications_catching_up">متصل. جارٍ استعادة التنبيهات الفائتة.</string>
+    <string name="notifications_catch_up_failed">التنبيهات المباشرة متصلة؛ تعذر التحقق من التنبيهات الفائتة. أعد فتح SoAI.</string>
+    <string name="notifications_certificate_required">يلزم اعتماد الشهادة. افتح SoAI لمراجعتها.</string>
+    <string name="notifications_sign_in_required">يلزم تسجيل الدخول. افتح SoAI.</string>
+    <string name="notifications_access_denied">رُفض الوصول إلى التنبيهات. تحقق من صلاحيات حسابك.</string>
 </resources>

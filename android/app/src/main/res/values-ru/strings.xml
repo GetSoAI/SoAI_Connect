@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Не удалось запустить камеру</string>
     <string name="qr_scan_unsupported">Для этого QR-кода нужна более новая версия SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Этот QR-код относится к другому серверу SoAI</string>
+    <string name="page_error_address">Адрес сервера не найден. Проверьте адрес и сеть, затем обновите страницу.</string>
+    <string name="page_error_connection">Сервер недоступен. Проверьте сеть и работу SoAI, затем обновите страницу.</string>
+    <string name="page_error_timeout">Сервер не ответил вовремя. Обновите страницу, чтобы повторить попытку.</string>
+    <string name="page_error_certificate">Защищённое соединение не установлено. Проверьте сертификат сервера и обновите страницу.</string>
+    <string name="page_error_authentication">Требуется вход. Обновите страницу, чтобы войти.</string>
+    <string name="page_error_access">Доступ запрещён. Проверьте разрешения учётной записи.</string>
+    <string name="page_error_missing">Страница не найдена. Проверьте адрес сервера.</string>
+    <string name="page_error_busy">Сервер занят. Подождите немного и обновите страницу.</string>
+    <string name="page_error_server">Сервер не смог загрузить страницу. Повторите попытку чуть позже.</string>
+    <string name="notifications_connecting">Подключение к SoAI</string>
+    <string name="notifications_reconnecting">Соединение потеряно. Повторное подключение к SoAI.</string>
+    <string name="notifications_catching_up">Подключено. Получение пропущенных оповещений.</string>
+    <string name="notifications_catch_up_failed">Оповещения подключены; проверить пропущенные не удалось. Откройте SoAI заново.</string>
+    <string name="notifications_certificate_required">Требуется подтверждение сертификата. Откройте SoAI для проверки.</string>
+    <string name="notifications_sign_in_required">Требуется вход. Откройте SoAI.</string>
+    <string name="notifications_access_denied">Доступ к уведомлениям запрещён. Проверьте разрешения учётной записи.</string>
 </resources>

@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">कैमरा शुरू नहीं हो सका</string>
     <string name="qr_scan_unsupported">इस QR कोड के लिए SoAI Connect का नया संस्करण चाहिए</string>
     <string name="qr_error_instance_mismatch">यह QR कोड किसी दूसरे SoAI सर्वर का है</string>
+    <string name="page_error_address">सर्वर का पता नहीं मिला। पता और नेटवर्क जाँचें, फिर दोबारा लोड करें।</string>
+    <string name="page_error_connection">सर्वर तक नहीं पहुँच सके। नेटवर्क और SoAI चालू होने की जाँच करें, फिर दोबारा लोड करें।</string>
+    <string name="page_error_timeout">सर्वर ने जवाब देने में बहुत समय लिया। फिर प्रयास करने के लिए दोबारा लोड करें।</string>
+    <string name="page_error_certificate">सुरक्षित कनेक्शन विफल रहा। सर्वर प्रमाणपत्र जाँचें, फिर दोबारा लोड करें।</string>
+    <string name="page_error_authentication">साइन इन करना आवश्यक है। साइन इन करने के लिए दोबारा लोड करें।</string>
+    <string name="page_error_access">पहुँच अस्वीकृत। अपने खाते की अनुमतियाँ जाँचें।</string>
+    <string name="page_error_missing">पृष्ठ नहीं मिला। सर्वर का पता जाँचें।</string>
+    <string name="page_error_busy">सर्वर व्यस्त है। थोड़ी देर रुककर दोबारा लोड करें।</string>
+    <string name="page_error_server">सर्वर यह पृष्ठ लोड नहीं कर सका। थोड़ी देर में फिर प्रयास करें।</string>
+    <string name="notifications_connecting">SoAI से कनेक्ट हो रहा है</string>
+    <string name="notifications_reconnecting">कनेक्शन टूट गया। SoAI से दोबारा कनेक्ट हो रहा है।</string>
+    <string name="notifications_catching_up">कनेक्ट है। छूटे हुए अलर्ट प्राप्त हो रहे हैं।</string>
+    <string name="notifications_catch_up_failed">लाइव अलर्ट कनेक्ट हैं; छूटे अलर्ट की जाँच नहीं हो सकी। SoAI दोबारा खोलें।</string>
+    <string name="notifications_certificate_required">प्रमाणपत्र की स्वीकृति आवश्यक है। समीक्षा के लिए SoAI खोलें।</string>
+    <string name="notifications_sign_in_required">साइन इन करना आवश्यक है। SoAI खोलें।</string>
+    <string name="notifications_access_denied">सूचनाओं तक पहुँच अस्वीकृत। अपने खाते की अनुमतियाँ जाँचें।</string>
 </resources>

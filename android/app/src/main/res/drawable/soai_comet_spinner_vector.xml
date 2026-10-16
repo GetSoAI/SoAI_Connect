@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <group
+        android:name="spinner"
+        android:pivotX="24"
+        android:pivotY="24">
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M24,4 A20,20 0,1 1 24,44 A20,20 0,1 1 24,4"
+            android:strokeColor="@color/soai_spinner_track"
+            android:strokeLineCap="butt"
+            android:strokeWidth="4" />
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M24,4 A20,20 0,1 1 24,44 A20,20 0,1 1 24,4"
+            android:strokeLineCap="butt"
+            android:strokeWidth="4">
+            <aapt:attr name="android:strokeColor">
+                <gradient
+                    android:centerX="24"
+                    android:centerY="24"
+                    android:type="sweep">
+                    <item android:color="@android:color/transparent" android:offset="0" />
+                    <item android:color="@android:color/transparent" android:offset="0.0778" />
+                    <item android:color="@color/soai_spinner_active_01" android:offset="0.15" />
+                    <item android:color="@color/soai_spinner_active_02" android:offset="0.2167" />
+                    <item android:color="@color/soai_spinner_active_04" android:offset="0.2833" />
+                    <item android:color="@color/soai_spinner_active_07" android:offset="0.35" />
+                    <item android:color="@color/soai_spinner_active_11" android:offset="0.4167" />
+                    <item android:color="@color/soai_spinner_active_17" android:offset="0.4833" />
+                    <item android:color="@color/soai_spinner_active_24" android:offset="0.55" />
+                    <item android:color="@color/soai_spinner_active_33" android:offset="0.6167" />
+                    <item android:color="@color/soai_spinner_active_44" android:offset="0.6833" />
+                    <item android:color="@color/soai_spinner_active_57" android:offset="0.75" />
+                    <item android:color="@color/soai_spinner_active_70" android:offset="0.8111" />
+                    <item android:color="@color/soai_spinner_active_82" android:offset="0.8667" />
+                    <item android:color="@color/soai_spinner_active_91" android:offset="0.9167" />
+                    <item android:color="@color/soai_spinner_active_97" android:offset="0.9611" />
+                    <item android:color="@color/soai_spinner_active" android:offset="1" />
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
+</vector>

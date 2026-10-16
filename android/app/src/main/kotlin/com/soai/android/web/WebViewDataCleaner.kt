@@ -1,3 +1,4 @@
+// WebView session data and certificate-decision cleanup for web/WebViewDataCleaner.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.web
@@ -5,9 +6,15 @@ package com.soai.android.web
 import android.webkit.CookieManager
 import android.webkit.WebStorage
 import android.webkit.WebView
+import com.soai.android.network.SessionCertificateTrust
+
+internal interface WebSessionDataOwner {
+    fun onSessionDataClearing()
+}
 
 object WebViewDataCleaner {
     private val webViews = mutableSetOf<WebView>()
+    private val sessionOwners = mutableSetOf<WebSessionDataOwner>()
     private val cleanupCallbacks = mutableListOf<() -> Unit>()
     private var sessionCleanupInProgress = false
 
@@ -17,6 +24,14 @@ object WebViewDataCleaner {
 
     fun unregister(webView: WebView) {
         webViews.remove(webView)
+    }
+
+    internal fun registerSessionOwner(owner: WebSessionDataOwner) {
+        sessionOwners.add(owner)
+    }
+
+    internal fun unregisterSessionOwner(owner: WebSessionDataOwner) {
+        sessionOwners.remove(owner)
     }
 
     fun clearCache() {
@@ -29,10 +44,13 @@ object WebViewDataCleaner {
         if (onComplete != null) cleanupCallbacks.add(onComplete)
         if (sessionCleanupInProgress) return
         sessionCleanupInProgress = true
+        sessionOwners.toList().forEach { owner -> owner.onSessionDataClearing() }
+        SessionCertificateTrust.clear()
         clearCache()
         webViews.toList().forEach { webView ->
             webView.clearHistory()
             webView.clearFormData()
+            webView.clearSslPreferences()
         }
         WebStorage.getInstance().deleteAllData()
         val cookieManager = CookieManager.getInstance()

@@ -1,3 +1,4 @@
+// Server origin and WebView TLS endpoint binding for network/ServerOrigin.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
@@ -22,6 +23,16 @@ object ServerOrigin {
         val scheme = uri.scheme ?: return null
         val host = uri.host ?: return null
         return normalize(scheme, host, uri.port)
+    }
+
+    fun normalizeTlsEndpoint(url: String): String? {
+        val uri = try {
+            URI(url)
+        } catch (exception: Exception) {
+            return null
+        }
+        if (uri.scheme?.lowercase() !in setOf("https", "wss")) return null
+        return normalize("https", uri.host ?: return null, uri.port)
     }
 
     internal fun normalize(scheme: String, host: String, requestedPort: Int): String? {

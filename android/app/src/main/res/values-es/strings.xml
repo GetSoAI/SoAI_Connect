@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">No se pudo iniciar la cámara</string>
     <string name="qr_scan_unsupported">Este código QR requiere una versión más reciente de SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Este código QR pertenece a otro servidor SoAI</string>
+    <string name="page_error_address">No se encontró la dirección del servidor. Compruebe la dirección y la red y recargue.</string>
+    <string name="page_error_connection">Servidor inaccesible. Compruebe la red y que SoAI esté en ejecución y recargue.</string>
+    <string name="page_error_timeout">El servidor tardó demasiado en responder. Recargue para reintentar.</string>
+    <string name="page_error_certificate">Falló la conexión segura. Compruebe el certificado del servidor y recargue.</string>
+    <string name="page_error_authentication">Es necesario iniciar sesión. Recargue para acceder.</string>
+    <string name="page_error_access">Acceso denegado. Compruebe los permisos de su cuenta.</string>
+    <string name="page_error_missing">Página no encontrada. Compruebe la dirección del servidor.</string>
+    <string name="page_error_busy">El servidor está ocupado. Espere un momento y recargue.</string>
+    <string name="page_error_server">El servidor no pudo cargar esta página. Reinténtelo en breve.</string>
+    <string name="notifications_connecting">Conectando con SoAI</string>
+    <string name="notifications_reconnecting">Conexión perdida. Reconectando con SoAI.</string>
+    <string name="notifications_catching_up">Conectado. Recuperando avisos pendientes.</string>
+    <string name="notifications_catch_up_failed">Avisos en directo conectados; no se pudieron comprobar los avisos pendientes. Vuelva a abrir SoAI.</string>
+    <string name="notifications_certificate_required">Se requiere aprobar el certificado. Abra SoAI para revisarlo.</string>
+    <string name="notifications_sign_in_required">Es necesario iniciar sesión. Abra SoAI.</string>
+    <string name="notifications_access_denied">Acceso a notificaciones denegado. Compruebe los permisos de su cuenta.</string>
 </resources>

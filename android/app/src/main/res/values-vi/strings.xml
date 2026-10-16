@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Không thể khởi động camera</string>
     <string name="qr_scan_unsupported">Mã QR này cần phiên bản SoAI Connect mới hơn</string>
     <string name="qr_error_instance_mismatch">Mã QR này thuộc về một máy chủ SoAI khác</string>
+    <string name="page_error_address">Không tìm thấy địa chỉ máy chủ. Kiểm tra địa chỉ và mạng rồi tải lại.</string>
+    <string name="page_error_connection">Không thể truy cập máy chủ. Kiểm tra mạng và xem SoAI có đang chạy không rồi tải lại.</string>
+    <string name="page_error_timeout">Máy chủ phản hồi quá lâu. Tải lại để thử lại.</string>
+    <string name="page_error_certificate">Kết nối bảo mật không thành công. Kiểm tra chứng chỉ máy chủ rồi tải lại.</string>
+    <string name="page_error_authentication">Cần đăng nhập. Tải lại để đăng nhập.</string>
+    <string name="page_error_access">Truy cập bị từ chối. Kiểm tra quyền của tài khoản.</string>
+    <string name="page_error_missing">Không tìm thấy trang. Kiểm tra địa chỉ máy chủ.</string>
+    <string name="page_error_busy">Máy chủ đang bận. Chờ một lát rồi tải lại.</string>
+    <string name="page_error_server">Máy chủ không thể tải trang này. Hãy thử lại sau một lát.</string>
+    <string name="notifications_connecting">Đang kết nối với SoAI</string>
+    <string name="notifications_reconnecting">Mất kết nối. Đang kết nối lại với SoAI.</string>
+    <string name="notifications_catching_up">Đã kết nối. Đang khôi phục cảnh báo bị bỏ lỡ.</string>
+    <string name="notifications_catch_up_failed">Đã kết nối cảnh báo trực tiếp; không thể kiểm tra cảnh báo bị bỏ lỡ. Mở lại SoAI.</string>
+    <string name="notifications_certificate_required">Cần phê duyệt chứng chỉ. Mở SoAI để xem xét.</string>
+    <string name="notifications_sign_in_required">Cần đăng nhập. Mở SoAI.</string>
+    <string name="notifications_access_denied">Truy cập thông báo bị từ chối. Kiểm tra quyền của tài khoản.</string>
 </resources>

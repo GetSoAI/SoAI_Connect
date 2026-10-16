@@ -1,3 +1,4 @@
+// Cancellable HTTP response consumption and bounded network reads for network/HttpCallExecution.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
@@ -7,36 +8,41 @@ import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLPeerUnverifiedException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 
-internal suspend fun executeHttpCall(client: OkHttpClient, request: Request): Response {
-    return suspendCancellableCoroutine { cont ->
+internal suspend fun <ResponseValue> executeHttpCall(
+    client: OkHttpClient,
+    request: Request,
+    consumeResponse: (Response) -> ResponseValue
+): ResponseValue {
+    return suspendCancellableCoroutine { continuation ->
         val call = client.newCall(request)
-        cont.invokeOnCancellation { call.cancel() }
+        continuation.invokeOnCancellation { call.cancel() }
 
         call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                if (cont.isCancelled) return
-                cont.resumeWithException(e)
+            override fun onFailure(call: Call, failure: IOException) {
+                if (continuation.isCancelled) return
+                continuation.resumeWithException(failure)
             }
 
             override fun onResponse(call: Call, response: Response) {
-                cont.resume(response) { _, responseToClose, _ -> responseToClose.close() }
+                if (!continuation.isActive) {
+                    response.close()
+                    return
+                }
+                try {
+                    val result = response.use(consumeResponse)
+                    continuation.resume(result)
+                } catch (exception: Exception) {
+                    if (!continuation.isCancelled) continuation.resumeWithException(exception)
+                }
             }
         })
-    }
-}
-
-internal suspend fun executeHttpCallForSuccess(client: OkHttpClient, request: Request): Boolean {
-    return withContext(Dispatchers.IO) {
-        executeHttpCall(client, request).use { response -> response.isSuccessful }
     }
 }
 

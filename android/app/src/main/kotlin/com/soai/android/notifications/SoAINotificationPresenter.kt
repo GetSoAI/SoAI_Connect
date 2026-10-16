@@ -1,3 +1,4 @@
+// Android notification delivery and connection status presentation for notifications/SoAINotificationPresenter.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.notifications
@@ -39,11 +40,23 @@ object SoAINotificationPresenter {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun buildForegroundNotification(context: Context) =
+    fun buildForegroundNotification(context: Context, status: NotificationConnectionStatus) =
         NotificationCompat.Builder(context, SoAINotificationChannels.CONNECTION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(context.getString(R.string.android_notifications_foreground_title))
-            .setContentText(context.getString(R.string.android_notifications_foreground_text))
+            .setContentTitle(context.getString(
+                if (status == NotificationConnectionStatus.CONNECTED) R.string.android_notifications_foreground_title
+                else R.string.android_notifications_connection_channel_name
+            ))
+            .setContentText(context.getString(when (status) {
+                NotificationConnectionStatus.CONNECTING -> R.string.notifications_connecting
+                NotificationConnectionStatus.CONNECTED -> R.string.android_notifications_foreground_text
+                NotificationConnectionStatus.RECONNECTING -> R.string.notifications_reconnecting
+                NotificationConnectionStatus.CATCHING_UP -> R.string.notifications_catching_up
+                NotificationConnectionStatus.CATCH_UP_FAILED -> R.string.notifications_catch_up_failed
+                NotificationConnectionStatus.CERTIFICATE_APPROVAL_REQUIRED -> R.string.notifications_certificate_required
+                NotificationConnectionStatus.SIGN_IN_REQUIRED -> R.string.notifications_sign_in_required
+                NotificationConnectionStatus.ACCESS_DENIED -> R.string.notifications_access_denied
+            }))
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
             .setContentIntent(foregroundContentIntent(context))

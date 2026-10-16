@@ -1,9 +1,10 @@
+// Device identity updates and session revocation from settings for ui/SettingsSessionController.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.ui
 
-import android.webkit.CookieManager
 import android.util.Log
+import android.webkit.CookieManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import com.soai.android.web.AndroidDeviceIdentity
 import com.soai.android.web.AndroidDeviceIdentityCookie
 import com.soai.android.web.SoAISessionCookies
 import com.soai.android.web.WebViewDataCleaner
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
 internal class SettingsSessionController(
@@ -74,6 +76,8 @@ internal class SettingsSessionController(
                 } else {
                     showMessage(activity.getString(R.string.device_name_update_failed))
                 }
+            } catch (exception: CancellationException) {
+                throw exception
             } catch (exception: Exception) {
                 Log.w(TAG, "Device name update failed", exception)
                 showMessage(activity.getString(R.string.device_name_update_failed))
@@ -124,6 +128,8 @@ internal class SettingsSessionController(
                 } else {
                     showLogoutFailure()
                 }
+            } catch (exception: CancellationException) {
+                throw exception
             } catch (exception: Exception) {
                 Log.w(TAG, "Server logout failed", exception)
                 showLogoutFailure()

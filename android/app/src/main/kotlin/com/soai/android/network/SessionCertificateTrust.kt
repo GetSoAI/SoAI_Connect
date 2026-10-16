@@ -1,3 +1,4 @@
+// Origin-bound temporary certificate trust and effective trust selection for network/SessionCertificateTrust.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
@@ -37,5 +38,20 @@ object SessionCertificateTrust {
             return null
         }
         return fingerprint
+    }
+
+    @Synchronized
+    fun effectiveFingerprint(
+        serverOrigin: String?,
+        serverInstanceId: String?,
+        storedOrigin: String?,
+        storedInstanceId: String?,
+        storedFingerprint: String?
+    ): String? {
+        fingerprintFor(serverOrigin, serverInstanceId)?.let { return it }
+        if (!ServerCertificatePin.isApplicable(serverOrigin, serverInstanceId, storedOrigin, storedInstanceId)) {
+            return null
+        }
+        return storedFingerprint?.takeIf(ServerCertificatePin::isValidFingerprint)
     }
 }

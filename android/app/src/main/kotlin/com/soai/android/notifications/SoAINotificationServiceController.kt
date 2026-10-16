@@ -1,3 +1,4 @@
+// Notification listener lifecycle requests for notifications/SoAINotificationServiceController.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.notifications
@@ -39,7 +40,7 @@ object SoAINotificationServiceController {
         try {
             ContextCompat.startForegroundService(context, intent)
         } catch (exception: RuntimeException) {
-            Log.e(TAG, "Android rejected SoAI notification listener start", exception)
+            Log.w(TAG, "Android rejected SoAI notification listener start", exception)
         }
     }
 

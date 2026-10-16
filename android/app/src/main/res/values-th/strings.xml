@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">ไม่สามารถเริ่มกล้องได้</string>
     <string name="qr_scan_unsupported">คิวอาร์โค้ดนี้ต้องใช้ SoAI Connect เวอร์ชันที่ใหม่กว่า</string>
     <string name="qr_error_instance_mismatch">คิวอาร์โค้ดนี้เป็นของเซิร์ฟเวอร์ SoAI อื่น</string>
+    <string name="page_error_address">ไม่พบที่อยู่เซิร์ฟเวอร์ ตรวจสอบที่อยู่และเครือข่าย แล้วโหลดใหม่</string>
+    <string name="page_error_connection">เข้าถึงเซิร์ฟเวอร์ไม่ได้ ตรวจสอบเครือข่ายและว่า SoAI ทำงานอยู่ แล้วโหลดใหม่</string>
+    <string name="page_error_timeout">เซิร์ฟเวอร์ใช้เวลาตอบกลับนานเกินไป โหลดใหม่เพื่อลองอีกครั้ง</string>
+    <string name="page_error_certificate">การเชื่อมต่อที่ปลอดภัยล้มเหลว ตรวจสอบใบรับรองเซิร์ฟเวอร์ แล้วโหลดใหม่</string>
+    <string name="page_error_authentication">ต้องลงชื่อเข้าใช้ โหลดใหม่เพื่อลงชื่อเข้าใช้</string>
+    <string name="page_error_access">การเข้าถึงถูกปฏิเสธ ตรวจสอบสิทธิ์บัญชีของคุณ</string>
+    <string name="page_error_missing">ไม่พบหน้า ตรวจสอบที่อยู่เซิร์ฟเวอร์</string>
+    <string name="page_error_busy">เซิร์ฟเวอร์ไม่ว่าง รอสักครู่แล้วโหลดใหม่</string>
+    <string name="page_error_server">เซิร์ฟเวอร์โหลดหน้านี้ไม่ได้ ลองอีกครั้งในอีกสักครู่</string>
+    <string name="notifications_connecting">กำลังเชื่อมต่อกับ SoAI</string>
+    <string name="notifications_reconnecting">การเชื่อมต่อขาดหาย กำลังเชื่อมต่อกับ SoAI ใหม่</string>
+    <string name="notifications_catching_up">เชื่อมต่อแล้ว กำลังกู้คืนการแจ้งเตือนที่พลาดไป</string>
+    <string name="notifications_catch_up_failed">เชื่อมต่อการแจ้งเตือนสดแล้ว แต่ตรวจสอบการแจ้งเตือนที่พลาดไม่ได้ เปิด SoAI ใหม่</string>
+    <string name="notifications_certificate_required">ต้องอนุมัติใบรับรอง เปิด SoAI เพื่อตรวจสอบ</string>
+    <string name="notifications_sign_in_required">ต้องลงชื่อเข้าใช้ เปิด SoAI</string>
+    <string name="notifications_access_denied">การเข้าถึงการแจ้งเตือนถูกปฏิเสธ ตรวจสอบสิทธิ์บัญชีของคุณ</string>
 </resources>

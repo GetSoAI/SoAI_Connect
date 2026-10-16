@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Не вдалося запустити камеру</string>
     <string name="qr_scan_unsupported">Для цього QR-коду потрібна новіша версія SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Цей QR-код належить іншому серверу SoAI</string>
+    <string name="page_error_address">Адресу сервера не знайдено. Перевірте адресу й мережу та перезавантажте сторінку.</string>
+    <string name="page_error_connection">Сервер недоступний. Перевірте мережу й роботу SoAI та перезавантажте сторінку.</string>
+    <string name="page_error_timeout">Сервер не відповів вчасно. Перезавантажте сторінку, щоб повторити спробу.</string>
+    <string name="page_error_certificate">Захищене з’єднання не встановлено. Перевірте сертифікат сервера й перезавантажте сторінку.</string>
+    <string name="page_error_authentication">Потрібно ввійти. Перезавантажте сторінку для входу.</string>
+    <string name="page_error_access">Доступ заборонено. Перевірте дозволи облікового запису.</string>
+    <string name="page_error_missing">Сторінку не знайдено. Перевірте адресу сервера.</string>
+    <string name="page_error_busy">Сервер зайнятий. Трохи зачекайте й перезавантажте сторінку.</string>
+    <string name="page_error_server">Сервер не зміг завантажити сторінку. Спробуйте ще раз трохи пізніше.</string>
+    <string name="notifications_connecting">Підключення до SoAI</string>
+    <string name="notifications_reconnecting">З’єднання втрачено. Повторне підключення до SoAI.</string>
+    <string name="notifications_catching_up">Підключено. Отримання пропущених сповіщень.</string>
+    <string name="notifications_catch_up_failed">Поточні сповіщення підключено; перевірити пропущені не вдалося. Відкрийте SoAI знову.</string>
+    <string name="notifications_certificate_required">Потрібне схвалення сертифіката. Відкрийте SoAI для перевірки.</string>
+    <string name="notifications_sign_in_required">Потрібно ввійти. Відкрийте SoAI.</string>
+    <string name="notifications_access_denied">Доступ до сповіщень заборонено. Перевірте дозволи облікового запису.</string>
 </resources>

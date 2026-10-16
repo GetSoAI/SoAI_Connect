@@ -177,4 +177,20 @@
     <string name="qr_scan_camera_unavailable">دوربین راه‌اندازی نشد</string>
     <string name="qr_scan_unsupported">این کد QR به نسخهٔ جدیدتری از SoAI Connect نیاز دارد</string>
     <string name="qr_error_instance_mismatch">این کد QR متعلق به سرور SoAI دیگری است</string>
+    <string name="page_error_address">نشانی سرور پیدا نشد. نشانی و شبکه را بررسی و دوباره بارگذاری کنید.</string>
+    <string name="page_error_connection">سرور در دسترس نیست. شبکه و اجرای SoAI را بررسی و دوباره بارگذاری کنید.</string>
+    <string name="page_error_timeout">پاسخ سرور بیش از حد طول کشید. برای تلاش مجدد، دوباره بارگذاری کنید.</string>
+    <string name="page_error_certificate">اتصال امن ناموفق بود. گواهی سرور را بررسی و دوباره بارگذاری کنید.</string>
+    <string name="page_error_authentication">ورود لازم است. برای ورود دوباره بارگذاری کنید.</string>
+    <string name="page_error_access">دسترسی رد شد. مجوزهای حساب خود را بررسی کنید.</string>
+    <string name="page_error_missing">صفحه پیدا نشد. نشانی سرور را بررسی کنید.</string>
+    <string name="page_error_busy">سرور مشغول است. کمی صبر و دوباره بارگذاری کنید.</string>
+    <string name="page_error_server">سرور نتوانست این صفحه را بارگذاری کند. کمی بعد دوباره تلاش کنید.</string>
+    <string name="notifications_connecting">در حال اتصال به SoAI</string>
+    <string name="notifications_reconnecting">اتصال قطع شد. در حال اتصال مجدد به SoAI.</string>
+    <string name="notifications_catching_up">متصل شد. در حال بازیابی هشدارهای ازدست‌رفته.</string>
+    <string name="notifications_catch_up_failed">هشدارهای زنده متصل هستند؛ بررسی هشدارهای ازدست‌رفته ممکن نشد. SoAI را دوباره باز کنید.</string>
+    <string name="notifications_certificate_required">تأیید گواهی لازم است. برای بررسی، SoAI را باز کنید.</string>
+    <string name="notifications_sign_in_required">ورود لازم است. SoAI را باز کنید.</string>
+    <string name="notifications_access_denied">دسترسی به اعلان‌ها رد شد. مجوزهای حساب خود را بررسی کنید.</string>
 </resources>

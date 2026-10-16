@@ -15,7 +15,7 @@ class SoAISessionApi(
 ) {
     suspend fun logout(serverUrl: String): Boolean {
         val request = buildLogoutRequest(serverUrl, cookieManager.getCookie(serverUrl))
-        return executeHttpCallForSuccess(httpClient, request)
+        return executeHttpCall(httpClient, request) { response -> response.isSuccessful }
     }
 
     suspend fun renameCurrentDevice(
@@ -33,7 +33,7 @@ class SoAISessionApi(
             serverUrl,
             cookieManager.getCookie(serverUrl)
         ).patch(payload).build()
-        return executeHttpCallForSuccess(httpClient, request)
+        return executeHttpCall(httpClient, request) { response -> response.isSuccessful }
     }
 
     companion object {

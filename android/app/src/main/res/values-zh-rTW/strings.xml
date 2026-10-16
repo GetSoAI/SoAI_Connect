@@ -177,4 +177,20 @@
     <string name="qr_scan_camera_unavailable">無法啟動相機</string>
     <string name="qr_scan_unsupported">此 QR 碼需要較新版本的 SoAI Connect</string>
     <string name="qr_error_instance_mismatch">此 QR 碼屬於另一部 SoAI 伺服器</string>
+    <string name="page_error_address">找不到伺服器位址。請檢查位址和網路，然後重新載入。</string>
+    <string name="page_error_connection">無法連接伺服器。請檢查網路及 SoAI 是否正在執行，然後重新載入。</string>
+    <string name="page_error_timeout">伺服器回應逾時。請重新載入以重試。</string>
+    <string name="page_error_certificate">安全連線失敗。請檢查伺服器憑證，然後重新載入。</string>
+    <string name="page_error_authentication">需要登入。請重新載入以登入。</string>
+    <string name="page_error_access">存取遭到拒絕。請檢查帳戶權限。</string>
+    <string name="page_error_missing">找不到頁面。請檢查伺服器位址。</string>
+    <string name="page_error_busy">伺服器忙碌。請稍候再重新載入。</string>
+    <string name="page_error_server">伺服器無法載入此頁面。請稍後再試。</string>
+    <string name="notifications_connecting">正在連線至 SoAI</string>
+    <string name="notifications_reconnecting">連線已中斷。正在重新連線至 SoAI。</string>
+    <string name="notifications_catching_up">已連線。正在恢復錯過的提醒。</string>
+    <string name="notifications_catch_up_failed">即時提醒已連線，但無法檢查錯過的提醒。請重新開啟 SoAI。</string>
+    <string name="notifications_certificate_required">需要核准憑證。請開啟 SoAI 進行檢查。</string>
+    <string name="notifications_sign_in_required">需要登入。請開啟 SoAI。</string>
+    <string name="notifications_access_denied">通知存取遭到拒絕。請檢查帳戶權限。</string>
 </resources>

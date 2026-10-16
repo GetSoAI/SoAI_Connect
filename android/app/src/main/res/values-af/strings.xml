@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Die kamera kon nie begin word nie</string>
     <string name="qr_scan_unsupported">Hierdie QR-kode benodig \'n nuwer weergawe van SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Hierdie QR-kode behoort aan \'n ander SoAI-bediener</string>
+    <string name="page_error_address">Bedieneradres nie gevind nie. Kontroleer die adres en jou netwerk, en herlaai.</string>
+    <string name="page_error_connection">Bediener onbereikbaar. Kontroleer jou netwerk en of SoAI loop, en herlaai.</string>
+    <string name="page_error_timeout">Die bediener het te lank geneem om te antwoord. Herlaai om weer te probeer.</string>
+    <string name="page_error_certificate">Veilige verbinding het misluk. Kontroleer die bedienersertifikaat en herlaai.</string>
+    <string name="page_error_authentication">Aanmelding vereis. Herlaai om aan te meld.</string>
+    <string name="page_error_access">Toegang geweier. Kontroleer jou rekeningtoestemmings.</string>
+    <string name="page_error_missing">Bladsy nie gevind nie. Kontroleer die bedieneradres.</string>
+    <string name="page_error_busy">Die bediener is besig. Wag kortliks en herlaai.</string>
+    <string name="page_error_server">Die bediener kon nie hierdie bladsy laai nie. Probeer binnekort weer.</string>
+    <string name="notifications_connecting">Verbind tans met SoAI</string>
+    <string name="notifications_reconnecting">Verbinding verloor. Verbind weer met SoAI.</string>
+    <string name="notifications_catching_up">Verbind. Herwin gemiste kennisgewings.</string>
+    <string name="notifications_catch_up_failed">Regstreekse kennisgewings is verbind; gemiste kennisgewings kon nie nagegaan word nie. Heropen SoAI.</string>
+    <string name="notifications_certificate_required">Sertifikaatgoedkeuring vereis. Maak SoAI oop om dit na te gaan.</string>
+    <string name="notifications_sign_in_required">Aanmelding vereis. Maak SoAI oop.</string>
+    <string name="notifications_access_denied">Toegang tot kennisgewings geweier. Kontroleer jou rekeningtoestemmings.</string>
 </resources>

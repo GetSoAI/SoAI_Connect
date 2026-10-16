@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Camera nu a putut fi pornită</string>
     <string name="qr_scan_unsupported">Acest cod QR necesită o versiune mai nouă de SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Acest cod QR aparține altui server SoAI</string>
+    <string name="page_error_address">Adresa serverului nu a fost găsită. Verificați adresa și rețeaua, apoi reîncărcați.</string>
+    <string name="page_error_connection">Server inaccesibil. Verificați rețeaua și dacă SoAI rulează, apoi reîncărcați.</string>
+    <string name="page_error_timeout">Serverul a răspuns prea târziu. Reîncărcați pentru a încerca din nou.</string>
+    <string name="page_error_certificate">Conexiunea securizată a eșuat. Verificați certificatul serverului, apoi reîncărcați.</string>
+    <string name="page_error_authentication">Este necesară autentificarea. Reîncărcați pentru a vă autentifica.</string>
+    <string name="page_error_access">Acces refuzat. Verificați permisiunile contului.</string>
+    <string name="page_error_missing">Pagina nu a fost găsită. Verificați adresa serverului.</string>
+    <string name="page_error_busy">Serverul este ocupat. Așteptați puțin, apoi reîncărcați.</string>
+    <string name="page_error_server">Serverul nu a putut încărca această pagină. Încercați din nou în curând.</string>
+    <string name="notifications_connecting">Conectare la SoAI</string>
+    <string name="notifications_reconnecting">Conexiune pierdută. Reconectare la SoAI.</string>
+    <string name="notifications_catching_up">Conectat. Recuperare alerte ratate.</string>
+    <string name="notifications_catch_up_failed">Alertele în direct sunt conectate; alertele ratate nu au putut fi verificate. Redeschideți SoAI.</string>
+    <string name="notifications_certificate_required">Este necesară aprobarea certificatului. Deschideți SoAI pentru verificare.</string>
+    <string name="notifications_sign_in_required">Este necesară autentificarea. Deschideți SoAI.</string>
+    <string name="notifications_access_denied">Acces la notificări refuzat. Verificați permisiunile contului.</string>
 </resources>

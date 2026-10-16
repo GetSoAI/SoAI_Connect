@@ -1,13 +1,13 @@
+// Fingerprint validation and exact approved-certificate trust for network/ServerCertificatePin.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
 
 import android.annotation.SuppressLint
-import java.security.KeyStore
 import java.security.MessageDigest
+import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import javax.net.ssl.SSLPeerUnverifiedException
-import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
 object ServerCertificatePin {
@@ -32,7 +32,7 @@ object ServerCertificatePin {
         if (fingerprint.isNullOrBlank()) return false
         val normalized = normalizeFingerprint(fingerprint)
         return normalized.length == SHA_256_HEX_LENGTH && normalized.all { character ->
-            character.isDigit() || character in 'A'..'F'
+            character in '0'..'9' || character in 'A'..'F'
         }
     }
 
@@ -61,9 +61,7 @@ class PinnedFingerprintTrustManager(pinnedFingerprint: String) : X509TrustManage
     private val normalizedPin = ServerCertificatePin.normalizeFingerprint(pinnedFingerprint).also {
         require(ServerCertificatePin.isValidFingerprint(it)) { "Invalid SHA-256 certificate fingerprint" }
     }
-    private val systemTrustManager = platformDefaultTrustManager()
-
-    override fun getAcceptedIssuers(): Array<X509Certificate> = systemTrustManager.acceptedIssuers
+    override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
 
     override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
         throw SSLPeerUnverifiedException("Client certificates are not supported")
@@ -75,16 +73,10 @@ class PinnedFingerprintTrustManager(pinnedFingerprint: String) : X509TrustManage
         if (ServerCertificatePin.matchesFingerprint(ServerCertificatePin.sha256Hex(leaf), normalizedPin)) {
             return
         }
-        systemTrustManager.checkServerTrusted(chain, authType)
+        throw CertificateException("Server certificate does not match the approved fingerprint")
     }
 
     fun matchesFingerprint(certificate: X509Certificate): Boolean {
         return ServerCertificatePin.matchesFingerprint(ServerCertificatePin.sha256Hex(certificate), normalizedPin)
-    }
-
-    private fun platformDefaultTrustManager(): X509TrustManager {
-        val factory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-        factory.init(null as KeyStore?)
-        return factory.trustManagers.filterIsInstance<X509TrustManager>().first()
     }
 }

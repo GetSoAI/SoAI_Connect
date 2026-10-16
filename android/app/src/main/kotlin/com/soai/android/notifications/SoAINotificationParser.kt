@@ -1,8 +1,9 @@
+// Notification records and WebSocket event parsing for notifications/SoAINotificationParser.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.notifications
 
-import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 object SoAINotificationParser {
@@ -15,11 +16,12 @@ object SoAINotificationParser {
 
     fun parseListResponse(body: String): List<SoAINotificationRecord> {
         val root = JSONObject(body)
-        val array = root.optJSONArray("notifications") ?: JSONArray()
+        val array = root.getJSONArray("notifications")
         val records = mutableListOf<SoAINotificationRecord>()
         for (index in 0 until array.length()) {
-            val item = array.optJSONObject(index) ?: continue
-            parseRecord(item)?.let { records.add(it) }
+            val item = array.getJSONObject(index)
+            val record = parseRecord(item) ?: throw JSONException("Invalid notification record at index $index")
+            records.add(record)
         }
         return records
     }

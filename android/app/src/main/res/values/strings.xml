@@ -177,4 +177,20 @@
     <string name="qr_scan_camera_unavailable">The camera could not be started</string>
     <string name="qr_scan_unsupported">This QR code needs a newer version of SoAI Connect</string>
     <string name="qr_error_instance_mismatch">This QR code belongs to a different SoAI server</string>
+    <string name="page_error_address">Server address not found. Check the address and your network, then reload.</string>
+    <string name="page_error_connection">Server unreachable. Check your network and whether SoAI is running, then reload.</string>
+    <string name="page_error_timeout">The server took too long to respond. Reload to try again.</string>
+    <string name="page_error_certificate">Secure connection failed. Check the server certificate, then reload.</string>
+    <string name="page_error_authentication">Sign-in required. Reload to sign in.</string>
+    <string name="page_error_access">Access denied. Check your account permissions.</string>
+    <string name="page_error_missing">Page not found. Check the server address.</string>
+    <string name="page_error_busy">The server is busy. Wait briefly, then reload.</string>
+    <string name="page_error_server">The server could not load this page. Try again shortly.</string>
+    <string name="notifications_connecting">Connecting to SoAI</string>
+    <string name="notifications_reconnecting">Connection lost. Reconnecting to SoAI.</string>
+    <string name="notifications_catching_up">Connected. Recovering missed alerts.</string>
+    <string name="notifications_catch_up_failed">Live alerts connected; missed alerts could not be checked. Reopen SoAI.</string>
+    <string name="notifications_certificate_required">Certificate approval required. Open SoAI to review it.</string>
+    <string name="notifications_sign_in_required">Sign-in required. Open SoAI.</string>
+    <string name="notifications_access_denied">Notification access denied. Check your account permissions.</string>
 </resources>

@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Nie udało się uruchomić aparatu</string>
     <string name="qr_scan_unsupported">Ten kod QR wymaga nowszej wersji SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Ten kod QR należy do innego serwera SoAI</string>
+    <string name="page_error_address">Nie znaleziono adresu serwera. Sprawdź adres i sieć, a następnie odśwież.</string>
+    <string name="page_error_connection">Serwer jest nieosiągalny. Sprawdź sieć i czy SoAI działa, a następnie odśwież.</string>
+    <string name="page_error_timeout">Serwer nie odpowiedział na czas. Odśwież, aby spróbować ponownie.</string>
+    <string name="page_error_certificate">Bezpieczne połączenie nie powiodło się. Sprawdź certyfikat serwera i odśwież.</string>
+    <string name="page_error_authentication">Wymagane logowanie. Odśwież, aby się zalogować.</string>
+    <string name="page_error_access">Odmowa dostępu. Sprawdź uprawnienia konta.</string>
+    <string name="page_error_missing">Nie znaleziono strony. Sprawdź adres serwera.</string>
+    <string name="page_error_busy">Serwer jest zajęty. Poczekaj chwilę i odśwież.</string>
+    <string name="page_error_server">Serwer nie mógł załadować tej strony. Spróbuj ponownie za chwilę.</string>
+    <string name="notifications_connecting">Łączenie z SoAI</string>
+    <string name="notifications_reconnecting">Utracono połączenie. Ponowne łączenie z SoAI.</string>
+    <string name="notifications_catching_up">Połączono. Pobieranie pominiętych alertów.</string>
+    <string name="notifications_catch_up_failed">Alerty na żywo połączone; nie udało się sprawdzić pominiętych alertów. Otwórz SoAI ponownie.</string>
+    <string name="notifications_certificate_required">Wymagane zatwierdzenie certyfikatu. Otwórz SoAI, aby go sprawdzić.</string>
+    <string name="notifications_sign_in_required">Wymagane logowanie. Otwórz SoAI.</string>
+    <string name="notifications_access_denied">Odmowa dostępu do powiadomień. Sprawdź uprawnienia konta.</string>
 </resources>

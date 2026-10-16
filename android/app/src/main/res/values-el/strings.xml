@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Δεν ήταν δυνατή η εκκίνηση της κάμερας</string>
     <string name="qr_scan_unsupported">Αυτός ο κωδικός QR απαιτεί νεότερη έκδοση του SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Αυτός ο κωδικός QR ανήκει σε διαφορετικό διακομιστή SoAI</string>
+    <string name="page_error_address">Η διεύθυνση διακομιστή δεν βρέθηκε. Ελέγξτε τη διεύθυνση και το δίκτυο και ανανεώστε.</string>
+    <string name="page_error_connection">Ο διακομιστής δεν είναι προσβάσιμος. Ελέγξτε το δίκτυο και αν εκτελείται το SoAI και ανανεώστε.</string>
+    <string name="page_error_timeout">Ο διακομιστής άργησε να απαντήσει. Ανανεώστε για νέα προσπάθεια.</string>
+    <string name="page_error_certificate">Η ασφαλής σύνδεση απέτυχε. Ελέγξτε το πιστοποιητικό διακομιστή και ανανεώστε.</string>
+    <string name="page_error_authentication">Απαιτείται σύνδεση στον λογαριασμό. Ανανεώστε για να συνδεθείτε.</string>
+    <string name="page_error_access">Δεν επιτρέπεται η πρόσβαση. Ελέγξτε τα δικαιώματα του λογαριασμού σας.</string>
+    <string name="page_error_missing">Η σελίδα δεν βρέθηκε. Ελέγξτε τη διεύθυνση διακομιστή.</string>
+    <string name="page_error_busy">Ο διακομιστής είναι απασχολημένος. Περιμένετε λίγο και ανανεώστε.</string>
+    <string name="page_error_server">Ο διακομιστής δεν μπόρεσε να φορτώσει τη σελίδα. Δοκιμάστε ξανά σε λίγο.</string>
+    <string name="notifications_connecting">Σύνδεση με το SoAI</string>
+    <string name="notifications_reconnecting">Η σύνδεση χάθηκε. Επανασύνδεση με το SoAI.</string>
+    <string name="notifications_catching_up">Συνδέθηκε. Ανάκτηση χαμένων ειδοποιήσεων.</string>
+    <string name="notifications_catch_up_failed">Οι ζωντανές ειδοποιήσεις συνδέθηκαν· οι χαμένες δεν ελέγχθηκαν. Ανοίξτε ξανά το SoAI.</string>
+    <string name="notifications_certificate_required">Απαιτείται έγκριση πιστοποιητικού. Ανοίξτε το SoAI για έλεγχο.</string>
+    <string name="notifications_sign_in_required">Απαιτείται σύνδεση στον λογαριασμό. Ανοίξτε το SoAI.</string>
+    <string name="notifications_access_denied">Δεν επιτρέπεται η πρόσβαση στις ειδοποιήσεις. Ελέγξτε τα δικαιώματα λογαριασμού.</string>
 </resources>

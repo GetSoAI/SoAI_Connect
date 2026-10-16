@@ -1,3 +1,4 @@
+// Cancellable acknowledgement of opened Android notifications for notifications/SoAINotificationReadMarker.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.notifications
@@ -7,8 +8,8 @@ import android.util.Log
 import android.webkit.CookieManager
 import com.soai.android.data.AppPreferences
 import com.soai.android.network.HttpClientFactory
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object SoAINotificationReadMarker {
@@ -24,7 +25,7 @@ object SoAINotificationReadMarker {
             try {
                 val client = SoAINotificationApiClient(
                     httpClient,
-                    CookieManager.getInstance()
+                    CookieManager.getInstance()::getCookie
                 )
                 if (!client.markRead(serverUrl, notificationId)) {
                     Log.w(TAG, "Backend rejected notification mark-read request")

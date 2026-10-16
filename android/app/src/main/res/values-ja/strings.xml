@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">カメラを起動できませんでした</string>
     <string name="qr_scan_unsupported">この QR コードには新しいバージョンの SoAI Connect が必要です</string>
     <string name="qr_error_instance_mismatch">この QR コードは別の SoAI サーバーのものです</string>
+    <string name="page_error_address">サーバーのアドレスが見つかりません。アドレスとネットワークを確認して再読み込みしてください。</string>
+    <string name="page_error_connection">サーバーに接続できません。ネットワークとSoAIの起動状態を確認して再読み込みしてください。</string>
+    <string name="page_error_timeout">サーバーの応答がタイムアウトしました。再読み込みしてやり直してください。</string>
+    <string name="page_error_certificate">安全な接続に失敗しました。サーバー証明書を確認して再読み込みしてください。</string>
+    <string name="page_error_authentication">ログインが必要です。再読み込みしてログインしてください。</string>
+    <string name="page_error_access">アクセスが拒否されました。アカウントの権限を確認してください。</string>
+    <string name="page_error_missing">ページが見つかりません。サーバーのアドレスを確認してください。</string>
+    <string name="page_error_busy">サーバーが混み合っています。少し待ってから再読み込みしてください。</string>
+    <string name="page_error_server">サーバーがページを読み込めませんでした。しばらくしてからお試しください。</string>
+    <string name="notifications_connecting">SoAIに接続中</string>
+    <string name="notifications_reconnecting">接続が切れました。SoAIに再接続中。</string>
+    <string name="notifications_catching_up">接続済み。未受信の通知を取得中。</string>
+    <string name="notifications_catch_up_failed">リアルタイム通知は接続済みですが、未受信の通知を確認できませんでした。SoAIを開き直してください。</string>
+    <string name="notifications_certificate_required">証明書の承認が必要です。SoAIを開いて確認してください。</string>
+    <string name="notifications_sign_in_required">ログインが必要です。SoAIを開いてください。</string>
+    <string name="notifications_access_denied">通知へのアクセスが拒否されました。アカウントの権限を確認してください。</string>
 </resources>

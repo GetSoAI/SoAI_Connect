@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Fotoaparát se nepodařilo spustit</string>
     <string name="qr_scan_unsupported">Tento QR kód vyžaduje novější verzi SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Tento QR kód patří k jinému serveru SoAI</string>
+    <string name="page_error_address">Adresa serveru nebyla nalezena. Zkontrolujte adresu a síť a obnovte stránku.</string>
+    <string name="page_error_connection">Server je nedostupný. Zkontrolujte síť a zda SoAI běží, pak obnovte stránku.</string>
+    <string name="page_error_timeout">Server neodpověděl včas. Obnovte stránku a zkuste to znovu.</string>
+    <string name="page_error_certificate">Zabezpečené připojení selhalo. Zkontrolujte certifikát serveru a obnovte stránku.</string>
+    <string name="page_error_authentication">Je vyžadováno přihlášení. Obnovte stránku a přihlaste se.</string>
+    <string name="page_error_access">Přístup odepřen. Zkontrolujte oprávnění účtu.</string>
+    <string name="page_error_missing">Stránka nebyla nalezena. Zkontrolujte adresu serveru.</string>
+    <string name="page_error_busy">Server je zaneprázdněn. Chvíli počkejte a obnovte stránku.</string>
+    <string name="page_error_server">Server nemohl načíst tuto stránku. Zkuste to za chvíli.</string>
+    <string name="notifications_connecting">Připojování k SoAI</string>
+    <string name="notifications_reconnecting">Připojení ztraceno. Opětovné připojování k SoAI.</string>
+    <string name="notifications_catching_up">Připojeno. Obnovování zmeškaných upozornění.</string>
+    <string name="notifications_catch_up_failed">Živá upozornění jsou připojena; zmeškaná se nepodařilo zkontrolovat. Znovu otevřete SoAI.</string>
+    <string name="notifications_certificate_required">Je vyžadováno schválení certifikátu. Otevřete SoAI a zkontrolujte jej.</string>
+    <string name="notifications_sign_in_required">Je vyžadováno přihlášení. Otevřete SoAI.</string>
+    <string name="notifications_access_denied">Přístup k upozorněním odepřen. Zkontrolujte oprávnění účtu.</string>
 </resources>

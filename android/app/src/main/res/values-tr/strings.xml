@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Kamera başlatılamadı</string>
     <string name="qr_scan_unsupported">Bu QR kodu için SoAI Connect\'in daha yeni bir sürümü gerekir</string>
     <string name="qr_error_instance_mismatch">Bu QR kodu farklı bir SoAI sunucusuna ait</string>
+    <string name="page_error_address">Sunucu adresi bulunamadı. Adresi ve ağınızı kontrol edip yeniden yükleyin.</string>
+    <string name="page_error_connection">Sunucuya ulaşılamıyor. Ağınızı ve SoAI uygulamasının çalıştığını kontrol edip yeniden yükleyin.</string>
+    <string name="page_error_timeout">Sunucu zamanında yanıt vermedi. Yeniden denemek için sayfayı yükleyin.</string>
+    <string name="page_error_certificate">Güvenli bağlantı başarısız oldu. Sunucu sertifikasını kontrol edip yeniden yükleyin.</string>
+    <string name="page_error_authentication">Oturum açmanız gerekiyor. Oturum açmak için yeniden yükleyin.</string>
+    <string name="page_error_access">Erişim reddedildi. Hesap izinlerinizi kontrol edin.</string>
+    <string name="page_error_missing">Sayfa bulunamadı. Sunucu adresini kontrol edin.</string>
+    <string name="page_error_busy">Sunucu meşgul. Kısa bir süre bekleyip yeniden yükleyin.</string>
+    <string name="page_error_server">Sunucu bu sayfayı yükleyemedi. Kısa bir süre sonra tekrar deneyin.</string>
+    <string name="notifications_connecting">SoAI uygulamasına bağlanılıyor</string>
+    <string name="notifications_reconnecting">Bağlantı kesildi. SoAI uygulamasına yeniden bağlanılıyor.</string>
+    <string name="notifications_catching_up">Bağlandı. Kaçırılan uyarılar alınıyor.</string>
+    <string name="notifications_catch_up_failed">Canlı uyarılar bağlı; kaçırılan uyarılar kontrol edilemedi. SoAI uygulamasını yeniden açın.</string>
+    <string name="notifications_certificate_required">Sertifika onayı gerekiyor. İncelemek için SoAI uygulamasını açın.</string>
+    <string name="notifications_sign_in_required">Oturum açmanız gerekiyor. SoAI uygulamasını açın.</string>
+    <string name="notifications_access_denied">Bildirim erişimi reddedildi. Hesap izinlerinizi kontrol edin.</string>
 </resources>

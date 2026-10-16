@@ -177,4 +177,20 @@
     <string name="qr_scan_camera_unavailable">Impossibile avviare la fotocamera</string>
     <string name="qr_scan_unsupported">Questo codice QR richiede una versione più recente di SoAI Connect</string>
     <string name="qr_error_instance_mismatch">Questo codice QR appartiene a un altro server SoAI</string>
+    <string name="page_error_address">Indirizzo del server non trovato. Controlla indirizzo e rete, poi ricarica.</string>
+    <string name="page_error_connection">Server non raggiungibile. Controlla la rete e che SoAI sia in esecuzione, poi ricarica.</string>
+    <string name="page_error_timeout">Il server ha impiegato troppo tempo a rispondere. Ricarica per riprovare.</string>
+    <string name="page_error_certificate">Connessione sicura non riuscita. Controlla il certificato del server, poi ricarica.</string>
+    <string name="page_error_authentication">È necessario accedere. Ricarica per effettuare l’accesso.</string>
+    <string name="page_error_access">Accesso negato. Controlla i permessi del tuo account.</string>
+    <string name="page_error_missing">Pagina non trovata. Controlla l’indirizzo del server.</string>
+    <string name="page_error_busy">Il server è occupato. Attendi un momento, poi ricarica.</string>
+    <string name="page_error_server">Il server non ha potuto caricare questa pagina. Riprova tra poco.</string>
+    <string name="notifications_connecting">Connessione a SoAI</string>
+    <string name="notifications_reconnecting">Connessione persa. Riconnessione a SoAI.</string>
+    <string name="notifications_catching_up">Connesso. Recupero degli avvisi persi.</string>
+    <string name="notifications_catch_up_failed">Avvisi in diretta connessi; impossibile verificare gli avvisi persi. Riapri SoAI.</string>
+    <string name="notifications_certificate_required">È richiesta l’approvazione del certificato. Apri SoAI per verificarlo.</string>
+    <string name="notifications_sign_in_required">È necessario accedere. Apri SoAI.</string>
+    <string name="notifications_access_denied">Accesso alle notifiche negato. Controlla i permessi del tuo account.</string>
 </resources>

@@ -59,4 +59,21 @@
     <!-- QR Scanner Colors -->
     <color name="qr_scan_scrim">#80000000</color>
     <color name="qr_scan_hint_background">#99000000</color>
+
+    <color name="soai_spinner_track">#2471787E</color>
+    <color name="soai_spinner_active_01">#0300658E</color>
+    <color name="soai_spinner_active_02">#0500658E</color>
+    <color name="soai_spinner_active_04">#0A00658E</color>
+    <color name="soai_spinner_active_07">#1200658E</color>
+    <color name="soai_spinner_active_11">#1C00658E</color>
+    <color name="soai_spinner_active_17">#2B00658E</color>
+    <color name="soai_spinner_active_24">#3D00658E</color>
+    <color name="soai_spinner_active_33">#5400658E</color>
+    <color name="soai_spinner_active_44">#7000658E</color>
+    <color name="soai_spinner_active_57">#9100658E</color>
+    <color name="soai_spinner_active_70">#B300658E</color>
+    <color name="soai_spinner_active_82">#D100658E</color>
+    <color name="soai_spinner_active_91">#E800658E</color>
+    <color name="soai_spinner_active_97">#F700658E</color>
+    <color name="soai_spinner_active">#00658E</color>
 </resources>

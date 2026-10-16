@@ -1,5 +1,21 @@
 # SoAI Connect Release Notes
 
+## 1.0.4
+
+SoAI Connect 1.0.4 improves certificate handling, notification recovery and connection errors.
+
+### Improvements
+
+- Background notifications show connection and recovery status, reconnect promptly after network changes, and recover missed alerts without restoring dismissed notifications.
+- Page-load errors explain the cause and how to retry. Connection checks use the updated loading indicator.
+- Updated AndroidX Core to 1.19.1 and Gradle to 9.8.1.
+
+### Fixes
+
+- "Trust once" applies consistently to the WebUI, notifications and account actions. Saved certificates require approval when replaced, and rejecting a certificate no longer causes repeated prompts.
+- Incognito Mode clears temporary certificate trust and pending page loads when the session ends. Private HTTPS connections retain live WebUI updates after approval.
+- Cancelling an account action when leaving settings no longer shows a failure message.
+
 ## 1.0.3
 
 SoAI Connect 1.0.3 adds QR setup for SoAI servers.

@@ -11,10 +11,10 @@
 SoAI Connect is the official Android app for [SoAI](https://soai.to), the Smart Orchestrator for Artificial Intelligence.
 
 <p align="center">
-<a href="https://github.com/GetSoAI/SoAI_Connect"><img src="https://img.shields.io/github/v/release/GetSoAI/SoAI_Connect?label=release&amp;color=153e75&amp;labelColor=153e75&amp;style=for-the-badge" alt="Latest published SoAI Connect release" height="28"></a>
-<img src="media/readme/supported-platforms.svg" alt="Android 8.0 or newer" height="28">
-<img src="media/readme/supported-languages.svg" alt="25 UI languages" height="28">
-<a href="https://github.com/GetSoAI/SoAI_Connect"><img src="media/readme/mit-license.svg" alt="MIT License in LICENSE.md" height="28"></a>
+<a href="https://github.com/GetSoAI/SoAI_Connect"><img src="https://img.shields.io/github/v/release/GetSoAI/SoAI_Connect?label=RELEASE&amp;color=153e75&amp;labelColor=153e75&amp;style=flat" alt="Latest published SoAI Connect release" height="20"></a>
+<img src="media/readme/supported-platforms.svg" alt="Android 8.0 or newer" height="20">
+<img src="media/readme/supported-languages.svg" alt="25 UI languages" height="20">
+<a href="LICENSE.md"><img src="media/readme/mit-license.svg" alt="MIT License in LICENSE.md" height="20"></a>
 </p>
 
 <p align="center">

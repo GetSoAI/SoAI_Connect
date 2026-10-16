@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">카메라를 시작할 수 없습니다</string>
     <string name="qr_scan_unsupported">이 QR 코드를 사용하려면 최신 버전의 SoAI Connect가 필요합니다</string>
     <string name="qr_error_instance_mismatch">이 QR 코드는 다른 SoAI 서버의 코드입니다</string>
+    <string name="page_error_address">서버 주소를 찾을 수 없습니다. 주소와 네트워크를 확인한 후 새로고침하세요.</string>
+    <string name="page_error_connection">서버에 연결할 수 없습니다. 네트워크와 SoAI 실행 여부를 확인한 후 새로고침하세요.</string>
+    <string name="page_error_timeout">서버 응답 시간이 초과되었습니다. 새로고침하여 다시 시도하세요.</string>
+    <string name="page_error_certificate">보안 연결에 실패했습니다. 서버 인증서를 확인한 후 새로고침하세요.</string>
+    <string name="page_error_authentication">로그인이 필요합니다. 새로고침하여 로그인하세요.</string>
+    <string name="page_error_access">접근이 거부되었습니다. 계정 권한을 확인하세요.</string>
+    <string name="page_error_missing">페이지를 찾을 수 없습니다. 서버 주소를 확인하세요.</string>
+    <string name="page_error_busy">서버가 혼잡합니다. 잠시 기다린 후 새로고침하세요.</string>
+    <string name="page_error_server">서버가 이 페이지를 불러오지 못했습니다. 잠시 후 다시 시도하세요.</string>
+    <string name="notifications_connecting">SoAI에 연결 중</string>
+    <string name="notifications_reconnecting">연결이 끊겼습니다. SoAI에 다시 연결 중입니다.</string>
+    <string name="notifications_catching_up">연결됨. 놓친 알림을 복구하는 중입니다.</string>
+    <string name="notifications_catch_up_failed">실시간 알림은 연결되었지만 놓친 알림을 확인하지 못했습니다. SoAI를 다시 여세요.</string>
+    <string name="notifications_certificate_required">인증서 승인이 필요합니다. SoAI를 열어 확인하세요.</string>
+    <string name="notifications_sign_in_required">로그인이 필요합니다. SoAI를 여세요.</string>
+    <string name="notifications_access_denied">알림 접근이 거부되었습니다. 계정 권한을 확인하세요.</string>
 </resources>

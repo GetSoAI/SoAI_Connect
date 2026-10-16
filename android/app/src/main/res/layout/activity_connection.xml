@@ -91,6 +91,7 @@
                 android:id="@+id/progressBar"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:indeterminateDrawable="@drawable/soai_comet_spinner"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/actionButton"
                 app:layout_constraintEnd_toEndOf="@id/actionButton"

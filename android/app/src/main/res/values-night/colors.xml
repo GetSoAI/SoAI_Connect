@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="soai_spinner_track">#248A9297</color>
+    <color name="soai_spinner_active_01">#038ACEFF</color>
+    <color name="soai_spinner_active_02">#058ACEFF</color>
+    <color name="soai_spinner_active_04">#0A8ACEFF</color>
+    <color name="soai_spinner_active_07">#128ACEFF</color>
+    <color name="soai_spinner_active_11">#1C8ACEFF</color>
+    <color name="soai_spinner_active_17">#2B8ACEFF</color>
+    <color name="soai_spinner_active_24">#3D8ACEFF</color>
+    <color name="soai_spinner_active_33">#548ACEFF</color>
+    <color name="soai_spinner_active_44">#708ACEFF</color>
+    <color name="soai_spinner_active_57">#918ACEFF</color>
+    <color name="soai_spinner_active_70">#B38ACEFF</color>
+    <color name="soai_spinner_active_82">#D18ACEFF</color>
+    <color name="soai_spinner_active_91">#E88ACEFF</color>
+    <color name="soai_spinner_active_97">#F78ACEFF</color>
+    <color name="soai_spinner_active">#8ACEFF</color>
+</resources>

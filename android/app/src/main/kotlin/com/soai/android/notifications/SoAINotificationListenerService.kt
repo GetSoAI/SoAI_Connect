@@ -1,54 +1,49 @@
+// Notification service and reconnect supervision for notifications/SoAINotificationListenerService.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.notifications
 
 import android.app.Service
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Build
 import android.os.IBinder
-import android.os.SystemClock
 import android.util.Log
 import android.webkit.CookieManager
 import androidx.core.app.ServiceCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import com.soai.android.SoAIApplication
 import com.soai.android.data.AppPreferences
 import com.soai.android.network.HttpClientFactory
+import com.soai.android.network.HttpClientRelease
 import com.soai.android.web.SoAISessionCookies
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withTimeoutOrNull
-import java.util.concurrent.atomic.AtomicLong
-import okhttp3.Response
-import okhttp3.WebSocket
-import okhttp3.WebSocketListener
-import org.json.JSONObject
 
 class SoAINotificationListenerService : Service() {
-
-    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    private val networkChanges = Channel<Unit>(Channel.CONFLATED)
     private lateinit var prefs: AppPreferences
     private lateinit var seenStore: SoAINotificationSeenStore
-
-    @Volatile
     private var listenerJob: Job? = null
-
-    @Volatile
-    private var activeCoordinator: SoAINotificationStreamCoordinator? = null
-
-    @Volatile
     private var activeServerUrl: String? = null
+    private var networkCallback: ConnectivityManager.NetworkCallback? = null
 
+    @Volatile
     private var foregroundStarted = false
 
     override fun onCreate() {
@@ -65,264 +60,134 @@ class SoAINotificationListenerService : Service() {
             ServiceCompat.startForeground(
                 this,
                 FOREGROUND_NOTIFICATION_ID,
-                SoAINotificationPresenter.buildForegroundNotification(this),
+                SoAINotificationPresenter.buildForegroundNotification(this, NotificationConnectionStatus.CONNECTING),
                 foregroundServiceType
             )
             true
         } catch (exception: RuntimeException) {
-            Log.e(TAG, "Android rejected the notification listener foreground start", exception)
+            Log.w(TAG, "Android rejected the notification listener foreground start", exception)
             false
         }
+        if (foregroundStarted) observeNetworkChanges()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (!foregroundStarted) {
-            stopSelf()
-            return START_NOT_STICKY
-        }
         val serverUrl = prefs.serverUrl
-        if (!listenerAllowed(serverUrl)) {
-            stopSelf()
+        if (!foregroundStarted || !listenerAllowed(serverUrl)) {
+            stopSelf(startId)
             return START_NOT_STICKY
         }
-        if (activeServerUrl == serverUrl && listenerJob?.isActive == true) {
-            return START_STICKY
-        }
+        if (activeServerUrl == serverUrl && listenerJob?.isActive == true) return START_STICKY
         listenerJob?.cancel()
         val listenerServerUrl = serverUrl ?: return START_NOT_STICKY
         activeServerUrl = listenerServerUrl
         listenerJob = serviceScope.launch {
             try {
-                var outcome: ListenerRunOutcome
+                var outcome: SessionConnectionOutcome?
                 do {
                     outcome = runListener(listenerServerUrl)
-                } while (
-                    isActive &&
-                    outcome == ListenerRunOutcome.POLICY_DISALLOWED &&
-                    listenerAllowed(listenerServerUrl)
-                )
-                if (isActive) stopSelf()
+                } while (isActive && outcome != SessionConnectionOutcome.AUTHENTICATION_REVOKED &&
+                    outcome != SessionConnectionOutcome.FAILED && listenerAllowed(listenerServerUrl))
+                if (isActive) stopSelf(startId)
             } catch (exception: CancellationException) {
                 throw exception
             } catch (exception: Exception) {
                 Log.e(TAG, "Notification listener stopped after an unexpected failure", exception)
-                if (isActive) stopSelf()
+                if (isActive) stopSelf(startId)
             }
         }
         return START_STICKY
     }
 
     override fun onDestroy() {
-        listenerJob?.cancel()
-        activeCoordinator = null
+        foregroundStarted = false
         serviceScope.cancel()
+        networkCallback?.let { callback ->
+            getSystemService(ConnectivityManager::class.java).unregisterNetworkCallback(callback)
+        }
+        networkCallback = null
+        networkChanges.cancel()
         super.onDestroy()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
-    private suspend fun runListener(serverUrl: String): ListenerRunOutcome {
+    private fun observeNetworkChanges() {
+        val callback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                networkChanges.trySend(Unit)
+            }
+
+            override fun onLost(network: Network) {
+                networkChanges.trySend(Unit)
+            }
+        }
+        try {
+            getSystemService(ConnectivityManager::class.java).registerDefaultNetworkCallback(callback)
+            networkCallback = callback
+        } catch (exception: RuntimeException) {
+            Log.w(TAG, "Network-change observation unavailable; timed reconnection remains active", exception)
+        }
+    }
+
+    private suspend fun runListener(serverUrl: String): SessionConnectionOutcome? {
         var backoffMillis = ReconnectBackoff.INITIAL_MILLIS
-        var listenerOutcome = ListenerRunOutcome.POLICY_DISALLOWED
+        var lastOutcome: SessionConnectionOutcome? = null
         val webSocketClient = HttpClientFactory.createPinnedWebSocket(prefs)
         val restClient = HttpClientFactory.createPinnedRest(prefs)
-        val apiClient = SoAINotificationApiClient(restClient, CookieManager.getInstance())
+        val apiClient = SoAINotificationApiClient(restClient, CookieManager.getInstance()::getCookie)
         try {
-            while (serviceScope.isActive && listenerAllowed(serverUrl)) {
-                val coordinator = SoAINotificationStreamCoordinator(seenStore)
-                val finished = CompletableDeferred<SessionConnectionOutcome>()
-                val openedAtMillis = AtomicLong(0L)
-                val connectionJob = SupervisorJob(currentCoroutineContext()[Job])
-                val connectionScope = CoroutineScope(currentCoroutineContext() + connectionJob)
-                activeCoordinator = coordinator
-                val webSocket = webSocketClient.newWebSocket(
-                    apiClient.buildWebSocketRequest(serverUrl),
-                    createWebSocketListener(serverUrl, apiClient, coordinator, finished, connectionScope) {
-                        openedAtMillis.set(SystemClock.elapsedRealtime())
-                    }
-                )
-                try {
-                    var outcome: SessionConnectionOutcome? = null
-                    while (outcome == null && listenerAllowed(serverUrl)) {
-                        outcome = withTimeoutOrNull(LISTENER_POLICY_CHECK_INTERVAL_MILLIS) {
-                            finished.await()
+            while (currentCoroutineContext().isActive && listenerAllowed(serverUrl)) {
+                while (networkChanges.tryReceive().isSuccess) Unit
+                val connection = SoAINotificationConnection(
+                    serverUrl,
+                    apiClient,
+                    seenStore,
+                    onRecords = { records ->
+                        if (listenerAllowed(serverUrl) && !SoAIApplication.instance.isAppForegrounded()) {
+                            records.forEach { record ->
+                                SoAINotificationPresenter.show(this, SoAINotificationTextResolver.resolveDisplay(this, record))
+                            }
                         }
-                    }
-                    if (outcome == SessionConnectionOutcome.AUTHENTICATION_REVOKED) {
-                        listenerOutcome = ListenerRunOutcome.AUTHENTICATION_REVOKED
-                        break
-                    }
-                } finally {
-                    if (activeCoordinator === coordinator) {
-                        activeCoordinator = null
-                    }
-                    webSocket.cancel()
-                    connectionJob.cancelAndJoin()
-                }
-                if (!serviceScope.isActive || !listenerAllowed(serverUrl)) {
-                    break
-                }
-                val openedAt = openedAtMillis.get()
-                val connectionLifetime = if (openedAt == 0L) 0L else SystemClock.elapsedRealtime() - openedAt
-                backoffMillis = ReconnectBackoff.next(backoffMillis, connectionLifetime)
-                delay(ReconnectBackoff.jittered(backoffMillis))
+                    },
+                    onCancelled = { ids -> SoAINotificationPresenter.cancelKnown(this, ids) },
+                    onStatus = ::showConnectionStatus
+                )
+                showConnectionStatus(NotificationConnectionStatus.CONNECTING)
+                val outcome = connection.run(webSocketClient, networkChanges) { listenerAllowed(serverUrl) }
+                lastOutcome = outcome
+                if (outcome == SessionConnectionOutcome.AUTHENTICATION_REVOKED || outcome == SessionConnectionOutcome.FAILED) break
+                if (!currentCoroutineContext().isActive || !listenerAllowed(serverUrl)) break
+                if (outcome == SessionConnectionOutcome.NETWORK_CHANGED) continue
+                backoffMillis = ReconnectBackoff.next(backoffMillis, connection.connectionLifetimeMillis)
+                withTimeoutOrNull(ReconnectBackoff.jittered(backoffMillis)) { networkChanges.receive() }
             }
         } finally {
-            restClient.dispatcher.cancelAll()
-            webSocketClient.dispatcher.cancelAll()
-            restClient.connectionPool.evictAll()
-            webSocketClient.connectionPool.evictAll()
-            restClient.dispatcher.executorService.shutdown()
-            webSocketClient.dispatcher.executorService.shutdown()
+            HttpClientRelease.release(restClient, webSocketClient)
         }
-        return listenerOutcome
+        return lastOutcome
     }
 
-    private fun createWebSocketListener(
-        serverUrl: String,
-        apiClient: SoAINotificationApiClient,
-        coordinator: SoAINotificationStreamCoordinator,
-        finished: CompletableDeferred<SessionConnectionOutcome>,
-        connectionScope: CoroutineScope,
-        onOpened: () -> Unit
-    ): WebSocketListener {
-        return object : WebSocketListener() {
-            override fun onOpen(webSocket: WebSocket, response: Response) {
-                onOpened()
-                if (activeCoordinator !== coordinator) {
-                    webSocket.cancel()
-                    finished.complete(SessionConnectionOutcome.RECONNECT)
-                    return
-                }
-                connectionScope.launch {
-                    try {
-                        syncUnreadNotifications(serverUrl, apiClient, coordinator)
-                    } catch (exception: CancellationException) {
-                        throw exception
-                    } catch (exception: Exception) {
-                        Log.w(TAG, "Initial notification sync failed", exception)
-                    } finally {
-                        postAll(coordinator, coordinator.completeInitialSync())
-                    }
-                }
-            }
-
-            override fun onMessage(webSocket: WebSocket, text: String) {
-                handleWebSocketMessage(webSocket, text, coordinator)
-            }
-
-            override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
-                webSocket.close(code, reason)
-            }
-
-            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-                if (SessionClosePolicy.indicatesAuthenticationLoss(code)) {
-                    confirmSessionOutcome(serverUrl, apiClient, finished, connectionScope)
-                } else {
-                    finished.complete(SessionConnectionOutcome.RECONNECT)
-                }
-            }
-
-            override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
-                SoAINotificationFailureLog.webSocketFailure(TAG, t)
-                confirmSessionOutcome(serverUrl, apiClient, finished, connectionScope)
-            }
-        }
-    }
-
-    private fun confirmSessionOutcome(
-        serverUrl: String,
-        apiClient: SoAINotificationApiClient,
-        finished: CompletableDeferred<SessionConnectionOutcome>,
-        connectionScope: CoroutineScope
-    ) {
-        connectionScope.launch {
-            val authenticated = try {
-                apiClient.probeAuthentication(serverUrl)
-            } catch (exception: Exception) {
-                SoAINotificationFailureLog.sessionProbeFailure(TAG, exception)
-                null
-            }
-            finished.complete(SessionClosePolicy.outcomeAfterAuthenticationProbe(authenticated))
-        }
-    }
-
-    private fun handleWebSocketMessage(
-        webSocket: WebSocket,
-        text: String,
-        coordinator: SoAINotificationStreamCoordinator
-    ) {
-        if (activeCoordinator !== coordinator) return
-        val payload = try {
-            JSONObject(text)
-        } catch (exception: Exception) {
-            Log.w(TAG, "Ignoring malformed WebSocket notification payload", exception)
-            return
-        }
-        when (payload.optionalString("type")) {
-            "ping" -> webSocket.send("""{"type":"pong"}""")
-            "NotificationCreatedEvent" -> {
-                val record = SoAINotificationParser.parseCreatedEvent(payload) ?: return
-                postAll(coordinator, coordinator.onCreated(record))
-            }
-            "NotificationsMarkedReadEvent" -> {
-                cancelAll(coordinator.suppress(SoAINotificationParser.parseMarkedReadIds(payload)))
-            }
-            "NotificationDeletedEvent" -> {
-                payload.optionalString("notification_id")?.let { id ->
-                    cancelAll(coordinator.suppress(listOf(id)))
-                }
-            }
-            "NotificationsClearedEvent" -> {
-                cancelAll(coordinator.clearAll(SoAINotificationParser.parseEventTimestampMs(payload)))
-            }
-        }
-    }
-
-    private fun syncUnreadNotifications(
-        serverUrl: String,
-        apiClient: SoAINotificationApiClient,
-        coordinator: SoAINotificationStreamCoordinator
-    ) {
-        val records = apiClient.fetchUnread(serverUrl) ?: return
-        if (activeCoordinator !== coordinator) return
-        val baseline = seenStore.shouldBaseline(serverUrl)
-        val toPost = coordinator.onUnreadFetched(records, baseline)
-        if (baseline) {
-            seenStore.markBaseline(serverUrl)
-        }
-        postAll(coordinator, toPost)
-    }
-
-    private fun postAll(coordinator: SoAINotificationStreamCoordinator, records: List<SoAINotificationRecord>) {
-        if (records.isEmpty()) return
-        if (activeCoordinator !== coordinator) return
-        if (SoAIApplication.instance.isAppForegrounded()) return
-        records.forEach { record ->
-            SoAINotificationPresenter.show(this, SoAINotificationTextResolver.resolveDisplay(this, record))
-        }
-    }
-
-    private fun cancelAll(notificationIds: Collection<String>) {
-        SoAINotificationPresenter.cancelKnown(this, notificationIds)
+    private fun showConnectionStatus(status: NotificationConnectionStatus) {
+        if (!foregroundStarted) return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) return
+        NotificationManagerCompat.from(this).notify(
+            FOREGROUND_NOTIFICATION_ID,
+            SoAINotificationPresenter.buildForegroundNotification(this, status)
+        )
     }
 
     private fun listenerAllowed(serverUrl: String?): Boolean {
         if (!prefs.androidNotificationsEnabled || prefs.incognitoMode || !prefs.hasConnectedServer()) return false
-        if (serverUrl.isNullOrBlank()) return false
+        if (serverUrl.isNullOrBlank() || prefs.serverUrl != serverUrl) return false
         if (!SoAINotificationPresenter.canRunListener(this)) return false
-        val cookieHeader = CookieManager.getInstance().getCookie(serverUrl)
-        return SoAISessionCookies.hasAuthentication(serverUrl, cookieHeader)
+        return SoAISessionCookies.hasAuthentication(serverUrl, CookieManager.getInstance().getCookie(serverUrl))
     }
 
     companion object {
         private const val TAG = "SoAINotificationSvc"
         private const val FOREGROUND_NOTIFICATION_ID = 4601
-        private const val LISTENER_POLICY_CHECK_INTERVAL_MILLIS = 30_000L
     }
-}
-
-private enum class ListenerRunOutcome {
-    AUTHENTICATION_REVOKED,
-    POLICY_DISALLOWED
 }

@@ -1,3 +1,4 @@
+// Notification session close and authentication outcomes for notifications/SessionClosePolicy.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.notifications
@@ -16,5 +17,7 @@ object SessionClosePolicy {
 
 enum class SessionConnectionOutcome {
     RECONNECT,
-    AUTHENTICATION_REVOKED
+    NETWORK_CHANGED,
+    AUTHENTICATION_REVOKED,
+    FAILED
 }

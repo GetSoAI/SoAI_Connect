@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Die Kamera konnte nicht gestartet werden</string>
     <string name="qr_scan_unsupported">Für diesen QR-Code ist eine neuere Version von SoAI Connect erforderlich</string>
     <string name="qr_error_instance_mismatch">Dieser QR-Code gehört zu einem anderen SoAI-Server</string>
+    <string name="page_error_address">Serveradresse nicht gefunden. Prüfen Sie Adresse und Netzwerk und laden Sie die Seite neu.</string>
+    <string name="page_error_connection">Server nicht erreichbar. Prüfen Sie Ihr Netzwerk und ob SoAI läuft, und laden Sie die Seite neu.</string>
+    <string name="page_error_timeout">Der Server hat nicht rechtzeitig geantwortet. Laden Sie die Seite erneut.</string>
+    <string name="page_error_certificate">Sichere Verbindung fehlgeschlagen. Prüfen Sie das Serverzertifikat und laden Sie die Seite neu.</string>
+    <string name="page_error_authentication">Anmeldung erforderlich. Laden Sie die Seite neu, um sich anzumelden.</string>
+    <string name="page_error_access">Zugriff verweigert. Prüfen Sie die Berechtigungen Ihres Kontos.</string>
+    <string name="page_error_missing">Seite nicht gefunden. Prüfen Sie die Serveradresse.</string>
+    <string name="page_error_busy">Der Server ist ausgelastet. Warten Sie kurz und laden Sie die Seite neu.</string>
+    <string name="page_error_server">Der Server konnte diese Seite nicht laden. Versuchen Sie es gleich erneut.</string>
+    <string name="notifications_connecting">Verbindung mit SoAI wird hergestellt</string>
+    <string name="notifications_reconnecting">Verbindung verloren. Verbindung mit SoAI wird erneut hergestellt.</string>
+    <string name="notifications_catching_up">Verbunden. Verpasste Meldungen werden abgerufen.</string>
+    <string name="notifications_catch_up_failed">Live-Meldungen verbunden; verpasste Meldungen konnten nicht geprüft werden. Öffnen Sie SoAI erneut.</string>
+    <string name="notifications_certificate_required">Zertifikat muss bestätigt werden. Öffnen Sie SoAI zur Prüfung.</string>
+    <string name="notifications_sign_in_required">Anmeldung erforderlich. Öffnen Sie SoAI.</string>
+    <string name="notifications_access_denied">Zugriff auf Meldungen verweigert. Prüfen Sie die Berechtigungen Ihres Kontos.</string>
 </resources>

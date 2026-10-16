@@ -164,4 +164,20 @@
     <string name="qr_scan_camera_unavailable">Kamera tidak dapat dimulai</string>
     <string name="qr_scan_unsupported">Kode QR ini memerlukan versi SoAI Connect yang lebih baru</string>
     <string name="qr_error_instance_mismatch">Kode QR ini milik server SoAI lain</string>
+    <string name="page_error_address">Alamat server tidak ditemukan. Periksa alamat dan jaringan, lalu muat ulang.</string>
+    <string name="page_error_connection">Server tidak dapat dijangkau. Periksa jaringan dan apakah SoAI berjalan, lalu muat ulang.</string>
+    <string name="page_error_timeout">Server terlalu lama merespons. Muat ulang untuk mencoba lagi.</string>
+    <string name="page_error_certificate">Koneksi aman gagal. Periksa sertifikat server, lalu muat ulang.</string>
+    <string name="page_error_authentication">Perlu masuk. Muat ulang untuk masuk.</string>
+    <string name="page_error_access">Akses ditolak. Periksa izin akun Anda.</string>
+    <string name="page_error_missing">Halaman tidak ditemukan. Periksa alamat server.</string>
+    <string name="page_error_busy">Server sedang sibuk. Tunggu sebentar, lalu muat ulang.</string>
+    <string name="page_error_server">Server tidak dapat memuat halaman ini. Coba lagi sebentar lagi.</string>
+    <string name="notifications_connecting">Menghubungkan ke SoAI</string>
+    <string name="notifications_reconnecting">Koneksi terputus. Menghubungkan kembali ke SoAI.</string>
+    <string name="notifications_catching_up">Terhubung. Memulihkan peringatan yang terlewat.</string>
+    <string name="notifications_catch_up_failed">Peringatan langsung terhubung; peringatan yang terlewat tidak dapat diperiksa. Buka kembali SoAI.</string>
+    <string name="notifications_certificate_required">Persetujuan sertifikat diperlukan. Buka SoAI untuk memeriksanya.</string>
+    <string name="notifications_sign_in_required">Perlu masuk. Buka SoAI.</string>
+    <string name="notifications_access_denied">Akses notifikasi ditolak. Periksa izin akun Anda.</string>
 </resources>

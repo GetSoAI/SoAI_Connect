@@ -1,3 +1,4 @@
+// Typed backend health and endpoint verification for network/BackendHealthVerifier.kt.
 // SPDX-License-Identifier: MIT
 
 package com.soai.android.network
@@ -31,7 +32,7 @@ internal class BackendHealthVerifier(
 
         return try {
             val verifiedTlsStatus = if (scheme == "https") TlsStatus.TRUSTED else TlsStatus.NONE
-            buildHealthCheck(executeHttpCall(httpClient, request), verifiedTlsStatus)
+            executeHttpCall(httpClient, request) { response -> buildHealthCheck(response, verifiedTlsStatus) }
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
@@ -44,7 +45,7 @@ internal class BackendHealthVerifier(
 
     private suspend fun verifyHealthIgnoringCertificate(request: Request): HealthCheck {
         return try {
-            buildHealthCheck(executeHttpCall(tlsReaderClient, request), TlsStatus.UNTRUSTED)
+            executeHttpCall(tlsReaderClient, request) { response -> buildHealthCheck(response, TlsStatus.UNTRUSTED) }
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
@@ -53,33 +54,31 @@ internal class BackendHealthVerifier(
     }
 
     private fun buildHealthCheck(response: Response, tlsStatus: TlsStatus): HealthCheck {
-        response.use { resp ->
-            if (!resp.isSuccessful) {
-                val transientSoAIFailure = resp.code == 503 && isTypedTransientSoAIResponse(
-                    readBoundedBody(resp, MAX_HEALTH_BODY_BYTES)
-                )
-                return HealthCheck(
-                    endpoint = null,
-                    tlsStatus = TlsStatus.NONE,
-                    rejectedNonSoAI = !transientSoAIFailure,
-                    transientSoAIFailure = transientSoAIFailure
-                )
-            }
-            val endpoint = DiscoveryPayloadParser.parse(
-                readBoundedBody(resp, MAX_HEALTH_BODY_BYTES)
-            ) ?: return HealthCheck(
-                endpoint = null,
-                tlsStatus = TlsStatus.NONE,
-                rejectedNonSoAI = true,
-                transientSoAIFailure = false
+        if (!response.isSuccessful) {
+            val transientSoAIFailure = response.code == 503 && isTypedTransientSoAIResponse(
+                readBoundedBody(response, MAX_HEALTH_BODY_BYTES)
             )
             return HealthCheck(
-                endpoint = endpoint,
-                tlsStatus = tlsStatus,
-                rejectedNonSoAI = false,
-                transientSoAIFailure = false
+                endpoint = null,
+                tlsStatus = TlsStatus.NONE,
+                rejectedNonSoAI = !transientSoAIFailure,
+                transientSoAIFailure = transientSoAIFailure
             )
         }
+        val endpoint = DiscoveryPayloadParser.parse(
+            readBoundedBody(response, MAX_HEALTH_BODY_BYTES)
+        ) ?: return HealthCheck(
+            endpoint = null,
+            tlsStatus = TlsStatus.NONE,
+            rejectedNonSoAI = true,
+            transientSoAIFailure = false
+        )
+        return HealthCheck(
+            endpoint = endpoint,
+            tlsStatus = tlsStatus,
+            rejectedNonSoAI = false,
+            transientSoAIFailure = false
+        )
     }
 
     private fun unresolvedHealthCheck(): HealthCheck {
