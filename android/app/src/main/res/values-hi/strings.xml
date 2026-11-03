@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">प्रमाणपत्र की स्वीकृति आवश्यक है। समीक्षा के लिए SoAI खोलें।</string>
     <string name="notifications_sign_in_required">साइन इन करना आवश्यक है। SoAI खोलें।</string>
     <string name="notifications_access_denied">सूचनाओं तक पहुँच अस्वीकृत। अपने खाते की अनुमतियाँ जाँचें।</string>
+    <string name="session_action_missing">सत्र नहीं मिला। फिर से साइन इन करें।</string>
+    <string name="session_action_rejected">अनुरोध अस्वीकार हुआ। इनपुट और सत्र जाँचें, फिर दोबारा प्रयास करें।</string>
+    <string name="session_action_failed">यह कार्रवाई पूरी नहीं हो सकी। फिर से प्रयास करें।</string>
+    <string name="notifications_blocked_settings">Android ने ब्लॉक किया है। सेटिंग खोलने के लिए टैप करें।</string>
 </resources>

@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Wymagane zatwierdzenie certyfikatu. Otwórz SoAI, aby go sprawdzić.</string>
     <string name="notifications_sign_in_required">Wymagane logowanie. Otwórz SoAI.</string>
     <string name="notifications_access_denied">Odmowa dostępu do powiadomień. Sprawdź uprawnienia konta.</string>
+    <string name="session_action_missing">Nie znaleziono sesji. Zaloguj się ponownie.</string>
+    <string name="session_action_rejected">Żądanie odrzucone. Sprawdź dane i sesję, a następnie spróbuj ponownie.</string>
+    <string name="session_action_failed">Nie udało się wykonać tej czynności. Spróbuj ponownie.</string>
+    <string name="notifications_blocked_settings">Zablokowane przez Androida. Dotknij, aby otworzyć ustawienia.</string>
 </resources>

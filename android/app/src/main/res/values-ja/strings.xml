@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">証明書の承認が必要です。SoAIを開いて確認してください。</string>
     <string name="notifications_sign_in_required">ログインが必要です。SoAIを開いてください。</string>
     <string name="notifications_access_denied">通知へのアクセスが拒否されました。アカウントの権限を確認してください。</string>
+    <string name="session_action_missing">セッションが見つかりません。再度ログインしてください。</string>
+    <string name="session_action_rejected">リクエストが拒否されました。入力とセッションを確認し、再試行してください。</string>
+    <string name="session_action_failed">この操作を完了できませんでした。再試行してください。</string>
+    <string name="notifications_blocked_settings">Androidによりブロックされています。タップして設定を開いてください。</string>
 </resources>

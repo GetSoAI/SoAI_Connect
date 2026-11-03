@@ -193,4 +193,8 @@
     <string name="notifications_certificate_required">È richiesta l’approvazione del certificato. Apri SoAI per verificarlo.</string>
     <string name="notifications_sign_in_required">È necessario accedere. Apri SoAI.</string>
     <string name="notifications_access_denied">Accesso alle notifiche negato. Controlla i permessi del tuo account.</string>
+    <string name="session_action_missing">Sessione non trovata. Accedi di nuovo.</string>
+    <string name="session_action_rejected">Richiesta rifiutata. Controlla i dati e la sessione, poi riprova.</string>
+    <string name="session_action_failed">Impossibile completare questa azione. Riprova.</string>
+    <string name="notifications_blocked_settings">Bloccate da Android. Tocca per aprire le impostazioni.</string>
 </resources>

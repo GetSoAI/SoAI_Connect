@@ -15,6 +15,7 @@ import com.soai.android.databinding.ActivitySettingsBinding
 import com.soai.android.network.HttpClientFactory
 import com.soai.android.network.HttpClientRelease
 import com.soai.android.network.SoAISessionApi
+import com.soai.android.network.SessionActionResult
 import com.soai.android.notifications.SoAINotificationPresenter
 import com.soai.android.notifications.SoAINotificationServiceController
 import com.soai.android.web.AndroidDeviceIdentity
@@ -71,10 +72,9 @@ internal class SettingsSessionController(
         binding.saveDeviceNameButton.isEnabled = false
         activity.lifecycleScope.launch {
             try {
-                if (sessionApi.renameCurrentDevice(serverUrl, prefs.deviceId, label)) {
-                    persistDeviceLabel(label, serverUrl)
-                } else {
-                    showMessage(activity.getString(R.string.device_name_update_failed))
+                when (val result = sessionApi.renameCurrentDevice(serverUrl, prefs.deviceId, label)) {
+                    SessionActionResult.Success -> persistDeviceLabel(label, serverUrl)
+                    is SessionActionResult.Failure -> showMessage(describeFailure(result))
                 }
             } catch (exception: CancellationException) {
                 throw exception
@@ -123,10 +123,9 @@ internal class SettingsSessionController(
         binding.logoutButton.isEnabled = false
         activity.lifecycleScope.launch {
             try {
-                if (sessionApi.logout(serverUrl)) {
-                    clearLocalSession()
-                } else {
-                    showLogoutFailure()
+                when (val result = sessionApi.logout(serverUrl)) {
+                    SessionActionResult.Success -> clearLocalSession()
+                    is SessionActionResult.Failure -> showLogoutFailure(describeFailure(result))
                 }
             } catch (exception: CancellationException) {
                 throw exception
@@ -139,12 +138,17 @@ internal class SettingsSessionController(
         }
     }
 
-    private fun showLogoutFailure() {
+    private fun describeFailure(failure: SessionActionResult.Failure): String {
+        val message = activity.getString(failure.messageResource)
+        return failure.traceId?.let { "$message\n$it" } ?: message
+    }
+
+    private fun showLogoutFailure(cause: String? = null) {
         if (activity.isDestroyed || activity.isFinishing) return
         dialogs.show(
             MaterialAlertDialogBuilder(activity)
                 .setTitle(R.string.logout_failed_title)
-                .setMessage(R.string.logout_failed_message)
+                .setMessage(listOfNotNull(cause, activity.getString(R.string.logout_failed_message)).joinToString("\n\n"))
                 .setPositiveButton(R.string.retry) { _, _ -> revokeAndLogout() }
                 .setNegativeButton(R.string.clear_locally) { _, _ -> confirmLocalClear() }
                 .setNeutralButton(R.string.cancel, null)

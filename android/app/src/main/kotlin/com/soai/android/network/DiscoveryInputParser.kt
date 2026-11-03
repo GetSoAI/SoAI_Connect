@@ -87,7 +87,7 @@ internal object DiscoveryInputParser {
             if (!suffix.startsWith(':')) return null
             val portText = suffix.substring(1)
             if (portText.isEmpty() || portText.any { character -> !character.isDigit() }) return null
-            return ParsedAuthority(hostname, portText.toIntOrNull())
+            return ParsedAuthority(hostname, portText.toIntOrNull() ?: throw DiscoveryException(DiscoveryFailureReason.INVALID_PORT, portText))
         }
         if (input.contains('[') || input.contains(']')) return null
         if (input.count { character -> character == ':' } > 1) {
@@ -101,7 +101,7 @@ internal object DiscoveryInputParser {
         val hostname = normalizeHostname(input.substring(0, separator)) ?: return null
         val portText = input.substring(separator + 1)
         if (portText.isEmpty() || portText.any { character -> !character.isDigit() }) return null
-        return ParsedAuthority(hostname, portText.toIntOrNull())
+        return ParsedAuthority(hostname, portText.toIntOrNull() ?: throw DiscoveryException(DiscoveryFailureReason.INVALID_PORT, portText))
     }
 
     private fun normalizeHostname(value: String): String? {

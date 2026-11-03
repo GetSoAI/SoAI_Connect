@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">يلزم اعتماد الشهادة. افتح SoAI لمراجعتها.</string>
     <string name="notifications_sign_in_required">يلزم تسجيل الدخول. افتح SoAI.</string>
     <string name="notifications_access_denied">رُفض الوصول إلى التنبيهات. تحقق من صلاحيات حسابك.</string>
+    <string name="session_action_missing">لم يتم العثور على الجلسة. سجّل الدخول مجددًا.</string>
+    <string name="session_action_rejected">تم رفض الطلب. تحقّق من البيانات والجلسة ثم أعد المحاولة.</string>
+    <string name="session_action_failed">تعذّر إكمال هذا الإجراء. أعد المحاولة.</string>
+    <string name="notifications_blocked_settings">حظرها Android. انقر لفتح الإعدادات.</string>
 </resources>

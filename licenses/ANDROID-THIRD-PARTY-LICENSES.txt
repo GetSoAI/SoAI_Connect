@@ -1,8 +1,8 @@
 SoAI Connect for Android - Licenses
 
 Application: com.soai.android
-Version: 1.0.4
-Generated: 2026-10-16
+Version: 1.0.5
+Generated: 2026-11-03
 
 SoAI Connect
 ------------
@@ -127,8 +127,8 @@ com.google.guava:guava:33.3.1-android -> Apache License, Version 2.0 (http://www
 com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 com.google.j2objc:j2objc-annotations:3.0.0 -> Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 com.google.zxing:core:3.5.4 -> The Apache Software License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
-com.squareup.okhttp3:okhttp-android:5.5.0 -> The Apache Software License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
-com.squareup.okhttp3:okhttp:5.5.0 -> The Apache Software License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
+com.squareup.okhttp3:okhttp-android:5.5.1 -> The Apache Software License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
+com.squareup.okhttp3:okhttp:5.5.1 -> The Apache Software License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
 com.squareup.okio:okio-jvm:3.18.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 com.squareup.okio:okio:3.18.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 jakarta.inject:jakarta.inject-api:2.0.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)

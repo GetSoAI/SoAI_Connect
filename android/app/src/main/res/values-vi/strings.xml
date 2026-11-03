@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Cần phê duyệt chứng chỉ. Mở SoAI để xem xét.</string>
     <string name="notifications_sign_in_required">Cần đăng nhập. Mở SoAI.</string>
     <string name="notifications_access_denied">Truy cập thông báo bị từ chối. Kiểm tra quyền của tài khoản.</string>
+    <string name="session_action_missing">Không tìm thấy phiên. Hãy đăng nhập lại.</string>
+    <string name="session_action_rejected">Yêu cầu bị từ chối. Kiểm tra dữ liệu và phiên rồi thử lại.</string>
+    <string name="session_action_failed">Không thể hoàn tất thao tác này. Hãy thử lại.</string>
+    <string name="notifications_blocked_settings">Bị Android chặn. Nhấn để mở cài đặt.</string>
 </resources>

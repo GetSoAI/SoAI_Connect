@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Este necesară aprobarea certificatului. Deschideți SoAI pentru verificare.</string>
     <string name="notifications_sign_in_required">Este necesară autentificarea. Deschideți SoAI.</string>
     <string name="notifications_access_denied">Acces la notificări refuzat. Verificați permisiunile contului.</string>
+    <string name="session_action_missing">Sesiunea nu a fost găsită. Autentificați-vă din nou.</string>
+    <string name="session_action_rejected">Cerere respinsă. Verificați datele și sesiunea, apoi reîncercați.</string>
+    <string name="session_action_failed">Această acțiune nu a putut fi finalizată. Reîncercați.</string>
+    <string name="notifications_blocked_settings">Blocate de Android. Atingeți pentru a deschide setările.</string>
 </resources>

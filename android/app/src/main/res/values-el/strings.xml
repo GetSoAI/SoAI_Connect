@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Απαιτείται έγκριση πιστοποιητικού. Ανοίξτε το SoAI για έλεγχο.</string>
     <string name="notifications_sign_in_required">Απαιτείται σύνδεση στον λογαριασμό. Ανοίξτε το SoAI.</string>
     <string name="notifications_access_denied">Δεν επιτρέπεται η πρόσβαση στις ειδοποιήσεις. Ελέγξτε τα δικαιώματα λογαριασμού.</string>
+    <string name="session_action_missing">Η συνεδρία δεν βρέθηκε. Συνδεθείτε ξανά.</string>
+    <string name="session_action_rejected">Το αίτημα απορρίφθηκε. Ελέγξτε τα δεδομένα και τη συνεδρία και δοκιμάστε ξανά.</string>
+    <string name="session_action_failed">Δεν ήταν δυνατή η ολοκλήρωση της ενέργειας. Δοκιμάστε ξανά.</string>
+    <string name="notifications_blocked_settings">Αποκλείστηκε από το Android. Πατήστε για άνοιγμα των ρυθμίσεων.</string>
 </resources>

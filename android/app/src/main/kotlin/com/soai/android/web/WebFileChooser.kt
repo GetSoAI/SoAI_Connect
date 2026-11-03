@@ -47,12 +47,12 @@ class WebFileChooser(
                 launchIntent(params.createIntent())
                 return
             }
+            pendingFallbackIntent = params.createIntent()
             if (!hasCameraPermission()) {
-                pendingFallbackIntent = params.createIntent()
                 requestCameraPermission()
                 return
             }
-            launchCaptureOrFallback(null)
+            launchCaptureOrFallback(true)
         } catch (exception: RuntimeException) {
             Log.w(TAG, "Unable to launch file chooser", exception)
             abortPending()
@@ -61,12 +61,10 @@ class WebFileChooser(
     }
 
     fun onCameraPermissionResult(granted: Boolean) {
-        val fallbackIntent = pendingFallbackIntent
-        pendingFallbackIntent = null
         if (pendingCallback == null) return
 
         try {
-            launchCaptureOrFallback(if (granted) null else fallbackIntent)
+            launchCaptureOrFallback(granted)
         } catch (exception: RuntimeException) {
             Log.w(TAG, "Unable to launch file chooser", exception)
             abortPending()
@@ -74,14 +72,31 @@ class WebFileChooser(
         }
     }
 
-    private fun launchCaptureOrFallback(fallbackIntent: Intent?) {
-        val intent = fallbackIntent ?: tryCreateCameraCaptureIntent()
-        if (intent == null) {
+    private fun launchCaptureOrFallback(captureAllowed: Boolean) {
+        if (captureAllowed) {
+            try {
+                val captureIntent = tryCreateCameraCaptureIntent()
+                if (captureIntent != null) {
+                    launchIntent(captureIntent)
+                    pendingFallbackIntent = null
+                    return
+                }
+            } catch (exception: RuntimeException) {
+                Log.w(TAG, "Camera capture unavailable; opening file selection", exception)
+                cameraCaptureUri?.let(::revokeCameraUriPermission)
+                cameraCaptureFile?.delete()
+                cameraCaptureUri = null
+                cameraCaptureFile = null
+            }
+        }
+        val fallbackIntent = pendingFallbackIntent
+        pendingFallbackIntent = null
+        if (fallbackIntent == null) {
             abortPending()
             onPickerUnavailable()
             return
         }
-        launchIntent(intent)
+        launchIntent(fallbackIntent)
     }
 
     private fun hasCameraPermission(): Boolean {
@@ -153,9 +168,10 @@ class WebFileChooser(
         cameraCaptureUri = null
         cameraCaptureFile = null
         pendingFallbackIntent = null
-        pendingCallback?.onReceiveValue(null)
+        val callback = pendingCallback
         pendingCallback = null
         pendingOwner = null
+        callback?.onReceiveValue(null)
     }
 
     private fun tryCreateCameraCaptureIntent(): Intent? {
@@ -180,6 +196,8 @@ class WebFileChooser(
             return null
         }
 
+        cameraCaptureUri = uri
+        cameraCaptureFile = photoFile
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
             putExtra(MediaStore.EXTRA_OUTPUT, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
@@ -193,6 +211,8 @@ class WebFileChooser(
         if (resolved.isEmpty()) {
             revokeCameraUriPermission(uri)
             photoFile.delete()
+            cameraCaptureUri = null
+            cameraCaptureFile = null
             return null
         }
 
@@ -204,8 +224,6 @@ class WebFileChooser(
             )
         }
 
-        cameraCaptureUri = uri
-        cameraCaptureFile = photoFile
         return intent
     }
 

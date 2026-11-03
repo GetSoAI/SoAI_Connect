@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Требуется подтверждение сертификата. Откройте SoAI для проверки.</string>
     <string name="notifications_sign_in_required">Требуется вход. Откройте SoAI.</string>
     <string name="notifications_access_denied">Доступ к уведомлениям запрещён. Проверьте разрешения учётной записи.</string>
+    <string name="session_action_missing">Сессия не найдена. Войдите снова.</string>
+    <string name="session_action_rejected">Запрос отклонён. Проверьте данные и сессию и повторите попытку.</string>
+    <string name="session_action_failed">Не удалось выполнить действие. Повторите попытку.</string>
+    <string name="notifications_blocked_settings">Заблокировано Android. Нажмите, чтобы открыть настройки.</string>
 </resources>

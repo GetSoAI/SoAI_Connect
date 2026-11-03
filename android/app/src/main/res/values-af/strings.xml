@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Sertifikaatgoedkeuring vereis. Maak SoAI oop om dit na te gaan.</string>
     <string name="notifications_sign_in_required">Aanmelding vereis. Maak SoAI oop.</string>
     <string name="notifications_access_denied">Toegang tot kennisgewings geweier. Kontroleer jou rekeningtoestemmings.</string>
+    <string name="session_action_missing">Sessie nie gevind nie. Meld weer aan.</string>
+    <string name="session_action_rejected">Versoek geweier. Kontroleer jou invoer en sessie en probeer weer.</string>
+    <string name="session_action_failed">Kon nie hierdie aksie voltooi nie. Probeer weer.</string>
+    <string name="notifications_blocked_settings">Deur Android geblokkeer. Tik om instellings oop te maak.</string>
 </resources>

@@ -6,10 +6,14 @@
 </picture>
 </p>
 
-<h1 align="center">SoAI Connect for Android</h1>
+<p align="center"><strong>SoAI Connect for Android</strong></p>
 
-SoAI Connect is the official Android app for [SoAI](https://soai.to), the Smart Orchestrator for Artificial Intelligence.
+SoAI Connect is the official Android app for [SoAI](https://soai.to). It opens your server's WebUI for chat, models, files, and automations, with QR setup, native background notifications, and Wake-on-LAN.
 
+<p align="center">
+<a href="https://soai.to/download/android"><img src="media/readme/download-apk.svg" alt="Download APK" height="38"></a>
+<a href="https://soai.to/documentation/"><img src="media/readme/documentation.svg" alt="Documentation" height="38"></a>
+</p>
 <p align="center">
 <a href="https://github.com/GetSoAI/SoAI_Connect"><img src="https://img.shields.io/github/v/release/GetSoAI/SoAI_Connect?label=RELEASE&amp;color=153e75&amp;labelColor=153e75&amp;style=flat" alt="Latest published SoAI Connect release" height="20"></a>
 <img src="media/readme/supported-platforms.svg" alt="Android 8.0 or newer" height="20">
@@ -18,118 +22,119 @@ SoAI Connect is the official Android app for [SoAI](https://soai.to), the Smart 
 </p>
 
 <p align="center">
-<img src="media/readme/connect-setup.webp" width="260" alt="SoAI Connect setup screen with documentation-only server addresses">
+<img src="media/readme/connect-setup.webp" width="260" alt="SoAI Connect setup screen with the QR scanner button and an example hostname">
 </p>
 
-SoAI runs on your own machine. This app puts it on your phone: the same chat, models, files, and automations you already use in the browser, served by your own server, reached directly over your network.
+## What SoAI Connect does
 
-It also does two things a browser tab cannot. SoAI alerts reach your Android notification shade while the app sits in the background, so you know when an agent is waiting on you. And you can switch the machine on from your phone before you start.
+Connect to your server by scanning its QR code or entering a hostname or IP address. SoAI Connect identifies the server and its active port, reports fallback ports, and asks for an explicit endpoint when multiple instances answer. It supports HTTP and HTTPS, including custom and self-signed certificates that you explicitly approve.
 
-You need a running SoAI server to use the app. Your data stays on it. SoAI Connect keeps your server address, your sign-in, and whatever the page view caches while you use it, which Incognito Mode wipes when you leave.
+The app delivers agent approval requests, questions, secret prompts, automation results, mail alerts, and calendar reminders to Android's notification shade. Notifications come directly from your server through a background connection, without a push provider or Google account.
 
-## What it does
+Camera and microphone access use Android permission prompts, while uploads use Android's file picker. Wake-on-LAN can wake a compatible server before you connect. The interface follows your system's light or dark theme.
 
-You reach the server by address. Give the app a hostname or an IP and it checks the small range of ports a SoAI instance answers on, reads back which instance is there and which port its interface runs on, then shows you that before it connects. A server that had to fall back to a secondary port says so. If two instances answer, the app asks you for a port rather than picking one.
+## Install SoAI Connect
 
-You decide which certificate to trust. Most self-hosted servers run HTTPS with a certificate no phone will accept on its own, and the usual workaround is to stop checking. This app shows you the subject, the issuer, and the SHA-256 fingerprint, and you trust it for one session or for good. What you trust is pinned to that server. If a different certificate shows up later, the session stops and the app asks you again, because a quiet swap is what interception looks like. Over plain HTTP to an address outside your local network, the app tells you the session is readable on the way.
+You need Android 8.0 (API 26) or newer and a SoAI server reachable from your phone.
 
-Notifications come from your own server. No push provider sits in the path and no Google account is involved: the app holds the connection itself and turns what SoAI sends into Android notifications, whether that is a tool waiting for approval, an agent's question, a request for a secret, an automation that finished or failed, new mail, or a calendar reminder. The price of that design is battery management, since Android puts background connections to sleep, and the fix is the one setting described under Using the app.
+Download the APK and matching `.sha256` sidecar from Releases in the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). The app is distributed by sideloading and has no app-store listing.
 
-Smaller things: camera, microphone, and file uploads go through the normal Android permission prompts. Incognito Mode clears cookies and site data when you leave. Logout ends the session on the server rather than only on the phone, and tells you when it could not reach it. Wake-on-LAN can target a custom broadcast address and port. The interface ships in 25 languages and follows your system's dark theme.
+To update, install the new APK over the existing app with the same signing identity. Do not uninstall or clear application data, which removes your saved connection and settings.
 
-## Requirements
-
-- Android 8.0 (API 26) or newer.
-- A SoAI server reachable from the device over HTTP or HTTPS.
-
-## Installing
-
-SoAI Connect is distributed by sideloading from the Releases section of the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). There is no app-store listing.
-
-Each published APK ships with a `.sha256` sidecar and uses the canonical version-bearing name `SoAI-Connect-<version>-android.apk`. Verify the checksum and the signing certificate before you install:
+<details>
+<summary><strong>Verify the APK and signing certificate</strong></summary>
 
 ```sh
 sha256sum -c SoAI-Connect-<version>-android.apk.sha256
-apksigner verify --print-certs SoAI-Connect-<version>-android.apk
+apksigner verify --verbose --print-certs SoAI-Connect-<version>-android.apk
 ```
 
-A genuine package is signed with APK Signature Scheme v2 and v3, carries no v1 JAR signature, and reports this certificate:
+Official APKs use signature schemes v2 and v3, without a v1 JAR signature, and this signing identity:
 
-```
+```text
 Signer: CN=SoAI Connect, O=SoAI, L=Rome, C=IT
 SHA-256 digest: 664ee2c1ce55db7179eafab41ff22585380e236e1a8163a50e273e4691b6990b
 ```
 
-A package that fails either check did not come from this project. Report it instead of installing it.
+Do not install the package if checksum or signature verification fails, or if its certificate fingerprint differs.
 
-## Using the app
+</details>
 
-**First connection.** Type your server's address, a hostname or an IP, and tap **Check**. The app finds the port by itself, so you rarely need to give one; add `:port` if you run more than one instance on the same machine. When it reports the server it found, tap **Connect**, then sign in with your SoAI account. After that the app opens straight to your server.
+### First connection
 
-If your server uses HTTPS with its own certificate, the app shows you the certificate before it connects. Compare the SHA-256 fingerprint with the one on your server, then choose **Trust always**. The app remembers it, and if that certificate ever changes it stops and warns you before anything loads.
+1. In your server's WebUI, open **Settings → Connect** to display its QR code.
+2. In SoAI Connect, tap the QR icon beside **Server URL or IP** and allow camera access.
+3. Scan the code, review any connection or certificate prompt, and sign in with your SoAI account.
 
-**Day to day.** The screen is your SoAI interface, working as it does in a browser. Camera, microphone, and file uploads ask for Android permission the first time you use them. The toolbar menu holds **Reload**, **Settings**, and **About**.
+The phone must be able to reach the address in the QR code. The app verifies the server identity before connecting and asks you to review changed connection details. Scanning sets up the connection; it does not sign you in.
 
-**Turning on notifications.** Open **Settings → Privacy** and switch on **Android Notifications**, then allow the notification permission when Android asks. Because the app keeps its own connection to your server rather than going through Google, Android will eventually sleep it to save battery: find SoAI in your battery settings and set it to unrestricted. Name the device in the same section if you want the server's session list to be readable at a glance.
+For a certificate that needs approval, compare its SHA-256 fingerprint with your server's certificate before choosing **Trust once** or **Trust always**. A saved pin is tied to the server address and identity, and a changed certificate requires approval again.
 
-**Waking the machine.** Under **Settings → Power**, enter the MAC address of the machine running SoAI and tap **Wake now**. Enable Wake-on-LAN in that machine's BIOS and operating system first, or the packet arrives with nothing listening for it.
+<details>
+<summary><strong>Connect by address</strong></summary>
 
-**Starting over.** **Settings → Data** holds **Clear Cache**, **Logout**, which ends the session on the server as well as on the phone, and **Change server**, which forgets the current server and returns you to the setup screen. To drop a trusted certificate without leaving the server, use **Reset Trusted Certificate** under **Settings → Security**.
+Enter a hostname, IPv4, or IPv6 address, such as `soai.example.com`, and tap **Check**. Add `:port` for an explicit endpoint, or use `http://` or `https://` to try that scheme first.
 
-## Building from source
+Review the discovered server and tap **Connect**, then sign in. Subsequent launches open your saved server. HTTP connections to public hosts display a cleartext warning.
 
-You need JDK 17 or newer and an Android SDK with platform 37 and a matching build-tools package. Point `sdk.dir` in `android/local.properties` at your SDK.
+</details>
+
+## Notifications and device controls
+
+Open **Settings → Privacy → Android Notifications** to enable native alerts and grant notification permission. Delivery depends on connectivity, Android notification channels, and battery restrictions. The app reports blocked permissions or channels and links to Android settings. Its background guidance dialog also opens battery settings; choose unrestricted battery use if your device requires it.
+
+You can name the device in the same section to identify it in the server's session list.
+
+Under **Settings → Power**, enter the server's MAC address and tap **Wake now**. You can configure the broadcast address and UDP port. Wake-on-LAN must be enabled in the server's firmware and operating system, and your network must allow the packet to reach it.
+
+## Privacy and session management
+
+SoAI Connect stores your server address, sign-in cookies, preferences, and WebUI cache on the device. Incognito Mode clears cookies, site data, cache, and temporary certificate trust when you leave the app. Saved server settings and persistent certificate pins remain.
+
+The toolbar menu contains **Reload**, **Settings**, and **About**. **Settings → Data** provides **Clear Cache**, **Logout**, and **Change server**. Logout requests server-side session revocation; if it cannot confirm success, you can retry or explicitly clear only local credentials. Change server clears the saved connection and returns to setup.
+
+Use **Settings → Security → Reset Trusted Certificate** to remove the saved pin without changing the server address.
+
+## Build from source
+
+Install JDK 17 and an Android SDK with platform 37 and suitable build tools. Set `sdk.dir` in `android/local.properties`, then run:
 
 ```sh
 cd android
-./gradlew :app:test
-./gradlew :app:lint
-./gradlew :app:assembleDebug
+./gradlew :app:test :app:lint :app:assembleDebug
 ```
 
-Debug builds need no signing material. A release build is signed with the project's own key and is refused without it, so `:app:assembleRelease` only works for the maintainer. To build a signed release of your own fork, supply your own keystore in `android/local.properties`:
+<details>
+<summary><strong>Release signing, project layout, and versioning</strong></summary>
+
+Debug builds need no signing material. For a signed build of your own fork, configure your own keystore in `android/local.properties`:
 
 ```properties
 sdk.dir=/path/to/android-sdk
-soai.release.storeFile=your-release.keystore
+soai.release.storeFile=/path/to/your-release.keystore
 soai.release.storePassword=...
 soai.release.keyAlias=...
 soai.release.keyPassword=...
 ```
 
-That file holds signing secrets and is never tracked in git. Keep the keystore outside the checkout, readable only by you, and back it up. An Android package can only be updated in place by a build signed with the same key.
+Run `./gradlew :app:assembleRelease`. Release builds are refused without signing properties. Keep this file private and untracked, store the keystore outside the checkout, and back it up. In-place updates require the same signing key.
 
-## Versioning
+`android/` contains the Gradle project, with application sources under `android/app/src/main/kotlin/com/soai/android/`. Dependency notices are in `licenses/`.
 
-`VERSION` holds the client version and is the only place it is written. SoAI Connect versions independently of the SoAI server. It is a companion artifact, never an input to SoAI's automatic updates, and a client fix does not require a server release.
+`VERSION` controls the client version independently of the SoAI server and its automatic updater. Android's `versionCode` is derived as `major * 10000 + minor * 100 + patch`; minor and patch components must stay below 100.
 
-`versionCode` is derived from that version as `major * 10000 + minor * 100 + patch`, so `1.2.3` is `10203`. Bumping `VERSION` is the whole release-version change. Minor and patch components must stay below 100.
+</details>
 
-## Layout
-
-| Path | Contents |
-| --- | --- |
-| `android/` | The Gradle project. Application sources are under `android/app/src/main/kotlin/com/soai/android/`. |
-| `licenses/` | Third-party notices for every component embedded in the package. |
-| `VERSION` | The client version. |
-| `LICENSE.md` | The MIT License covering this client. |
-
-## Third-party components
-
-`licenses/ANDROID-THIRD-PARTY-LICENSES.txt` records every component embedded in the package, with its license text. The same notice is reproduced inside the app under **About → Licenses**. It is regenerated from the resolved release dependency graph whenever a release is built. Components whose notices or license terms name their own copyright holders keep a reviewed copy under `licenses/attributions/`, and the release build stops if one is missing, stale, or no longer matches the NOTICE shipped inside the component.
-
-## License
+## Licensing
 
 SoAI Connect is licensed under the MIT License; see `LICENSE.md`. You may inspect, copy, modify, and redistribute it, including as the basis for your own client.
 
 That grant covers this client only. It conveys no right in the SoAI name, logos, or product identity, and no right to run, copy, or distribute SoAI itself. Connecting a client to a SoAI deployment still requires rights applicable to that deployment. SoAI is distributed under the SoAI Source-Available License 1.0; see the downloads section of [soai.to](https://soai.to).
 
-Third-party Android libraries remain governed by their own licenses and notices.
+Third-party components retain their own licenses. `licenses/ANDROID-THIRD-PARTY-LICENSES.txt` lists dependencies and license texts, also available under **About → Licenses**. Dependency changes require updated notices and attribution records in `licenses/attributions/`.
 
-## Issues, security, and contributions
+## Security and support
 
-Bug reports and feature requests are welcome through the Issues section of the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). Include the client version, the Android version, and what you did, what happened, and what you expected.
+Report bugs or request features through Issues in the [SoAI Connect repository](https://github.com/GetSoAI/SoAI_Connect). Include the client version, Android version, steps, and expected result.
 
-Never report a security vulnerability in a public issue. `SECURITY.md` sets out the single point of contact and the disclosure process.
-
-Pull requests are not accepted. `CONTRIBUTING.md` explains why, and what is welcome instead.
+Report security vulnerabilities privately as described in `SECURITY.md`. Pull requests are not accepted; see `CONTRIBUTING.md`.

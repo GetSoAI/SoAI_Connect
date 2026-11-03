@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Certificaatgoedkeuring vereist. Open SoAI om het te controleren.</string>
     <string name="notifications_sign_in_required">Aanmelden vereist. Open SoAI.</string>
     <string name="notifications_access_denied">Toegang tot meldingen geweigerd. Controleer uw accountrechten.</string>
+    <string name="session_action_missing">Sessie niet gevonden. Meld je opnieuw aan.</string>
+    <string name="session_action_rejected">Verzoek geweigerd. Controleer je invoer en sessie en probeer het opnieuw.</string>
+    <string name="session_action_failed">Deze actie kon niet worden voltooid. Probeer het opnieuw.</string>
+    <string name="notifications_blocked_settings">Geblokkeerd door Android. Tik om de instellingen te openen.</string>
 </resources>

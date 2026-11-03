@@ -193,4 +193,8 @@
     <string name="notifications_certificate_required">تأیید گواهی لازم است. برای بررسی، SoAI را باز کنید.</string>
     <string name="notifications_sign_in_required">ورود لازم است. SoAI را باز کنید.</string>
     <string name="notifications_access_denied">دسترسی به اعلان‌ها رد شد. مجوزهای حساب خود را بررسی کنید.</string>
+    <string name="session_action_missing">نشست پیدا نشد. دوباره وارد شوید.</string>
+    <string name="session_action_rejected">درخواست رد شد. ورودی و نشست را بررسی کنید و دوباره تلاش کنید.</string>
+    <string name="session_action_failed">این کار انجام نشد. دوباره تلاش کنید.</string>
+    <string name="notifications_blocked_settings">توسط Android مسدود شده است. برای باز کردن تنظیمات ضربه بزنید.</string>
 </resources>

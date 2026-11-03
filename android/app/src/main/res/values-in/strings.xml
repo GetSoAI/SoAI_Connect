@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Persetujuan sertifikat diperlukan. Buka SoAI untuk memeriksanya.</string>
     <string name="notifications_sign_in_required">Perlu masuk. Buka SoAI.</string>
     <string name="notifications_access_denied">Akses notifikasi ditolak. Periksa izin akun Anda.</string>
+    <string name="session_action_missing">Sesi tidak ditemukan. Masuk kembali.</string>
+    <string name="session_action_rejected">Permintaan ditolak. Periksa masukan dan sesi, lalu coba lagi.</string>
+    <string name="session_action_failed">Tindakan ini tidak dapat diselesaikan. Coba lagi.</string>
+    <string name="notifications_blocked_settings">Diblokir oleh Android. Ketuk untuk membuka setelan.</string>
 </resources>

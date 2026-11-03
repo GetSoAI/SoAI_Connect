@@ -13,16 +13,16 @@ class SoAISessionApi(
     private val httpClient: OkHttpClient,
     private val cookieManager: CookieManager
 ) {
-    suspend fun logout(serverUrl: String): Boolean {
+    suspend fun logout(serverUrl: String): SessionActionResult {
         val request = buildLogoutRequest(serverUrl, cookieManager.getCookie(serverUrl))
-        return executeHttpCall(httpClient, request) { response -> response.isSuccessful }
+        return executeSessionAction(httpClient, request)
     }
 
     suspend fun renameCurrentDevice(
         serverUrl: String,
         deviceId: String,
         deviceLabel: String
-    ): Boolean {
+    ): SessionActionResult {
         val payload = JSONObject()
             .put("device_id", deviceId)
             .put("device_label", deviceLabel)
@@ -33,7 +33,7 @@ class SoAISessionApi(
             serverUrl,
             cookieManager.getCookie(serverUrl)
         ).patch(payload).build()
-        return executeHttpCall(httpClient, request) { response -> response.isSuccessful }
+        return executeSessionAction(httpClient, request)
     }
 
     companion object {

@@ -1,5 +1,20 @@
 # SoAI Connect Release Notes
 
+## 1.0.5
+
+SoAI Connect 1.0.5 improves notification setup and account error messages, and fixes connection validation and camera uploads.
+
+### Improvements
+
+- Notification settings show when Android permissions or notification channels block delivery, with a shortcut to the relevant Android settings.
+- Background notification guidance includes a button to open Android battery settings.
+- Logout and device-name errors explain the cause, including sign-in requirements, denied access, connection failures, timeouts, and server errors. A reference ID appears when available.
+
+### Fixes
+
+- Addresses containing excessively large port numbers now show an invalid-port error instead of silently starting automatic discovery.
+- Camera uploads fall back to file selection when a camera app is unavailable or capture cannot start. Temporary capture files and permissions are cleaned up when capture fails.
+
 ## 1.0.4
 
 SoAI Connect 1.0.4 improves certificate handling, notification recovery and connection errors.

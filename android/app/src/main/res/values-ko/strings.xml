@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">인증서 승인이 필요합니다. SoAI를 열어 확인하세요.</string>
     <string name="notifications_sign_in_required">로그인이 필요합니다. SoAI를 여세요.</string>
     <string name="notifications_access_denied">알림 접근이 거부되었습니다. 계정 권한을 확인하세요.</string>
+    <string name="session_action_missing">세션을 찾을 수 없습니다. 다시 로그인하세요.</string>
+    <string name="session_action_rejected">요청이 거부되었습니다. 입력과 세션을 확인하고 다시 시도하세요.</string>
+    <string name="session_action_failed">이 작업을 완료하지 못했습니다. 다시 시도하세요.</string>
+    <string name="notifications_blocked_settings">Android에서 차단했습니다. 탭하여 설정을 여세요.</string>
 </resources>

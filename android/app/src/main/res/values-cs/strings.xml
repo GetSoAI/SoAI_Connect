@@ -180,4 +180,8 @@
     <string name="notifications_certificate_required">Je vyžadováno schválení certifikátu. Otevřete SoAI a zkontrolujte jej.</string>
     <string name="notifications_sign_in_required">Je vyžadováno přihlášení. Otevřete SoAI.</string>
     <string name="notifications_access_denied">Přístup k upozorněním odepřen. Zkontrolujte oprávnění účtu.</string>
+    <string name="session_action_missing">Relace nebyla nalezena. Přihlaste se znovu.</string>
+    <string name="session_action_rejected">Požadavek byl zamítnut. Zkontrolujte údaje a relaci a zkuste to znovu.</string>
+    <string name="session_action_failed">Tuto akci se nepodařilo dokončit. Zkuste to znovu.</string>
+    <string name="notifications_blocked_settings">Blokováno systémem Android. Klepnutím otevřete nastavení.</string>
 </resources>

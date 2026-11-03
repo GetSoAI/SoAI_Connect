@@ -3,7 +3,6 @@
 package com.soai.android.ui
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -32,15 +31,12 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var sessionController: SettingsSessionController
     private val dialogs = LifecycleDialogRegistry(this)
 
+    private lateinit var notificationSettings: NotificationSettingsController
+
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        if (granted) {
-            requestNotificationPermissionOrEnable()
-        } else {
-            binding.androidNotificationsSwitch.isChecked = false
-            showMessage(getString(R.string.permission_denied))
-        }
+        notificationSettings.onPermissionResult(granted)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +51,14 @@ class SettingsActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener { finish() }
 
+        notificationSettings = NotificationSettingsController(
+            this, binding, prefs, dialogs, ::showMessage,
+            {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }
+        )
         setupSwitches()
         setupButtons()
         wakeOnLanSettings = WakeOnLanSettings(this, binding, prefs, ::showMessage)
@@ -75,13 +79,14 @@ class SettingsActivity : AppCompatActivity() {
         super.onResume()
         updateActionVisibility()
         updateTrustedCertificateUI()
+        notificationSettings.refresh()
     }
 
     private fun setupSwitches() {
         binding.incognitoSwitch.isChecked = prefs.incognitoMode
         binding.incognitoSwitch.setOnCheckedChangeListener { _, isChecked ->
             prefs.incognitoMode = isChecked
-            syncAndroidNotificationsSwitch()
+            notificationSettings.bind()
             if (isChecked) {
                 WebViewDataCleaner.clearSessionData()
                 SoAINotificationServiceController.stop(this)
@@ -90,61 +95,7 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        syncAndroidNotificationsSwitch()
-    }
-
-    private fun syncAndroidNotificationsSwitch() {
-        binding.androidNotificationsSwitch.setOnCheckedChangeListener(null)
-        binding.androidNotificationsSwitch.isEnabled = !prefs.incognitoMode
-        binding.androidNotificationsSwitch.isChecked = prefs.androidNotificationsEnabled && !prefs.incognitoMode
-        binding.androidNotificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                requestNotificationPermissionOrEnable()
-            } else {
-                setAndroidNotificationsEnabled(false)
-            }
-        }
-    }
-
-    private fun requestNotificationPermissionOrEnable() {
-        if (prefs.incognitoMode) {
-            binding.androidNotificationsSwitch.isChecked = false
-            setAndroidNotificationsEnabled(false)
-            return
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            setAndroidNotificationsEnabled(true)
-            return
-        }
-        val granted = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.POST_NOTIFICATIONS
-        ) == PackageManager.PERMISSION_GRANTED
-        if (granted) {
-            setAndroidNotificationsEnabled(true)
-            return
-        }
-        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-    }
-
-    private fun setAndroidNotificationsEnabled(enabled: Boolean) {
-        prefs.androidNotificationsEnabled = enabled
-        if (enabled) {
-            prefs.clearNativeNotificationState()
-            SoAINotificationServiceController.sync(this)
-            showAndroidNotificationsBackgroundDialog()
-        } else {
-            SoAINotificationPresenter.cancelKnown(this, prefs.notificationSeenIds)
-            prefs.clearNativeNotificationState()
-            SoAINotificationServiceController.stop(this)
-        }
-    }
-
-    private fun showAndroidNotificationsBackgroundDialog() {
-        dialogs.show(MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.android_notifications_background_title)
-            .setMessage(R.string.android_notifications_background_message)
-            .setPositiveButton(R.string.ok, null))
+        notificationSettings.bind()
     }
 
     private fun setupButtons() {

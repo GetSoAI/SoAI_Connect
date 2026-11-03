@@ -193,4 +193,8 @@
     <string name="notifications_certificate_required">需要核准憑證。請開啟 SoAI 進行檢查。</string>
     <string name="notifications_sign_in_required">需要登入。請開啟 SoAI。</string>
     <string name="notifications_access_denied">通知存取遭到拒絕。請檢查帳戶權限。</string>
+    <string name="session_action_missing">找不到工作階段。請重新登入。</string>
+    <string name="session_action_rejected">要求遭拒絕。請檢查輸入與工作階段後重試。</string>
+    <string name="session_action_failed">無法完成此操作。請重試。</string>
+    <string name="notifications_blocked_settings">已遭 Android 封鎖。點選以開啟設定。</string>
 </resources>
