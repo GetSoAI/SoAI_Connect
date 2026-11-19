@@ -22,7 +22,8 @@ data class DiscoveryResult(
     val version: String,
     val preferredPort: Int,
     val fallbackActive: Boolean,
-    val cleartextToPublicHost: Boolean
+    val cleartextToPublicHost: Boolean,
+    val requestedScheme: String? = null
 )
 
 enum class TlsStatus {
@@ -55,19 +56,12 @@ class DiscoveryService(
             throw DiscoveryException(DiscoveryFailureReason.INVALID_ADDRESS)
         }
         val explicitPort = parsed.explicitPort
-        if (explicitPort != null && explicitPort !in 1..65535) {
-            throw DiscoveryException(DiscoveryFailureReason.INVALID_PORT, explicitPort.toString())
+        val result = if (explicitPort != null) {
+            probeBackendWithSchemes(parsed.hostname, explicitPort, parsed.preferredScheme)
+        } else {
+            discoverFromPorts(parsed.hostname, parsed.preferredScheme, targetInstanceId)
         }
-
-        if (explicitPort != null) {
-            return@withContext probeBackendWithSchemes(parsed.hostname, explicitPort, parsed.preferredScheme)
-        }
-
-        return@withContext discoverFromPorts(
-            parsed.hostname,
-            parsed.preferredScheme,
-            targetInstanceId
-        )
+        result.copy(requestedScheme = parsed.preferredScheme)
     }
 
     private suspend fun discoverFromPorts(

@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s تم العثور عليه: %2$s</string>
     <string name="server_found_fallback">%1$s\nالمنفذ المُعد %2$d مشغول. يعمل هذا المثيل على منفذ احتياطي %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nطُلب %2$s. تم العثور على الخادم عبر %3$s.</string>
     <string name="error_empty_url">عنوان URL للخادم مطلوب</string>
     <string name="error_invalid_address">عنوان الخادم غير صالح</string>
     <string name="error_ipv6_zone_unsupported">معرفات منطقة IPv6 غير مدعومة</string>

@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s 발견됨: %2$s</string>
     <string name="server_found_fallback">%1$s\n구성된 포트 %2$d이(가) 사용 중입니다. 이 인스턴스는 대체 포트 %3$d에서 실행 중입니다.</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s을 요청했습니다. 서버는 %3$s을 통해 찾았습니다.</string>
     <string name="error_empty_url">서버 URL이 필요합니다</string>
     <string name="error_invalid_address">잘못된 서버 주소</string>
     <string name="error_ipv6_zone_unsupported">IPv6 영역 식별자는 지원되지 않습니다.</string>

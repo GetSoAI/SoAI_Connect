@@ -45,37 +45,19 @@ object WakeOnLanSender {
     }
 
     fun parseMacAddress(macAddress: String): ByteArray {
-        val normalized = macAddress
-            .trim()
-            .replace("-", ":")
-            .lowercase()
-
-        val parts = normalized.split(":").filter { it.isNotBlank() }
-        val hexPairs = if (parts.size == MAC_LENGTH_BYTES) {
-            parts
-        } else {
-            val raw = normalized.replace(":", "")
-            if (raw.length != MAC_LENGTH_BYTES * 2) {
-                throw WakeOnLanException(WakeOnLanField.MAC)
-            }
-            raw.chunked(2)
+        val value = macAddress.trim()
+        val pairs = when {
+            PLAIN_MAC.matches(value) -> value.chunked(2)
+            COLON_MAC.matches(value) -> value.split(':')
+            HYPHEN_MAC.matches(value) -> value.split('-')
+            else -> throw WakeOnLanException(WakeOnLanField.MAC)
         }
-
-        if (hexPairs.size != MAC_LENGTH_BYTES) {
-            throw WakeOnLanException(WakeOnLanField.MAC)
-        }
-
-        val result = ByteArray(MAC_LENGTH_BYTES)
-        for (index in 0 until MAC_LENGTH_BYTES) {
-            val pair = hexPairs[index]
-            if (pair.length != 2) {
-                throw WakeOnLanException(WakeOnLanField.MAC)
-            }
-            val value = pair.toIntOrNull(16) ?: throw WakeOnLanException(WakeOnLanField.MAC)
-            result[index] = value.toByte()
-        }
-        return result
+        return ByteArray(MAC_LENGTH_BYTES) { index -> pairs[index].toInt(16).toByte() }
     }
+
+    private val PLAIN_MAC = Regex("[0-9a-fA-F]{12}")
+    private val COLON_MAC = Regex("[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}")
+    private val HYPHEN_MAC = Regex("[0-9a-fA-F]{2}(-[0-9a-fA-F]{2}){5}")
 
     fun resolveBroadcastAddresses(explicitBroadcastAddress: String?): List<InetAddress> {
         val trimmed = explicitBroadcastAddress?.trim().orEmpty()

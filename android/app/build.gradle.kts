@@ -123,11 +123,11 @@ dependencies {
     implementation("androidx.core:core:1.19.1")
     implementation("androidx.appcompat:appcompat:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.11.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.11.1")
 
-    implementation("androidx.camera:camera-camera2:1.6.2")
-    implementation("androidx.camera:camera-lifecycle:1.6.2")
-    implementation("androidx.camera:camera-view:1.6.2")
+    implementation("androidx.camera:camera-camera2:1.7.0")
+    implementation("androidx.camera:camera-lifecycle:1.7.0")
+    implementation("androidx.camera:camera-view:1.7.0")
     implementation("com.google.zxing:core:3.5.4")
 
     testImplementation("junit:junit:4.13.2")

@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s găsit: %2$s</string>
     <string name="server_found_fallback">%1$s\nPortul configurat %2$d este ocupat. Această instanță rulează pe portul de rezervă %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nS-a solicitat %2$s. Serverul a fost găsit prin %3$s.</string>
     <string name="error_empty_url">URL-ul serverului este obligatoriu</string>
     <string name="error_invalid_address">Adresă de server nevalidă</string>
     <string name="error_ipv6_zone_unsupported">Identificatorii de zonă IPv6 nu sunt acceptați</string>

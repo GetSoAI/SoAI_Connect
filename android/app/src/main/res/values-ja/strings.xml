@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s が見つかりました: %2$s</string>
     <string name="server_found_fallback">%1$s\n設定されたポート %2$d は使用中です。このインスタンスはフォールバック ポート %3$d で実行されています。</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s が指定されました。サーバーは %3$s で見つかりました。</string>
     <string name="error_empty_url">サーバーURLは必須です</string>
     <string name="error_invalid_address">無効なサーバーアドレス</string>
     <string name="error_ipv6_zone_unsupported">IPv6 ゾーン識別子はサポートされていません</string>

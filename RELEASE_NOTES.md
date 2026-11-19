@@ -1,5 +1,20 @@
 # SoAI Connect Release Notes
 
+## 1.0.6
+
+SoAI Connect 1.0.6 fixes Android server setup, uploads, notifications, and Wake-on-LAN settings.
+
+### Improvements
+
+- Updated AndroidX Lifecycle to 2.11.1, CameraX to 1.7.0, and the Gradle wrapper to 9.9.1.
+
+### Fixes
+
+- Server checks survive screen rotation. Setup flags invalid ports and shows when it switches between HTTP and HTTPS.
+- You can open Android settings directly when notification permission is denied. The background notification indicator now clears when the listener stops.
+- The WebUI file picker can open again after a cancelled upload, including when Android recreates the app screen.
+- Wake-on-LAN rejects malformed MAC addresses and keeps the previous settings when a MAC address or port is invalid.
+
 ## 1.0.5
 
 SoAI Connect 1.0.5 improves notification setup and account error messages, and fixes connection validation and camera uploads.

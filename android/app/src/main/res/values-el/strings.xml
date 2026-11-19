@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s βρέθηκε: [%2$s</string>
     <string name="server_found_fallback">%1$s\nΗ ρυθμισμένη θύρα %2$d είναι κατειλημμένη. Αυτή η παρουσία εκτελείται στην εφεδρική θύρα %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nΖητήθηκε %2$s. Ο διακομιστής βρέθηκε μέσω %3$s.</string>
     <string name="error_empty_url">Απαιτείται διεύθυνση URL διακομιστή</string>
     <string name="error_invalid_address">Μη έγκυρη διεύθυνση διακομιστή</string>
     <string name="error_ipv6_zone_unsupported">Τα αναγνωριστικά ζώνης IPv6 δεν υποστηρίζονται</string>

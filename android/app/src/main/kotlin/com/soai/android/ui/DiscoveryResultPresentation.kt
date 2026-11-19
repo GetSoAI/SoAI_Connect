@@ -46,12 +46,20 @@ internal object DiscoveryResultPresentation {
         } else {
             statusText
         }
-        val text = if (result.cleartextToPublicHost) {
-            context.getString(R.string.server_found_cleartext_warning, fallbackText)
+        val requestedScheme = result.requestedScheme
+        val transportChanged = requestedScheme != null && requestedScheme != result.scheme
+        val transportText = if (transportChanged) {
+            context.getString(R.string.server_found_transport_fallback, fallbackText,
+                requestedScheme.uppercase(), result.scheme.uppercase())
         } else {
             fallbackText
         }
-        val colorRes = if (result.fallbackActive || result.cleartextToPublicHost) {
+        val text = if (result.cleartextToPublicHost) {
+            context.getString(R.string.server_found_cleartext_warning, transportText)
+        } else {
+            transportText
+        }
+        val colorRes = if (result.fallbackActive || transportChanged || result.cleartextToPublicHost) {
             R.color.amber_500
         } else {
             R.color.green_500

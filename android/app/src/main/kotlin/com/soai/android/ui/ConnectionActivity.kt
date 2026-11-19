@@ -4,17 +4,17 @@ package com.soai.android.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.transition.TransitionManager
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withStarted
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.color.MaterialColors
 import com.soai.android.R
@@ -22,35 +22,18 @@ import com.soai.android.data.AppPreferences
 import com.soai.android.databinding.ActivityConnectionBinding
 import com.soai.android.network.ConnectPairingPayload
 import com.soai.android.network.ConnectPairingPayloadParser
-import com.soai.android.network.DiscoveryException
-import com.soai.android.network.DiscoveryResult
-import com.soai.android.network.DiscoveryService
-import com.soai.android.network.HttpClientFactory
 import com.soai.android.network.PairingScan
-import com.soai.android.network.QrAutoConnectPolicy
-import com.soai.android.network.QrConnectDecision
 import com.soai.android.network.ServerCertificatePin
 import com.soai.android.network.ServerOrigin
 import com.soai.android.web.ExternalNavigation
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.CancellationException
 
 class ConnectionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityConnectionBinding
     private lateinit var prefs: AppPreferences
     private val connectionScreenRenderer by lazy { ConnectionScreenRenderer(this, binding) }
-    private val discoveryServiceDelegate = lazy {
-        DiscoveryService(
-            HttpClientFactory.create(),
-            HttpClientFactory.createDiscoveryTlsReader()
-        )
-    }
-    private val discoveryService by discoveryServiceDelegate
-
-    private var connectionState = ConnectionState.IDLE
-    private var discoveryResult: DiscoveryResult? = null
-    private var pendingQrPairing: ConnectPairingPayload? = null
+    private val connectionSetup by lazy { ViewModelProvider(this)[ConnectionSetupViewModel::class.java] }
     private val qrScanLauncher = ConnectionQrScanLauncher(this, ::applyScannedPairing, ::showScanError)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,18 +53,37 @@ class ConnectionActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        val pairing = savedInstanceState?.getString(STATE_PENDING_QR_PAIRING)?.let { uri ->
+            (ConnectPairingPayloadParser.parse(uri) as? PairingScan.Valid)?.payload
+        }
+        connectionSetup.restore(savedInstanceState?.getString(STATE_INPUT).orEmpty(), pairing)
+        binding.serverUrlInput.isSaveEnabled = false
+        binding.serverUrlInput.setText(connectionSetup.setup.value.input)
         setupTextWatcher()
         setupActionButton()
         qrScanLauncher.bind(binding.serverUrlLayout)
         binding.serverUrlInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId != EditorInfo.IME_ACTION_DONE) return@setOnEditorActionListener false
-            if (connectionState == ConnectionState.READY || connectionState == ConnectionState.ERROR) {
-                startDiscovery()
+            if (connectionSetup.setup.value.state in setOf(ConnectionState.READY, ConnectionState.ERROR)) {
+                checkAddress()
             }
             true
         }
         setupWebsiteLink()
-        connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                connectionSetup.setup.collect { setup ->
+                    connectionScreenRenderer.render(setup.state, setup.result, qrScanLauncher.isAvailable)
+                    val error = setup.error
+                    if (setup.instanceMismatch) {
+                        showError(getString(R.string.qr_error_instance_mismatch), notify = false)
+                    } else if (error != null) {
+                        showError(DiscoveryResultPresentation.describeFailure(this@ConnectionActivity, error), notify = false)
+                    }
+                    if (setup.autoConnect && connectionSetup.setup.value === setup) connect()
+                }
+            }
+        }
     }
 
     private fun setupWebsiteLink() {
@@ -94,125 +96,52 @@ class ConnectionActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        pendingQrPairing?.let { pairing -> outState.putString(STATE_PENDING_QR_PAIRING, pairing.pairingUri) }
+        if (::binding.isInitialized) {
+            val setup = connectionSetup.setup.value
+            outState.putString(STATE_INPUT, setup.input)
+            setup.pairing?.let { pairing -> outState.putString(STATE_PENDING_QR_PAIRING, pairing.pairingUri) }
+        }
         super.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val pairingUri = savedInstanceState.getString(STATE_PENDING_QR_PAIRING)
-        if (pairingUri != null) {
-            when (val scan = ConnectPairingPayloadParser.parse(pairingUri)) {
-                is PairingScan.Valid -> pendingQrPairing = scan.payload
-                else -> {
-                    binding.serverUrlInput.text = null
-                    discoveryResult = null
-                    connectionState = ConnectionState.IDLE
-                    connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-                    showError(getString(R.string.error_empty_url))
-                    return
-                }
-            }
-        }
-        discoveryResult = null
-        connectionState = if (binding.serverUrlInput.text.isNullOrBlank()) {
-            ConnectionState.IDLE
-        } else {
-            ConnectionState.READY
-        }
-        connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-    }
-
-    override fun onDestroy() {
-        if (discoveryServiceDelegate.isInitialized()) {
-            discoveryService.close()
-        }
-        super.onDestroy()
-    }
-
     private fun setupTextWatcher() {
-        binding.serverUrlInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                val text = s?.toString()?.trim() ?: ""
-                connectionState = if (text.isEmpty()) ConnectionState.IDLE else ConnectionState.READY
-                discoveryResult = null
-                pendingQrPairing = null
-                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-            }
-        })
+        binding.serverUrlInput.doAfterTextChanged { text ->
+            connectionSetup.edit(text?.toString().orEmpty())
+        }
     }
 
     private fun setupActionButton() {
         binding.actionButton.setOnClickListener {
-            when (connectionState) {
-                ConnectionState.READY, ConnectionState.ERROR -> startDiscovery()
+            when (connectionSetup.setup.value.state) {
+                ConnectionState.READY, ConnectionState.ERROR -> checkAddress()
                 ConnectionState.VERIFIED -> connect()
                 else -> {}
             }
         }
     }
 
+    private fun checkAddress() {
+        if (connectionSetup.setup.value.input.isBlank()) {
+            binding.serverUrlLayout.error = getString(R.string.error_empty_url)
+        } else {
+            binding.serverUrlLayout.error = null
+            connectionSetup.check()
+        }
+    }
+
     private fun applyScannedPairing(pairing: ConnectPairingPayload) {
-        if (!::binding.isInitialized || connectionState == ConnectionState.CHECKING) return
+        if (!::binding.isInitialized || connectionSetup.setup.value.state == ConnectionState.CHECKING) return
         binding.serverUrlInput.setText(pairing.discoveryInput)
         binding.serverUrlInput.setSelection(binding.serverUrlInput.length())
-        pendingQrPairing = pairing
-        startDiscovery()
+        connectionSetup.check(pairing)
     }
 
     private fun showScanError(message: String) {
         if (::binding.isInitialized) showError(message)
     }
 
-    private fun startDiscovery() {
-        val input = binding.serverUrlInput.text?.toString()?.trim()
-        if (input.isNullOrEmpty()) {
-            binding.serverUrlLayout.error = getString(R.string.error_empty_url)
-            return
-        }
-
-        binding.serverUrlLayout.error = null
-        connectionState = ConnectionState.CHECKING
-        connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-
-        lifecycleScope.launch {
-            try {
-                val result = discoveryService.discover(input)
-                val pairing = pendingQrPairing
-                val decision = pairing?.let { QrAutoConnectPolicy.decide(it, result) }
-                if (decision == QrConnectDecision.INSTANCE_MISMATCH) {
-                    connectionState = ConnectionState.ERROR
-                    showError(getString(R.string.qr_error_instance_mismatch))
-                    connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-                    return@launch
-                }
-                if (decision == QrConnectDecision.REVIEW) pendingQrPairing = null
-                discoveryResult = result
-                connectionState = ConnectionState.VERIFIED
-                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-                if (decision == QrConnectDecision.AUTO_CONNECT) {
-                    lifecycle.withStarted { connect() }
-                }
-            } catch (exception: CancellationException) {
-                throw exception
-            } catch (e: DiscoveryException) {
-                connectionState = ConnectionState.ERROR
-                showError(DiscoveryResultPresentation.describeFailure(this@ConnectionActivity, e))
-                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-            } catch (e: Exception) {
-                connectionState = ConnectionState.ERROR
-                Log.w(TAG, "Unexpected discovery failure", e)
-                showError(getString(R.string.error_server_not_reachable, input))
-                connectionScreenRenderer.render(connectionState, discoveryResult, qrScanLauncher.isAvailable)
-            }
-        }
-    }
-
     private fun connect() {
-        val result = discoveryResult ?: return
-        pendingQrPairing = null
+        val result = connectionSetup.takeVerified() ?: return
         if (!ServerCertificatePin.isApplicable(
                 ServerOrigin.normalize(result.serverUrl),
                 result.instanceId,
@@ -230,12 +159,12 @@ class ConnectionActivity : AppCompatActivity() {
         AppNavigation.openMainAndFinish(this)
     }
 
-    private fun showError(message: String) {
+    private fun showError(message: String, notify: Boolean = true) {
         TransitionManager.endTransitions(binding.root)
         binding.statusText.visibility = View.VISIBLE
         binding.statusText.text = message
         binding.statusText.setTextColor(MaterialColors.getColor(binding.statusText, android.R.attr.colorError))
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+        if (notify) Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -259,6 +188,6 @@ class ConnectionActivity : AppCompatActivity() {
 
     private companion object {
         const val STATE_PENDING_QR_PAIRING = "pending_qr_pairing"
-        const val TAG = "ConnectionActivity"
+        const val STATE_INPUT = "connection_input"
     }
 }

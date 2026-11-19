@@ -7,6 +7,7 @@ import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.webkit.ValueCallback
@@ -27,33 +28,57 @@ class WebFileChooser(
     private val onPickerUnavailable: () -> Unit
 ) {
 
+    private enum class RequestPhase { IDLE, CAMERA_PERMISSION, PICKER }
+
+    private var requestPhase = RequestPhase.IDLE
     private var pendingCallback: ValueCallback<Array<Uri>>? = null
     private var pendingOwner: WebView? = null
     private var pendingFallbackIntent: Intent? = null
     private var cameraCaptureUri: Uri? = null
     private var cameraCaptureFile: File? = null
 
+    fun saveState(outState: Bundle) {
+        outState.putString(REQUEST_PHASE, requestPhase.name)
+        cameraCaptureFile?.let { file -> outState.putString(CAPTURE_FILE, file.name) }
+    }
+
+    fun restoreState(savedState: Bundle?) {
+        requestPhase = RequestPhase.entries.firstOrNull { phase ->
+            phase.name == savedState?.getString(REQUEST_PHASE)
+        } ?: RequestPhase.IDLE
+        val directory = File(activity.cacheDir, CameraCaptureFiles.DIRECTORY)
+        val file = CameraCaptureFiles.savedCapture(directory, savedState?.getString(CAPTURE_FILE)) ?: return
+        val uri = FileProvider.getUriForFile(activity, "${activity.packageName}.fileprovider", file)
+        revokeCameraUriPermission(uri)
+        file.delete()
+    }
+
     fun show(
         owner: WebView?,
         callback: ValueCallback<Array<Uri>>,
         params: WebChromeClient.FileChooserParams
     ) {
-        abortPending()
+        if (requestPhase != RequestPhase.IDLE || pendingCallback != null) {
+            callback.onReceiveValue(null)
+            return
+        }
         pendingCallback = callback
         pendingOwner = owner
 
         try {
             if (!params.isCaptureEnabled || !acceptsImages(params)) {
-                launchIntent(params.createIntent())
+                launchPicker(params.createIntent())
                 return
             }
             pendingFallbackIntent = params.createIntent()
             if (!hasCameraPermission()) {
+                requestPhase = RequestPhase.CAMERA_PERMISSION
                 requestCameraPermission()
                 return
             }
             launchCaptureOrFallback(true)
         } catch (exception: RuntimeException) {
+            requestPhase = RequestPhase.IDLE
             Log.w(TAG, "Unable to launch file chooser", exception)
             abortPending()
             onPickerUnavailable()
@@ -61,6 +86,8 @@ class WebFileChooser(
     }
 
     fun onCameraPermissionResult(granted: Boolean) {
+        if (requestPhase != RequestPhase.CAMERA_PERMISSION) return
+        requestPhase = RequestPhase.IDLE
         if (pendingCallback == null) return
 
         try {
@@ -77,7 +104,7 @@ class WebFileChooser(
             try {
                 val captureIntent = tryCreateCameraCaptureIntent()
                 if (captureIntent != null) {
-                    launchIntent(captureIntent)
+                    launchPicker(captureIntent)
                     pendingFallbackIntent = null
                     return
                 }
@@ -96,7 +123,17 @@ class WebFileChooser(
             onPickerUnavailable()
             return
         }
-        launchIntent(fallbackIntent)
+        launchPicker(fallbackIntent)
+    }
+
+    private fun launchPicker(intent: Intent) {
+        requestPhase = RequestPhase.PICKER
+        try {
+            launchIntent(intent)
+        } catch (exception: RuntimeException) {
+            requestPhase = RequestPhase.IDLE
+            throw exception
+        }
     }
 
     private fun hasCameraPermission(): Boolean {
@@ -107,6 +144,8 @@ class WebFileChooser(
     }
 
     fun handleResult(result: ActivityResult) {
+        if (requestPhase != RequestPhase.PICKER) return
+        requestPhase = RequestPhase.IDLE
         val callback = pendingCallback ?: return
         pendingCallback = null
         pendingOwner = null
@@ -245,6 +284,8 @@ class WebFileChooser(
     }
 
     private companion object {
+        const val REQUEST_PHASE = "web_chooser_request_phase"
+        const val CAPTURE_FILE = "web_chooser_capture_file"
         const val TAG = "WebFileChooser"
     }
 }

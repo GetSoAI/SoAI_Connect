@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s gevonden: %2$s</string>
     <string name="server_found_fallback">%1$s\nDe geconfigureerde poort %2$d is bezet. Deze instantie draait op terugvalpoort %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s is aangevraagd. De server is gevonden via %3$s.</string>
     <string name="error_empty_url">Server-URL is vereist</string>
     <string name="error_invalid_address">Ongeldig serveradres</string>
     <string name="error_ipv6_zone_unsupported">IPv6-zone-ID\'s worden niet ondersteund</string>

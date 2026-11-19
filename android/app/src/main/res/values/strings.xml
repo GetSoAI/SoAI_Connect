@@ -17,6 +17,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s found: %2$s</string>
     <string name="server_found_fallback">%1$s\nConfigured port %2$d is occupied. This instance is running on fallback port %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nRequested %2$s. The server was found over %3$s.</string>
     <string name="error_empty_url">Server URL is required</string>
     <string name="error_invalid_address">Invalid server address</string>
     <string name="error_ipv6_zone_unsupported">IPv6 zone identifiers are not supported</string>

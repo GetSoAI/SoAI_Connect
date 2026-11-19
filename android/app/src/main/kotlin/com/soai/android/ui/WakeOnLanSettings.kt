@@ -31,9 +31,17 @@ internal class WakeOnLanSettings(
     }
 
     fun persist() {
-        prefs.wolMac = binding.wolMacInput.text?.toString()?.trim()?.ifBlank { null }
-        prefs.wolBroadcastAddress = binding.wolBroadcastInput.text?.toString()?.trim()?.ifBlank { null }
-        parsePort(binding.wolPortInput.text?.toString())?.let { port -> prefs.wolPort = port }
+        val mac = binding.wolMacInput.text?.toString()?.trim()?.ifBlank { null }
+        val port = parsePort(binding.wolPortInput.text?.toString()) ?: return
+        if (mac != null) {
+            try {
+                WakeOnLanSender.parseMacAddress(mac)
+            } catch (_: WakeOnLanException) {
+                return
+            }
+        }
+        val broadcast = binding.wolBroadcastInput.text?.toString()?.trim()?.ifBlank { null }
+        prefs.saveWakeOnLan(mac, broadcast, port)
     }
 
     private fun send() {
@@ -49,8 +57,14 @@ internal class WakeOnLanSettings(
             binding.wolPortLayout.error = activity.getString(R.string.wol_error_invalid_port)
             return
         }
+        try {
+            WakeOnLanSender.parseMacAddress(macAddress)
+        } catch (exception: WakeOnLanException) {
+            showFieldError(exception.field)
+            return
+        }
         val broadcastAddress = binding.wolBroadcastInput.text?.toString()?.trim()?.ifBlank { null }
-        persist()
+        prefs.saveWakeOnLan(macAddress, broadcastAddress, port)
         binding.wolWakeButton.isEnabled = false
         activity.lifecycleScope.launch {
             try {

@@ -12,6 +12,13 @@ internal object CameraCaptureFiles {
 
     fun create(directory: File): File = File.createTempFile(PREFIX, SUFFIX, directory)
 
+    fun savedCapture(directory: File, name: String?): File? {
+        if (name == null || File(name).name != name || !name.startsWith(PREFIX) ||
+            !name.endsWith(SUFFIX)
+        ) return null
+        return File(directory, name)
+    }
+
     fun pruneStale(directory: File, nowMillis: Long) {
         directory.listFiles { file ->
             file.isFile &&

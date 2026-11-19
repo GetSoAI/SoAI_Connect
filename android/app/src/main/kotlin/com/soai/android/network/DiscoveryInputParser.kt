@@ -59,24 +59,27 @@ internal object DiscoveryInputParser {
     }
 
     private fun parseUrl(input: String): DiscoveryInput {
+        val separator = input.indexOf("://")
+        val scheme = input.substring(0, separator).lowercase()
+        if (scheme != HTTP_SCHEME && scheme != HTTPS_SCHEME) return invalidInput()
+        val remainder = input.substring(separator + 3)
+        val authority = remainder.substringBefore('/').substringBefore('?').substringBefore('#')
+        if (!authority.startsWith('[') && authority.count { character -> character == ':' } > 1) {
+            return invalidInput()
+        }
+        val parsed = parseAuthority(authority, asciiPort = true) ?: return invalidInput()
+        val hostAuthority = if (parsed.port == null) authority else authority.substringBeforeLast(':')
         val uri = try {
-            URI(input)
+            URI("$scheme://$hostAuthority${remainder.substring(authority.length)}")
         } catch (_: URISyntaxException) {
             return invalidInput()
         }
-        val scheme = uri.scheme?.lowercase()
-        if (scheme != HTTP_SCHEME && scheme != HTTPS_SCHEME) return invalidInput()
-        if (uri.rawUserInfo != null) return invalidInput()
-        val hostname = uri.host?.let { host -> normalizeHostname(host) } ?: return invalidInput()
-        val port = when {
-            uri.port != -1 -> uri.port
-            scheme == HTTPS_SCHEME -> HTTPS_DEFAULT_PORT
-            else -> HTTP_DEFAULT_PORT
-        }
-        return DiscoveryInput(hostname, port, scheme)
+        if (uri.host == null || uri.rawUserInfo != null) return invalidInput()
+        val port = parsed.port ?: if (scheme == HTTPS_SCHEME) HTTPS_DEFAULT_PORT else HTTP_DEFAULT_PORT
+        return DiscoveryInput(parsed.hostname, port, scheme)
     }
 
-    private fun parseAuthority(input: String): ParsedAuthority? {
+    private fun parseAuthority(input: String, asciiPort: Boolean = false): ParsedAuthority? {
         if (input.isBlank() || input.contains('@')) return null
         if (input.startsWith('[')) {
             val closingBracket = input.indexOf(']')
@@ -86,8 +89,7 @@ internal object DiscoveryInputParser {
             if (suffix.isEmpty()) return ParsedAuthority(hostname, null)
             if (!suffix.startsWith(':')) return null
             val portText = suffix.substring(1)
-            if (portText.isEmpty() || portText.any { character -> !character.isDigit() }) return null
-            return ParsedAuthority(hostname, portText.toIntOrNull() ?: throw DiscoveryException(DiscoveryFailureReason.INVALID_PORT, portText))
+            return parsePort(portText, asciiPort)?.let { port -> ParsedAuthority(hostname, port) }
         }
         if (input.contains('[') || input.contains(']')) return null
         if (input.count { character -> character == ':' } > 1) {
@@ -100,8 +102,16 @@ internal object DiscoveryInputParser {
         }
         val hostname = normalizeHostname(input.substring(0, separator)) ?: return null
         val portText = input.substring(separator + 1)
-        if (portText.isEmpty() || portText.any { character -> !character.isDigit() }) return null
-        return ParsedAuthority(hostname, portText.toIntOrNull() ?: throw DiscoveryException(DiscoveryFailureReason.INVALID_PORT, portText))
+        return parsePort(portText, asciiPort)?.let { port -> ParsedAuthority(hostname, port) }
+    }
+
+    private fun parsePort(portText: String, asciiOnly: Boolean): Int? {
+        if (portText.any { character ->
+                if (asciiOnly) character !in '0'..'9' else !character.isDigit()
+            }
+        ) return null
+        return portText.toIntOrNull()?.takeIf { port -> port in 1..65535 }
+            ?: throw DiscoveryException(DiscoveryFailureReason.INVALID_PORT, portText.ifEmpty { ":" })
     }
 
     private fun normalizeHostname(value: String): String? {

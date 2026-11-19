@@ -24,6 +24,7 @@ import com.soai.android.network.HttpClientRelease
 import com.soai.android.web.SoAISessionCookies
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -40,6 +41,7 @@ class SoAINotificationListenerService : Service() {
     private lateinit var prefs: AppPreferences
     private lateinit var seenStore: SoAINotificationSeenStore
     private var listenerJob: Job? = null
+    private var latestStartId = 0
     private var activeServerUrl: String? = null
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
 
@@ -72,6 +74,7 @@ class SoAINotificationListenerService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        latestStartId = startId
         val serverUrl = prefs.serverUrl
         if (!foregroundStarted || !listenerAllowed(serverUrl)) {
             stopSelf(startId)
@@ -81,21 +84,23 @@ class SoAINotificationListenerService : Service() {
         listenerJob?.cancel()
         val listenerServerUrl = serverUrl ?: return START_NOT_STICKY
         activeServerUrl = listenerServerUrl
-        listenerJob = serviceScope.launch {
+        val job = serviceScope.launch(start = CoroutineStart.LAZY) {
             try {
                 var outcome: SessionConnectionOutcome?
                 do {
                     outcome = runListener(listenerServerUrl)
                 } while (isActive && outcome != SessionConnectionOutcome.AUTHENTICATION_REVOKED &&
                     outcome != SessionConnectionOutcome.FAILED && listenerAllowed(listenerServerUrl))
-                if (isActive) stopSelf(startId)
             } catch (exception: CancellationException) {
                 throw exception
             } catch (exception: Exception) {
                 Log.e(TAG, "Notification listener stopped after an unexpected failure", exception)
-                if (isActive) stopSelf(startId)
+            } finally {
+                if (isActive && listenerJob === coroutineContext[Job]) stopSelf(latestStartId)
             }
         }
+        listenerJob = job
+        job.start()
         return START_STICKY
     }
 

@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fileChooser.restoreState(savedInstanceState)
         SoAIWindowSystemBars.hideStatusBar(window)
         prefs = AppPreferences.getInstance(this)
         if (!prefs.hasConnectedServer()) {
@@ -195,6 +196,11 @@ class MainActivity : AppCompatActivity() {
         if (!prefs.incognitoMode) return
         if (!isFinishing) return
         WebViewDataCleaner.clearSessionData()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        fileChooser.saveState(outState)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onDestroy() {

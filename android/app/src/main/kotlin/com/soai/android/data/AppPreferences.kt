@@ -45,17 +45,22 @@ class AppPreferences private constructor(context: Context) : SoAINotificationSee
         get() = prefs.getString(KEY_TRUSTED_SERVER_CERT_SHA256, null)
         set(value) = prefs.edit { putString(KEY_TRUSTED_SERVER_CERT_SHA256, value) }
 
-    var wolMac: String?
+    val wolMac: String?
         get() = prefs.getString(KEY_WOL_MAC, null)
-        set(value) = prefs.edit { putString(KEY_WOL_MAC, value) }
 
-    var wolBroadcastAddress: String?
+    val wolBroadcastAddress: String?
         get() = prefs.getString(KEY_WOL_BROADCAST_ADDRESS, null)
-        set(value) = prefs.edit { putString(KEY_WOL_BROADCAST_ADDRESS, value) }
 
-    var wolPort: Int
+    val wolPort: Int
         get() = prefs.getInt(KEY_WOL_PORT, DEFAULT_WOL_PORT)
-        set(value) = prefs.edit { putInt(KEY_WOL_PORT, value) }
+
+    fun saveWakeOnLan(mac: String?, broadcast: String?, port: Int) {
+        prefs.edit {
+            putString(KEY_WOL_MAC, mac)
+            putString(KEY_WOL_BROADCAST_ADDRESS, broadcast)
+            putInt(KEY_WOL_PORT, port)
+        }
+    }
 
     var androidNotificationsEnabled: Boolean
         get() = prefs.getBoolean(KEY_ANDROID_NOTIFICATIONS_ENABLED, false)

@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s ditemukan: %2$s</string>
     <string name="server_found_fallback">%1$s\nPort %2$d yang dikonfigurasi sedang digunakan. Instance ini berjalan pada port cadangan %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s diminta. Server ditemukan melalui %3$s.</string>
     <string name="error_empty_url">URL server diperlukan</string>
     <string name="error_invalid_address">Alamat server tidak valid</string>
     <string name="error_ipv6_zone_unsupported">Pengidentifikasi zona IPv6 tidak didukung</string>

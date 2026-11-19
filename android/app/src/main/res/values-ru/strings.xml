@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s найдено: %2$s</string>
     <string name="server_found_fallback">%1$s\nНастроенный порт %2$d занят. Этот экземпляр работает на резервном порту %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nЗапрошен %2$s. Сервер найден через %3$s.</string>
     <string name="error_empty_url">Требуется URL-адрес сервера.</string>
     <string name="error_invalid_address">Неверный адрес сервера</string>
     <string name="error_ipv6_zone_unsupported">Идентификаторы зон IPv6 не поддерживаются.</string>

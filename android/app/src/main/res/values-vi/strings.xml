@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s đã tìm thấy: %2$s</string>
     <string name="server_found_fallback">%1$s\nCổng đã cấu hình %2$d đang bận. Phiên bản này đang chạy trên cổng dự phòng %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nĐã yêu cầu %2$s. Máy chủ được tìm thấy qua %3$s.</string>
     <string name="error_empty_url">URL máy chủ là bắt buộc</string>
     <string name="error_invalid_address">Địa chỉ máy chủ không hợp lệ</string>
     <string name="error_ipv6_zone_unsupported">Mã định danh vùng IPv6 không được hỗ trợ</string>

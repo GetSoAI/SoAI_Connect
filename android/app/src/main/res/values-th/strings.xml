@@ -15,6 +15,7 @@
     <string name="server_identity_named">ซอย %1$s — %2$s</string>
     <string name="server_found_identity">%1$s พบ: %2$s</string>
     <string name="server_found_fallback">%1$s\nพอร์ตที่กำหนดค่าไว้ %2$d ถูกใช้งานอยู่ อินสแตนซ์นี้กำลังทำงานบนพอร์ตสำรอง %3$d</string>
+    <string name="server_found_transport_fallback">%1$s\nขอใช้ %2$s แต่พบเซิร์ฟเวอร์ผ่าน %3$s</string>
     <string name="error_empty_url">ต้องระบุ URL ของเซิร์ฟเวอร์</string>
     <string name="error_invalid_address">ที่อยู่เซิร์ฟเวอร์ไม่ถูกต้อง</string>
     <string name="error_ipv6_zone_unsupported">ไม่รองรับตัวระบุโซน IPv6</string>

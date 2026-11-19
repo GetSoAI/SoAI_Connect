@@ -17,6 +17,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s پیدا شد: %2$s</string>
     <string name="server_found_fallback">%1$s\nدرگاه پیکربندی‌شدهٔ %2$d در حال استفاده است. این نمونه روی درگاه جایگزین %3$d اجرا می‌شود.</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s درخواست شد. سرور از طریق %3$s پیدا شد.</string>
     <string name="error_empty_url">نشانی سرور الزامی است</string>
     <string name="error_invalid_address">نشانی سرور نامعتبر است</string>
     <string name="error_ipv6_zone_unsupported">شناسه‌های ناحیهٔ IPv6 پشتیبانی نمی‌شوند</string>

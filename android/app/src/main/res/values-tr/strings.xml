@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s bulundu: %2$s</string>
     <string name="server_found_fallback">%1$s\nYapılandırılan %2$d bağlantı noktası kullanımda. Bu örnek %3$d yedek bağlantı noktasında çalışıyor.</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s istendi. Sunucu %3$s üzerinden bulundu.</string>
     <string name="error_empty_url">Sunucu URL\'si gerekli</string>
     <string name="error_invalid_address">Geçersiz sunucu adresi</string>
     <string name="error_ipv6_zone_unsupported">IPv6 bölge tanımlayıcıları desteklenmiyor</string>

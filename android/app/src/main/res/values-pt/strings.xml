@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s encontrado: %2$s</string>
     <string name="server_found_fallback">%1$s\nA porta configurada %2$d está ocupada. Esta instância está em execução na porta alternativa %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nFoi solicitado %2$s. O servidor foi encontrado por %3$s.</string>
     <string name="error_empty_url">O URL do servidor é obrigatório</string>
     <string name="error_invalid_address">Endereço de servidor inválido</string>
     <string name="error_ipv6_zone_unsupported">Identificadores de zona IPv6 não são suportados</string>

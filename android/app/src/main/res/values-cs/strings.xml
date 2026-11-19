@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s nalezeno: %2$s</string>
     <string name="server_found_fallback">%1$s\nNastavený port %2$d je obsazený. Tato instance běží na záložním portu %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\nBylo požadováno %2$s. Server byl nalezen přes %3$s.</string>
     <string name="error_empty_url">Adresa URL serveru je povinná</string>
     <string name="error_invalid_address">Neplatná adresa serveru</string>
     <string name="error_ipv6_zone_unsupported">Identifikátory zóny IPv6 nejsou podporovány</string>

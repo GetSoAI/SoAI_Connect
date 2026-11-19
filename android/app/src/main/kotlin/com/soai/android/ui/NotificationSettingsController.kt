@@ -44,7 +44,7 @@ internal class NotificationSettingsController(
         if (granted && !prefs.incognitoMode) setEnabled(true)
         else {
             bind()
-            showMessage(activity.getString(R.string.permission_denied))
+            if (!granted) showMessage(activity.getString(R.string.notifications_blocked_settings))
         }
     }
 
@@ -63,7 +63,8 @@ internal class NotificationSettingsController(
         )
         binding.androidNotificationsDescription.text = when {
             prefs.incognitoMode -> activity.getString(R.string.incognito_mode)
-            prefs.androidNotificationsEnabled && (androidBlocked || blockedChannel != null) -> {
+            androidBlocked -> activity.getString(R.string.notifications_blocked_settings)
+            blockedChannel != null -> {
                 val channelTitle = if (blockedChannel == SoAINotificationChannels.CONNECTION_CHANNEL_ID) {
                     R.string.android_notifications_connection_channel_name
                 } else R.string.android_notifications_channel_name

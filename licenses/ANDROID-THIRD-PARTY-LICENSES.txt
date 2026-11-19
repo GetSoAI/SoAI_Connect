@@ -1,8 +1,8 @@
 SoAI Connect for Android - Licenses
 
 Application: com.soai.android
-Version: 1.0.5
-Generated: 2026-11-03
+Version: 1.0.6
+Generated: 2026-11-19
 
 SoAI Connect
 ------------
@@ -51,15 +51,16 @@ androidx.appcompat:appcompat-resources:1.8.0 -> The Apache Software License, Ver
 androidx.appcompat:appcompat:1.8.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.arch.core:core-common:2.2.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.arch.core:core-runtime:2.2.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera.featurecombinationquery:featurecombinationquery:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera.featurecombinationquery:featurecombinationquery:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.camera.viewfinder:viewfinder-core:1.5.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera:camera-camera2-pipe:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera:camera-camera2:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera:camera-core:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera:camera-core:1.6.2 -> BSD-3-Clause (https://opensource.org/licenses/BSD-3-Clause)
-androidx.camera:camera-lifecycle:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera:camera-video:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.camera:camera-view:1.6.2 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-camera2-pipe:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-camera2:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-common:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-core:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-core:1.7.0 -> BSD-3-Clause (https://opensource.org/licenses/BSD-3-Clause)
+androidx.camera:camera-lifecycle:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-video:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.camera:camera-view:1.7.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.cardview:cardview:1.0.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.collection:collection-jvm:1.5.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.collection:collection:1.5.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -84,20 +85,20 @@ androidx.fragment:fragment:1.5.4 -> The Apache Software License, Version 2.0 (ht
 androidx.graphics:graphics-shapes-android:1.0.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.graphics:graphics-shapes:1.0.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.interpolator:interpolator:1.0.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-common-jvm:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-common:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-livedata-core-ktx:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-livedata-core:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-livedata:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-process:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-runtime-android:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-runtime-ktx-android:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-runtime-ktx:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-runtime:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-viewmodel-android:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-viewmodel-savedstate:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
-androidx.lifecycle:lifecycle-viewmodel:2.11.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-common-jvm:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-common:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-livedata-core-ktx:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-livedata-core:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-livedata:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-process:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-runtime-android:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-runtime-ktx-android:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-runtime-ktx:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-runtime:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-viewmodel-android:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-viewmodel-savedstate:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
+androidx.lifecycle:lifecycle-viewmodel:2.11.1 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.loader:loader:1.0.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.media3:media3-common:1.9.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
 androidx.media3:media3-container:1.9.0 -> The Apache Software License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -150,7 +151,7 @@ The components below carry notices or license terms that name their own
 copyright holders. Their texts are reproduced as distributed.
 
 
-androidx.camera:camera-core:1.6.2
+androidx.camera:camera-core:1.7.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 libyuv, statically linked into the camera-core native libraries

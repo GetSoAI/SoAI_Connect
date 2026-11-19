@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s 找到：%2$s</string>
     <string name="server_found_fallback">%1$s\n配置的端口 %2$d 已被占用。此实例正在备用端口 %3$d 上运行。</string>
+    <string name="server_found_transport_fallback">%1$s\n已请求 %2$s。通过 %3$s 找到了服务器。</string>
     <string name="error_empty_url">服务器 URL 为必填项</string>
     <string name="error_invalid_address">服务器地址无效</string>
     <string name="error_ipv6_zone_unsupported">不支持 IPv6 区域标识符</string>

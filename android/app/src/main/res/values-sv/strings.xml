@@ -15,6 +15,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">%1$s hittade: %2$s</string>
     <string name="server_found_fallback">%1$s\nDen konfigurerade porten %2$d är upptagen. Den här instansen körs på reservporten %3$d.</string>
+    <string name="server_found_transport_fallback">%1$s\n%2$s begärdes. Servern hittades via %3$s.</string>
     <string name="error_empty_url">Server-URL krävs</string>
     <string name="error_invalid_address">Ogiltig serveradress</string>
     <string name="error_ipv6_zone_unsupported">IPv6-zonidentifierare stöds inte</string>

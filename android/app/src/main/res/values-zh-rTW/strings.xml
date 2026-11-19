@@ -17,6 +17,7 @@
     <string name="server_identity_named">SoAI %1$s — %2$s</string>
     <string name="server_found_identity">找到 %1$s：%2$s</string>
     <string name="server_found_fallback">%1$s\n設定的連接埠 %2$d 已被占用。此執行個體目前使用備用連接埠 %3$d。</string>
+    <string name="server_found_transport_fallback">%1$s\n已要求 %2$s。已透過 %3$s 找到伺服器。</string>
     <string name="error_empty_url">必須輸入伺服器網址</string>
     <string name="error_invalid_address">伺服器位址無效</string>
     <string name="error_ipv6_zone_unsupported">不支援 IPv6 區域識別碼</string>
